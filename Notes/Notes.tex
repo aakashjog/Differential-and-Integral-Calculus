@@ -1,0 +1,344 @@
+\documentclass[fleqn, a4paper, 12pt, twoside]{article}
+\usepackage{exsheets}
+\usepackage{amsmath, amssymb, amsthm} %standard AMS packages
+\usepackage{marginnote} %marginnotes
+\usepackage{gensymb} %miscellaneous symbols
+\usepackage{commath} %differential symbols
+\usepackage{xcolor} %colours
+\usepackage{cancel} %cancelling terms
+\usepackage{siunitx} %formatting units
+\usepackage{tikz, pgfplots} %diagrams
+	\usetikzlibrary{calc, hobby, patterns, intersections}
+\usepackage{graphicx} %inserting graphics
+\usepackage{hyperref} %hyperlinks
+\usepackage{datetime} %date and time
+\usepackage{ulem} %underline for \emph{}
+\usepackage{xfrac} %inline fractions
+\usepackage{enumerate} %numbered lists
+\usepackage{float} %inserting floats
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}} %adds numbers to specific equations in non-numbered list of equations
+
+\newcommand{\AxisRotator}[1][rotate=0]{
+	\tikz [x=0.25cm,y=0.60cm,line width=.2ex,-stealth,#1] \draw (0,0) arc (-150:150:1 and 1);%
+} %rotation symbols on axes
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+
+\newcommand{\curl}{\mathrm{curl\,}}
+
+\makeatletter
+\@addtoreset{section}{part} %resets section numbers in new part
+\makeatother
+
+%opening
+\title{Physics 2}
+\author{Aakash Jog}
+\date{2014-15}
+
+\begin{document}
+
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+\section{Lecturer Information}
+
+\textbf{Dr. Yakov Yakubov}\\
+~\\
+Office: Schreiber 233\\
+Telephone: {\href{tel:+97236405357}{+972 3-640-5357}\\
+E-mail: \href{mailto:yakubov@post.tau.ac.il}{yakubov@post.tau.ac.il}\\
+
+\section{Required Reading}
+
+Protter and Morrey: \textit{A first Course in Real Analysis}, UTM Series, Springer-Verlag, 1991
+
+\section{Additional Reading}
+
+Thomas and Finney, \textit{Calculus and Analytic Geometry}, 9th edition, Addison-Wesley, 1996
+
+\newpage
+\part{Sequences and Series}
+
+\section{Sequences}
+
+\begin{definition}[Sequence]
+	A sequence of real numbers is a set of numbers which are written in some order. There are infinitely many terms in a sequence. It is denoted by $\{a_n\}_{n = 1}^{\infty}$ or $\{a_n\}$.
+\end{definition}
+
+\begin{example}
+	$1, \dfrac{1}{2}, \dfrac{1}{3}, \dots$ is called the harmonic sequence.
+	\begin{equation*}
+		a_n = \dfrac{1}{n}
+	\end{equation*}
+\end{example}
+
+\begin{example}
+	$1, -\dfrac{1}{2}, \dfrac{1}{3}, \dots$ is called the alternating harmonic sequence.
+	\begin{equation*}
+		a_n = (-1)^{n + 1} \dfrac{1}{n}
+	\end{equation*}
+\end{example}
+
+\begin{example}
+	$\dfrac{1}{2}, \dfrac{2}{3}, \dfrac{3}{4}, \dots$
+	\begin{equation*}
+		a_n = \dfrac{n}{n + 1}
+	\end{equation*}
+\end{example}
+
+\begin{example}
+	$\dfrac{2}{3}, \dfrac{3}{9}, \dfrac{4}{27}, \dots$
+	\begin{align*}
+		a_n = \dfrac{n + 1}{3^n}
+	\end{align*}
+\end{example}
+
+\begin{example}
+	The Fibonacci sequence is given by
+	\begin{equation*}
+		f_n =
+			\begin{cases}
+				1 &;\quad n = 1, 2\\
+				f_{n - 1} + f_{n - 2} &;\quad n \geq 3\\
+			\end{cases}
+	\end{equation*}
+\end{example}
+
+\begin{example}
+	A geometric sequence is given by
+	\begin{equation*}
+		a_n = a_1 q^{n - 1}
+	\end{equation*}
+	where $q$ is called the common ratio.
+\end{example}
+
+\begin{example}
+	A geometric sequence is given by
+	\begin{equation*}
+		a_n = a_1 + d(n - 1)
+	\end{equation*}
+	where $d$ is called the common difference.
+\end{example}
+
+\begin{definition}[Equal sequences]
+	Two sequences $\{a_n\}$ and $\{b_n\}$ are said to be equal if $a_n = b_n$, $\forall n \in \mathbb{N}$.
+\end{definition}
+
+\begin{definition}[Sequences bounded from above]
+	$\{a_n\}$ is said to be bounded from above if $\exists M \in \mathbb{R}$, s.t. $a_n \leq M$, $\forall n \in \mathbb{N}$.
+	Each such $M$ is called an upper bound of $\{a_n\}$.
+\end{definition}
+
+\begin{definition}[Sequences bounded from below]
+	$\{a_n\}$ is said to be bounded from below if $\exists m \in \mathbb{R}$, s.t. $a_n \geq M$, $\forall n \in \mathbb{N}$.
+	Each such $M$ is called an lower bound of $\{a_n\}$.
+\end{definition}
+
+\begin{definition}
+	$\{a_n\}$ is said to be bounded if it is bounded from below and bounded from above.
+\end{definition}
+
+\begin{example}
+	The sequence $a_n = n^2 + 2$ is not bounded from above but is bounded from below, by all $m \leq 3$.
+\end{example}
+
+\begin{example}
+	$\left\{ \dfrac{2n - 1}{3n} \right\}$ is bounded.
+	\begin{equation*}
+		m = 0 \leq \dfrac{2n - 1}{3n} \leq \dfrac{2n}{3n} = \dfrac{2}{3} = M
+	\end{equation*}
+\end{example}
+
+\begin{definition}[Monotonic increasing sequence]
+	A sequence $\{a_n\}$ is called monotonic increasing if $\exists n_0 \in \mathbb{N}$, s.t. $a_n \leq a_{n + 1}$, $\forall n \geq n_0$.
+\end{definition}
+
+\begin{definition}[Monotonic decreasing sequence]
+	A sequence $\{a_n\}$ is called monotonic decreasing if $\exists n_0 \in \mathbb{N}$, s.t. $a_n \geq a_{n + 1}$, $\forall n \geq n_0$.
+\end{definition}
+
+\begin{definition}[Strongly increasing sequence]
+	A sequence $\{a_n\}$ is called monotonic increasing if $\exists n_0 \in \mathbb{N}$, s.t. $a_n < a_{n + 1}$, $\forall n \geq n_0$.
+\end{definition}
+
+\begin{definition}[Strongly decreasing sequence]
+	A sequence $\{a_n\}$ is called monotonic decreasing if $\exists n_0 \in \mathbb{N}$, s.t. $a_n > a_{n + 1}$, $\forall n \geq n_0$.
+\end{definition}
+
+\begin{example}
+	The sequence $\left\{ \dfrac{n^2}{2^n} \right\}$ is strongly decreasing.
+	However, this is not evident by observing the first few terms.
+	$\dfrac{1}{2}, 1, \dfrac{9}{8}, 1, \dfrac{25}{32}, \dots$
+	\begin{align*}
+		a_n &> a_{n + 1}\\
+		\iff \dfrac{n^2}{2^n} &> \dfrac{(n + 1)^2}{2^{n + 1}}\\
+		\iff 2 n^2 &> (n + 1)^2\\
+		\iff \sqrt{2} n &> n + 1\\
+		\iff n(\sqrt{2} - 1) &> 1\\
+		\iff n &> \dfrac{1}{\sqrt{2} - 1}\\
+		\iff n &> 3
+	\end{align*}
+\end{example}
+
+\begin{question}
+	Is $a_n = (-1)^n$ monotonic?
+\end{question}
+
+\begin{solution}[print]
+	The sequence $-1, 1, -1, 1, \dots$ is not monotonic.
+\end{solution}
+
+\subsection{Limit of a Sequence}
+
+\begin{definition}
+	Let $\{a_n\}$ be a given sequence.
+	A number $L$ is said to be the limit of the sequence if $\forall \varepsilon > 0$, $\exists n_0 \in \mathbb{N}$, s.t. $|a_n - L| < \varepsilon$, $\forall n \geq n_0$.
+	That is, there are infinitely many terms inside the interval and a finite number of terms outside it.
+\end{definition}
+
+\begin{example}
+	The sequence $\{\dfrac{1}{n}\}$ tends to 0, i.e. for any open interval $(-\varepsilon, \varepsilon)$, there are finite number of terms of the sequence outside the interval, and therefore there are infinitely many terms inside the interval.
+\end{example}
+
+\begin{question}
+	Prove
+	\begin{equation*}
+		\lim\limits_{n \to \infty} \dfrac{n + 2}{2n - 1} = \dfrac{1}{2}
+	\end{equation*}
+\end{question}
+
+\begin{solution}
+	$\forall \varepsilon > 0$, $\exists n_0 \in \mathbb{N}$
+\end{solution}
+
+\begin{question}
+	Prove that 2 is not a limit of $\left\{ \dfrac{3n + 1}{n} \right\}$.
+\end{question}
+
+\begin{solution}
+	If possible, let 
+	\begin{align*}
+		\lim\limits_{n \to \infty} \dfrac{3n + 1}{n} = 2
+	\end{align*}
+	Then, $\forall \varepsilon > 0$, $\exists n_0 \in \mathbb{N}$, s.t. $\left| \dfrac{3n + 1}{n} - 2 \right| < \varepsilon$, $\forall n \geq n_0$.
+	However,
+	\begin{equation*}
+		\left| \dfrac{3n + 1}{n} - 2 \right| = 1 + \dfrac{1}{n} > 1
+	\end{equation*}
+	This is a contradiction for $\varepsilon = \dfrac{1}{2}$.
+	Therefore, 2 is not a limit.
+\end{solution}
+
+\begin{theorem}
+	If a sequence $\{a_n\}$ has a limit $L$ then the limit is unique.
+	\label{uniquness of a limit}
+\end{theorem}
+
+\begin{proof}
+	If possible let there exist two limits $L_1$ and $L_2$.
+	Therefore, $\forall \varepsilon > 0$, there exist a finite number of terms in the interval $(L_1 - \varepsilon, L_1 + \varepsilon)$.
+	Therefore, there exist a finite number of terms in the interval $(L_2 - \varepsilon, L_2 + \varepsilon)$.
+	This contradicts the definition of a limit.
+	Therefore, the limit is unique.
+\end{proof}
+
+\begin{theorem}
+	If a sequence $\{a_n\}$ has limit $L$, then the sequence is bounded.
+	\label{existence of limit implies boundedness}
+\end{theorem}
+
+\begin{theorem}
+	Let
+	\begin{align*}
+		\lim\limits_{n \to \infty} a_n &= a\\
+		\lim\limits_{n \to \infty} b_n &= b
+	\end{align*}
+	and let $c$ be a constant.
+	Then,
+	\begin{align*}
+		\lim c &= c\\
+		\lim (c a_n) &= c \lim a_n\\
+		\lim (a_n \pm b_n) &= \lim a_n \pm \lim b_n\\
+		\lim (a_n b_n) &= \lim a_n \lim b_n\\
+		\lim (\dfrac{a_n}{b_n}) &= \dfrac{\lim a_n}{\lim b_n} \quad (\textnormal{ if } \lim b \neq 0)
+	\end{align*}
+	\label{limit arithmetic}
+\end{theorem}
+
+\begin{theorem}
+	Let $\{b_n\}$ be bounded and let $\lim a_n = 0$. Then,
+	\begin{equation*}
+		\lim (a_n b_n) = 0
+	\end{equation*}
+\end{theorem}
+
+\begin{theorem}[Sandwich Theorem]
+	Let $\{a_n\}$, $\{b_n\}$, $\{c_n\}$ be three sequences. If
+	\begin{equation*}
+		\lim a_n = \lim b_n = L
+	\end{equation*}
+	and $\exists n_0 \in \mathbb{N}$, s.t. $\forall n \geq n_0$, $a_n \leq b_n \leq c_n$.
+	Then,
+	\begin{equation*}
+		\lim b_n = L
+	\end{equation*}
+	\label{sandwich theorem}
+\end{theorem}
+
+\begin{question}
+	Calculate $\lim\limits_{n \to \infty} \sqrt[n]{2^n + 3^n}$
+\end{question}
+
+\begin{solution}[print]
+	\begin{gather*}
+		\sqrt[n]{3^n} \leq \sqrt[n]{2^n + 3^n} \leq \sqrt[n]{3^n + 3^n} = \sqrt[3]{2 \cdot 3^n}\\
+		\therefore 3 \leq \sqrt[n]{2^n + 3^n} \leq 3 \sqrt[n]{2}
+	\end{gather*}
+	Therefore, by the \nameref{sandwich theorem}, $\lim\limits_{n \to \infty} \sqrt[n]{2^n + 3^n} = 3$.
+\end{solution}
+
+\begin{theorem}
+	Any monotonically increasing sequence which is bounded from above converges.
+	Similarly, any monotonically decreasing sequence which is bounded from below converges.
+	\label{monotonicity and boundedness implies convergence}
+\end{theorem}
+
+\begin{question}
+	Prove that there exists a limit for $a_n = \underbrace{\sqrt{2 + \sqrt{2 + \sqrt{2 + \dots}}}}_{n \textnormal{ times }}$ and find it.
+\end{question}
+
+\begin{solution}[print]
+	\begin{equation*}
+		a_1 = \sqrt{2} < \sqrt{2 + \sqrt{2}} = a_2
+	\end{equation*}
+	If possible, let
+	\begin{align*}
+		a_{n - 1} &< a_n\\
+		\therefore \sqrt{2 + a_{n - 1}} &< \sqrt{2 + a_n}\\
+		\therefore a_n &< a_{n + 1}
+	\end{align*}
+	Hence, by induction, $\{a_n\}$ is monotonically increasing.
+	~\\
+	\begin{equation*}
+		a_1 = \sqrt{2} \leq 2
+	\end{equation*}
+	If possible, let
+	\begin{align*}
+		a_n &\leq 2
+		\therefore \sqrt{2 + a_n} &\leq \sqrt{2 + 2}\\
+		\therefore a_{n + 1} \leq 2
+	\end{align*}
+	Hence, by induction, $\{a_n\}$ is bounded from above by 2.
+	Therefore, by \nameref{monotonicity and boundedness implies convergence}, $\{a_n\}$ converges.
+\end{solution}
+
+\end{document}
