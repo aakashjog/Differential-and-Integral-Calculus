@@ -13,7 +13,7 @@
 \usepackage{hyperref} %hyperlinks
 \usepackage{datetime} %date and time
 \usepackage{ulem} %underline for \emph{}
-\usepackage{xfrac} %inline fractions
+\usepackage{xfrac, lmodern} %inline fractions
 \usepackage{enumerate} %numbered lists
 \usepackage{float} %inserting floats
 
@@ -36,6 +36,14 @@
 \@addtoreset{section}{part} %resets section numbers in new part
 \makeatother
 
+\newcommand\blfootnote[1]{%
+	\begingroup
+	\renewcommand\thefootnote{}\footnote{#1}%
+	\addtocounter{footnote}{-1}%
+	\endgroup
+}
+
+\SetupExSheets{solution/print = true} %prints all solutions by default
 %opening
 \title{Differential and Integral Calculus}
 \author{Aakash Jog}
@@ -45,6 +53,17 @@
 
 \maketitle
 %\setlength{\mathindent}{0pt}
+
+\blfootnote
+{	
+	\begin{figure}[H]
+		\includegraphics[height = 12pt]{cc.eps}
+		\includegraphics[height = 12pt]{by.eps}
+		\includegraphics[height = 12pt]{nc.eps}
+		\includegraphics[height = 12pt]{sa.eps}
+	\end{figure}
+	This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. To view a copy of this license, visit \url{http://creativecommons.org/licenses/by-nc-sa/4.0/}.
+} %CC-BY-NC-SA licencse
 
 \tableofcontents
 
@@ -339,6 +358,168 @@ Thomas and Finney, \textit{Calculus and Analytic Geometry}, 9th edition, Addison
 	\end{align*}
 	Hence, by induction, $\{a_n\}$ is bounded from above by 2.
 	Therefore, by \nameref{monotonicity and boundedness implies convergence}, $\{a_n\}$ converges.
+\end{solution}
+
+\begin{definition}[Limit in a wide sense]
+	The sequence $\{a_n\}$ is said to converge to $+\infty$ if $\forall M \in \mathbb{R}$, $\exists n_0 \in \mathbb{N}$, s.t. $\forall n \geq n_0$, $a_n > M$.\\
+	The sequence $\{a_n\}$ is said to converge to $-\infty$ if $\forall M \in \mathbb{R}$, $\exists n_0 \in \mathbb{N}$, s.t. $\forall n \geq n_0$, $a_n < M$.
+\end{definition}
+
+\subsection{Sub-sequences}
+
+\begin{definition}[Sub-sequence]
+	Let $\{a_n\}_{n = 1} ^{\infty}$ be a sequence.
+	Let $\{n_k\}_{k = 1}^{\infty}$ be a strongly increasing sequence of natural numbers.
+	Let $\{b_k\}_{k = 1}^{\infty}$ be a sequence such that $b_k = a_{n_k}$.
+	Then $\{b_k\}_{k = 1}^{\infty}$ is called a sub-sequence of $\{a_n\}_{n = 1}^{\infty}$.
+\end{definition}
+
+\begin{example}
+	\begin{equation*}
+	a_n = \dfrac{1}{n}
+	\end{equation*}
+	If we choose $n_k = k^2$,
+	\begin{equation*}
+		b_k = a_{n_k} = a_{k^2} = \dfrac{1}{k^2}
+	\end{equation*}
+	Therefore,
+	\begin{equation*}
+		\{b_k\} = 1, \dfrac{1}{4}, \dfrac{1}{9}, \dots
+	\end{equation*}
+\end{example}
+
+\begin{theorem}
+	If the sequence $\{a_n\}$ converges to $L$ in a wide sense, i.e. $L$ can be infinite, then any sub-sequence of $\{a_n\}$ converges to the same limit $L$.
+	\label{Any subsequence converges to the limit of the sequence}
+\end{theorem}
+
+\begin{definition}[Partial limit]
+	A real number $a$, which may be infinite, is called a partial limit of the sequence $\{a_n\}$ is there exists a sub-sequence of $\{a_n\}$ which converges to $a$.
+\end{definition}
+
+\begin{example}
+	Let
+	\begin{equation*}
+		a_n = (-1)^n
+	\end{equation*}
+	Therefore, $\nexists \lim\limits_{n \to \infty} a_n$.
+	Let
+	\begin{equation*}
+		b_k = a_{n_k} = a_{2n - 1}
+	\end{equation*}
+	Therefore,
+	\begin{align*}
+		\{b_k\} &= -1, -1, -1, \dots\\
+		\therefore \lim\limits_{k \to \infty} b_k &= 1
+	\end{align*}
+	Therefore, $-1$ is a partial limit of $\{a_n\}$.
+\end{example}
+
+\begin{theorem}[Bolzano-Weierstrass Theorem]
+	For any bounded sequence there exists a subsequence which is convergent, s.t. there exists at least one partial limit.
+	\label{Bolzano-Weierstrass Theorem}
+\end{theorem}
+
+\begin{definition}[Upper partial limit]
+	The largest partial limit of a sequence is called the upper partial limit.
+	It is denoted by $\overline{\lim} a_n$ or $\limsup a_n$.
+\end{definition}
+
+\begin{definition}[Lower partial limit]
+	The smallest partial limit of a sequence is called the upper partial limit.
+	It is denoted by $\underline{\lim} a_n$ or $\liminf a_n$.
+\end{definition}
+
+\begin{theorem}
+	If the sequence $\{a_n\}$ is bounded and 
+	\begin{equation*}
+		\overline{\lim} a_n = \underline{\lim} a_n = a
+	\end{equation*}
+	then 
+	\begin{equation*}
+		\exists \lim a_n = a
+	\end{equation*}
+	\label{Equal upper and lower partial limits imply existence of limit}
+\end{theorem}
+
+\subsection{Cauchy Characterisation of Convergence}
+
+\begin{definition}
+	A sequence $\{a_n\}$ is called a Cauchy sequence if $\forall \varepsilon > 0$, $\exists n_0 \in \mathbb{N}$, s.t. $\forall m, n \geq n_0$, $|a_n - a_m| < \varepsilon$.
+\end{definition}
+
+\begin{theorem}[Cauchy Characterisation of Convergence]
+	A sequence $\{a_n\}$ converges if and only if it is a Cauchy sequence.
+	\label{Cauchy Characterisation of Convergence}
+\end{theorem}
+
+\begin{proof}
+	Let
+	\begin{equation*}
+		\lim\limits_{n \to \infty} a_n = L
+	\end{equation*}
+	Then $\forall \varepsilon > 0$, $\exists n_0 \in \mathbb{N}$, such that $\forall n \geq n_0$, $|a_n - L| < \dfrac{\varepsilon}{2}$.
+	Therefore if $n \ge n_0$ and $m \ge n_0$, then
+	\begin{align*}
+		|a_n - a_m| &= |a_n - L + L - a_m|\\
+		&\le |a_n - L| + |L - a_m|\\
+		&< \dfrac{\varepsilon}{2} + \dfrac{\varepsilon}{2}\\
+		\therefore |a_n - a_m| &= \varepsilon
+	\end{align*}
+	~\\
+	Similarly, the converse can be proved by \thmref{Equal upper and lower partial limits imply existence of limit}.
+\end{proof}
+
+\begin{theorem}[Another Formulation of the Cauchy Characterisation Theorem]
+	The sequence $\{a_n\}$ converges if and only if $\forall \varepsilon > 0$, $\exists n_0 \in \mathbb{N}$, such that $\forall n \geq n_0$ and $\forall p \in \mathbb{N}$, $|a_{n + p} - a_n| < \varepsilon$.
+	\label{Another formulation of the Cauchy characterisation theorem}
+\end{theorem}
+
+\begin{question}
+	Prove that the sequence
+	\begin{equation*}
+		a_n = \dfrac{1}{1^2} + \dfrac{1}{2^2} + \dots + \dfrac{1}{n^2}
+	\end{equation*}
+	is convergent.
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		|a_{n + p} - a_n| &= \left| \dfrac{1}{1^2} + \dfrac{1}{2^2} + \dots + \dfrac{1}{(n + p)^2} - \left( \dfrac{1}{1^2} + \dfrac{1}{2^2} + \dots + \dfrac{1}{n^2} \right) \right|\\
+		&= \dfrac{1}{(n + 1)^2} + \dfrac{1}{(n + 2)^2} + \dots + \dfrac{1}{(n + p)^2}\\
+		\therefore |a_{n + p} - a_n| &< \dfrac{1}{n (n + 1)} + \dfrac{1}{(n + 1)(n + 2)} + \dots + \dfrac{1}{(n + p - 1)(n + p)}\\
+		\therefore |a_{n + p} - a_n| &< \dfrac{1}{n} - \cancel{\dfrac{1}{n + 1}} + \cancel{\dfrac{1}{n + 1}} + \dots + \cancel{\dfrac{1}{n + p - 1}} - \dfrac{1}{n + p}\\
+		\therefore |a_{n + p} - a_n| &< \dfrac{1}{n} - \dfrac{1}{n + p}\\
+		\therefore |a_{n + p} - a_n| &< \dfrac{1}{n}
+	\end{align*}
+	Therefore, $\forall \varepsilon > 0$, $\exists n_0 \in \mathbb{N}$, s.t. $\forall n \geq n_0$ and $\forall p \in \mathbb{N}$, $|a_{n + p} - a_n| < \varepsilon$, where $n_0 > \dfrac{1}{\varepsilon}$.
+	\qed
+\end{solution}
+
+\begin{question}
+	Prove that the sequence
+	\begin{equation*}
+		a_n = \dfrac{1}{1} + \dfrac{1}{n} + \dots + \dfrac{1}{n}
+	\end{equation*}
+	diverges.
+\end{question}
+
+\begin{solution}
+	If possible, let the sequence converge.
+	Then, by the \nameref{Cauchy Characterisation of Convergence}, $\forall \varepsilon > 0$, $\exists n_0 \in \mathbb{N}$, s.t. $\forall n \geq n_0$ and $\forall p \in \mathbb{N}$, $|a_{n + p} - a_n| < \varepsilon$.\\
+	Therefore,
+	\begin{align*}
+		|a_{n + p} - a_n| &= \left| \dfrac{1}{1} + \dfrac{1}{2} + \dots + \dfrac{1}{n} + \dfrac{1}{n + p} - \left( \dfrac{1}{n} + \dots + \dfrac{1}{n} \right) \right|\\
+		&= \dfrac{1}{n + 1} + \dots + \dfrac{1}{n + p}\\
+		&\ge p \cdot \dfrac{1}{n + p}\\
+		\therefore |a_{n + p} - a_n| &> \dfrac{p}{n + p}
+	\end{align*}
+	If $n = p$,
+	\begin{align*}
+		\dfrac{p}{n + p} &= \dfrac{1}{2}
+	\end{align*}
+	This contradicts the result obtained from the \nameref{Cauchy Characterisation of Convergence}, for $\varepsilon = \dfrac{1}{4}$.\\
+	Therefore, the sequence diverges.
 \end{solution}
 
 \end{document}
