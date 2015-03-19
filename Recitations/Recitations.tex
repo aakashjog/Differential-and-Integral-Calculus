@@ -1,5 +1,9 @@
 \documentclass[fleqn, a4paper, 12pt, twoside]{article}
-\usepackage{exsheets}
+
+\newcounter{recitationcount} %creates a new counter for recitation numbers (must be executed before exsheets is loaded)
+\newcommand\recitation{\refstepcounter{recitationcount}}
+
+\usepackage[counter-within = recitationcount]{exsheets}
 \usepackage{amsmath, amssymb, amsthm} %standard AMS packages
 \usepackage{marginnote} %marginnotes
 \usepackage{gensymb} %miscellaneous symbols
@@ -37,6 +41,17 @@
 \@addtoreset{section}{part} %resets section numbers in new part
 \makeatother
 
+\newcommand\blfootnote[1]{%
+	\begingroup
+	\renewcommand\thefootnote{}\footnote{#1}%
+	\addtocounter{footnote}{-1}%
+	\endgroup
+}
+
+\RenewQuSolPair{question}[name=Recitation \therecitationcount\ -- Exercise]{solution}[name=Recitation \therecitationcount\ -- Solution]
+
+\SetupExSheets{solution/print = true, totoc = true} %prints all solutions by default
+
 %opening
 \title{Differential and Integral Calculus : Recitations}
 \author{Aakash Jog}
@@ -46,6 +61,17 @@
 
 \maketitle
 %\setlength{\mathindent}{0pt}
+
+\blfootnote
+{	
+	\begin{figure}[H]
+		\includegraphics[height = 12pt]{cc.eps}
+		\includegraphics[height = 12pt]{by.eps}
+		\includegraphics[height = 12pt]{nc.eps}
+		\includegraphics[height = 12pt]{sa.eps}
+	\end{figure}
+	This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. To view a copy of this license, visit \url{http://creativecommons.org/licenses/by-nc-sa/4.0/}.
+} %CC-BY-NC-SA licencse
 
 \tableofcontents
 
@@ -61,6 +87,8 @@ E-mail: \href{mailto:micbromberg@gmail.com}{micbromberg@gmail.com}\\
 \part{Sequences and Series}
 
 \section{Sequences}
+
+\recitation
 
 \begin{question}
 	Prove:
@@ -184,6 +212,167 @@ E-mail: \href{mailto:micbromberg@gmail.com}{micbromberg@gmail.com}\\
 	Therefore by induction, $\{a_n\}$ is bounded from above by 5.
 \end{solution}
 
-\href{tel:+972586283629}{+972 58-628-3629}
+\recitation
+
+\subsection{Limit of a Function by Heine}
+
+\begin{definition}
+	\begin{equation*}
+		\lim\limits_{x \to x_0} f(x) = l
+	\end{equation*}
+	if for every sequence $x_n$, such that $\lim\limits_{n \to \infty} x_n = x_0$, \begin{equation*}
+		\lim\limits_{n \to \infty} f(x_n) = l
+	\end{equation*}
+\end{definition}
+
+\begin{theorem}
+	If $f$ is continuous at $x_0$ and $x_n \to x_0$, then 
+	\begin{equation*}
+		\lim\limits_{n \to \infty} f(x_n) = f\left( \lim\limits_{n \to \infty} x_n \right) = f_{x_0}
+	\end{equation*}
+\end{theorem}
+
+\begin{question}
+	Calculate $\lim\limits_{n \to \infty} \sqrt[n]{n}$.
+\end{question}
+
+\begin{solution}
+	Let
+	\begin{equation*}
+		f(x) = x^{\sfrac{1}{x}}
+	\end{equation*}
+	Therefore,
+	\begin{align*}
+		\lim\limits_{x \to \infty} x^{\sfrac{1}{x}} &= \lim\limits_{x \to \infty} e^{\cancelto{0}{\dfrac{\ln x}{x}}}\\
+		&= 1
+	\end{align*}
+\end{solution}
+
+\subsection{Sub-sequences}
+
+\begin{question}
+	Find all partial limits and $\overline{\lim}$ and $\underline{\lim}$ of
+	\begin{equation*}
+		a_n = \left( \cos \dfrac{\pi n}{4} \right)^n
+	\end{equation*}
+\end{question}
+
+\begin{solution}
+	Let $k, z \in \mathbb{Z}$
+	\begin{align*}
+		\cos \dfrac{\pi n}{4} &= \cos \dfrac{\pi (n + k)}{4}\\
+		\therefore \dfrac{\pi n}{4} &= \dfrac{\pi (n + k)}{4} + 2 \pi z\\
+		\therefore \pi n &= \pi (n + k) + 8 \pi z\\
+		\therefore k &= 8 z
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		a_{8k} &= \left( \cos \dfrac{\pi \cdot 8k}{4} \right)^{8k}\\
+		&= \left( \cos (2 \pi k) \right)^{8k}\\
+		&= 1\\
+		a_{8k + 1} &= \left( \cos \dfrac{\pi \cdot (8k + 1)}{4} \right)^{8k + 1}\\
+		&= \left( \cos \dfrac{\pi}{4} \right)^{8k + 1}\\
+		&= \left( \dfrac{\sqrt{2}}{2} \right)^{8k + 1}\\
+		a_{8k + 2} &= \left( \cos \dfrac{\pi \cdot (8k + 2)}{4} \right)^{8k + 2}\\
+		&= \left( \cos \dfrac{\pi}{2} \right)^{8k + 2}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\lim\limits_{k \to \infty} a_{8k} &= 1\\
+		\lim\limits_{k \to \infty} a_{8k + 1} &= \lim\limits_{k \to \infty} \left( \dfrac{\sqrt{2}}{2} \right)^{8k + 1}\\
+		&= 0
+	\end{align*}
+	Similarly,
+	\begin{align*}
+		\lim\limits_{k \to \infty} a_{8k + 2} &= 0\\
+		\lim\limits_{k \to \infty} a_{8k + 3} &= 0\\
+		\lim\limits_{k \to \infty} a_{8k + 4} &= \lim\limits_{k \to \infty} (-1)^{8k + 4}\\
+		&= 1\\
+		\lim\limits_{k \to \infty} a_{8k + 5} &= 0\\
+		\lim\limits_{k \to \infty} a_{8k + 6} &= 0\\
+		\lim\limits_{k \to \infty} a_{8k + 7} &= 0
+	\end{align*}
+	Therefore, $\{a_n\}$ has two partial limits, $0$ and $1$.
+	\begin{align*}
+		\overline{\lim} a_n &= 1\\
+		\underline{\lim} a_n &= 0
+	\end{align*}
+\end{solution}
+
+\section{Series}
+
+\begin{definition}[Convergence of a series]
+	Let $\{a_n\}$ be a sequence. Let $S_n$ be a sequence of partial sums of $a_n$, s.t.
+	\begin{equation*}
+		S_n = \sum_{k = 1}^{n} a_k
+	\end{equation*}
+	The series $\sum_{k = 1}^{\infty} a_k$ is said to converge to $l$ if
+	\begin{equation*}
+		\lim\limits_{n \to \infty} S_n = l
+	\end{equation*}
+	that is,
+	\begin{equation*}
+		\sum_{k = 1}^{\infty} a_k = \lim\limits_{n \to \infty} \sum_{k = 1}^{n} a_k = \lim\limits_{n \to \infty} S_n
+	\end{equation*}
+\end{definition}
+
+\begin{question}
+	Does $\displaystyle \sum_{k = 0}^{\infty} q^k$ where $-1 < q < 1$ converge?
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		\sum_{k = 0}^{\infty} q^k &= \lim\limits_{n \to \infty} \sum_{k = 0}^{n} q^k\\
+		&= \lim\limits_{n \to \infty} \dfrac{1 - q^{n + 1}}{1 - q}\\
+		&= \dfrac{1}{1 - q}
+	\end{align*}
+	Therefore, the series converges.
+\end{solution}
+
+\begin{question}
+	Does $\displaystyle \sum_{k = 1}^{\infty} \dfrac{1}{k(k + 1)}$ converge?
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		\sum_{k = 1}^{\infty} \dfrac{1}{k(k + 1)} &= \sum_{k = 1}^{\infty} \left( \dfrac{1}{k} - \dfrac{1}{k + 1} \right)\\
+		&= \lim\limits_{n \to \infty} \sum_{k = 1}^{n} \left( \dfrac{1}{k} - \dfrac{1}{k + 1} \right)\\
+		&= \lim\limits_{n \to \infty} \left( 1 - \dfrac{1}{n + 1} \right)\\
+		&= 1
+	\end{align*}
+\end{solution}
+
+\begin{question}
+	Does $\displaystyle \sum_{k = 1}^{\infty} \left( 1 + \dfrac{1}{k} \right)^k$ converge?
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		\lim\limits_{k \to \infty} \left( 1 + \dfrac{1}{k} \right)^k &= e\\
+		\therefore \lim\limits_{k \to \infty} \left( 1 + \dfrac{1}{k} \right)^k &\neq 0
+	\end{align*}
+	Therefore, the necessary condition is nt satisfied.
+	Hence, the series does not converge.
+\end{solution}
+
+\subsection{Comparison Tests for Positive Series}
+
+\begin{theorem}[First Comparison Test]
+	If $a_n \ge 0$, $b_n \ge 0$, and $a_n \le b_n$, then
+	\begin{enumerate}
+		\item If $\sum b_n$ converges, then $\sum a_n$ converges.
+		\item If $\sum a_n$ diverges, then $\sum b_n$ diverges.
+	\end{enumerate}
+	\label{FIrst Comparison Test}
+\end{theorem}
+
+\begin{theorem}[Second Comparison Test]
+	If $a_n \ge 0$, $b_n \ge 0$ and
+	\begin{equation*}
+		\lim\limits_{n \to \infty} \dfrac{a_n}{b_n} = l
+	\end{equation*}
+	where $0 < l < \infty$, then $\sum a_n$ and $\sum b_n$ converge or diverge simultaneously.
+	\label{Second Comparison Test}
+\end{theorem}
 
 \end{document}
