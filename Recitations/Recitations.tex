@@ -363,7 +363,7 @@ E-mail: \href{mailto:micbromberg@gmail.com}{micbromberg@gmail.com}\\
 		\item If $\sum b_n$ converges, then $\sum a_n$ converges.
 		\item If $\sum a_n$ diverges, then $\sum b_n$ diverges.
 	\end{enumerate}
-	\label{FIrst Comparison Test}
+	\label{First Comparison Test}
 \end{theorem}
 
 \begin{theorem}[Second Comparison Test]
@@ -374,5 +374,228 @@ E-mail: \href{mailto:micbromberg@gmail.com}{micbromberg@gmail.com}\\
 	where $0 < l < \infty$, then $\sum a_n$ and $\sum b_n$ converge or diverge simultaneously.
 	\label{Second Comparison Test}
 \end{theorem}
+
+\recitation
+
+\begin{question}
+	Suppose the sequence $a_n$ satisfies the condition
+	\begin{equation*}
+		a_{n + 1} - a_n > \dfrac{1}{n}
+	\end{equation*}
+	$\forall n \in \mathbb{N}$.\\
+	Prove that $\lim\limits_{n \to \infty} a_n = \infty$.
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		a_{n + 1} &= a_{n + 1} - a_{n} + a_{n} - a_{n - 1} + a_{n - 1} - a_{n - 2} + \dots + a_{2} - a_{1} + a_{1}\\
+		&= \sum_{k = 1}^{n} \left( a_{k + 1} - a_{k} \right) + a_{1}\\
+		&\ge \sum_{k = 1}^{n} \dfrac{1}{k} + a_1
+	\end{align*}
+	As the harmonic series diverges, $\sum\limits_{k = 1}^{n} \dfrac{1}{k} + a_1$ diverges.\\
+	Therefore, by the \nameref{First Comparison Test}, $\sum\limits_{k = 1}^{\infty} (a_{k + 1} - a_k)$ diverges.
+\end{solution}
+
+\begin{question}
+	Check the convergence of $\sum\limits_{n = 2}^{\infty} \dfrac{n + \sin n}{n^3 + \cos \pi n}$.
+\end{question}
+
+\begin{solution}
+	The series is non-negative.
+	Therefore, the comparison tests are applicable.
+	\begin{align*}
+		\dfrac{n + \sin n}{n^3 + \cos \pi n} &\le \dfrac{n + 1}{n^3 - 1}\\
+		\therefore \dfrac{n + \sin n}{n^3 + \cos \pi n} &\le \dfrac{2n}{n^3 - \dfrac{n^3}{2}} &\le \dfrac{4}{n^2}
+	\end{align*}
+	Therefore, by the \nameref{First Comparison Test}, as $\dfrac{4}{n^2}$ converges, $\sum_{n = 2}^{\infty} \dfrac{n + \sin n}{n^3 + \cos \pi n}$ also converges.
+\end{solution}
+
+\begin{question}
+	Let $a_n \ge 0$ and suppose that $\sum a_n$ converges. Prove that $\sum {a_n}^2$ converges.\\
+	Is it true without the assumption $a_n \ge 0$?
+\end{question}
+
+\begin{solution}
+	As $\sum a_n$ converges, $\lim\limits_{n \to \infty} a_n = 0$.\\
+	Therefore, $\exists N \in \mathbb{N}$, such that $\forall n > N$, $a_n < 1$.\\
+	Therefore, $\forall n > N$, ${a_n}^2 \le a_n$.
+	Hence, as $\sum\limits_{n = N + 1}^{\infty} a_n$ converges, $\sum\limits_{n = N + 1}^{\infty} {a_n}^2$ also converges.
+	Hence, $\sum\limits_{n = 1}^{\infty} a_n$ also converges.\\
+	~\\
+	This is not true without the assumption $a_n \ge 0$, as the argument ${a_n}^2 \le a_n$ does not hold.
+\end{solution}
+
+\begin{question}
+	For which $\alpha$ does $\sum \left( \sqrt{n + 1} - \sqrt{n} \right)^{\sfrac{\alpha}{2}}$ converge?
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		\sum \left( \sqrt{n + 1} - \sqrt{n} \right)^{\sfrac{\alpha}{2}} &= \sum \left( \dfrac{n + 1 - n}{\sqrt{n + 1} + \sqrt{n}} \right)^{\sfrac{\alpha}{2}}\\
+		&= \sum \left( \dfrac{1}{\sqrt{n + 1} - \sqrt{n}} \right)^{\sfrac{\alpha}{2}}
+	\end{align*}
+	The series is positive.
+	Therefore, the comparison tests are applicable.\\
+	Comparing with $\left( \dfrac{1}{\sqrt{n}} \right)^{\sfrac{\alpha}{2}}$,
+	\begin{align*}
+		\dfrac{\left( \dfrac{1}{\sqrt{n + 1} + \sqrt{n}} \right)^{\sfrac{\alpha}{2}}}{\left( \dfrac{1}{\sqrt{n}} \right)^{\sfrac{\alpha}{2}}} &= \left( \dfrac{\sqrt{n}}{\sqrt{n + 1} + \sqrt{n}} \right)^{\sfrac{\alpha}{2}}\\
+		\therefore \lim\limits_{n \to \infty} \left( \dfrac{\sqrt{n}}{\sqrt{n + 1} + \sqrt{n}} \right)^{\sfrac{\alpha}{2}} &= \left( \dfrac{1}{2} \right)^{\sfrac{\alpha}{2}}
+	\end{align*}
+	$\sum \dfrac{1}{n^{\sfrac{\alpha}{2}}}$ converges if and only if $\dfrac{\alpha}{4} > 1$, i.e. if an inly if $\alpha > 4$.\\
+	By the \nameref{Second Comparison Test}, $\sum \dfrac{1}{n^{\sfrac{\alpha}{4}}}$ and the series converge or diverge simultaneously.\\
+	Therefore, the series converges for $\alpha > 4$.
+\end{solution}
+
+\begin{question}
+	Check the convergence of $\sum\limits_{n = 1}^{\infty} \sin \dfrac{1}{n}$.
+\end{question}
+
+\begin{solution}
+	$\forall n \in \mathbb{N}$, $\sin \dfrac{1}{n} \ge 0$\\
+	\begin{align*}
+		\lim\limits_{n \to \infty} \dfrac{\sin \dfrac{1}{n}}{\dfrac{1}{n}} &= 1
+	\end{align*}
+	Therefore, by \nameref{Second Comparison Test}, $\sum \dfrac{1}{n}$ and $\sum \sin \dfrac{1}{n}$ diverge simultaneously.
+\end{solution}
+
+\subsection{d'Alembert Criteria (Ratio Test)}
+
+\begin{definition}[Absolute and conditional convergence]
+	The series $\sum a_n$ is said to converge absolutely if $\sum |a_n|$ converges.
+	The series $\sum a_n$ is said to converge conditionally if it converges but $\sum |a_n|$ diverges.
+\end{definition}
+
+\begin{theorem}
+	If the series $\sum a_n$ converges absolutely then it converges.
+\end{theorem}
+
+\begin{theorem}[d'Alembert Criteria (Ratio Test)]
+	\begin{enumerate}
+		\item 
+			If 
+			\begin{equation*}
+			\lim\limits_{n \to \infty} \left| \dfrac{a_{n - 1}}{a_n} \right| = L < 1
+			\end{equation*}
+			then $\sum a_n$ converges absolutely.
+		\item 
+			If 
+			\begin{equation*}
+			\lim\limits_{n \to \infty} \left| \dfrac{a_{n - 1}}{a_n} \right| = L > 1
+			\end{equation*}
+			(including $L = \infty$), then $\sum a_n$ converges diverges.
+		\item If $L = 1$, the test does not apply.
+	\end{enumerate}
+	\label{d'Alembert Criteria (Ratio Test)}
+\end{theorem}
+
+\begin{question}
+	Check the convergence of $\sum \dfrac{(-1)^n \cdot n^{1000}}{1 \cdot 3 \cdot 5 \cdot \dots \cdot (2n - 1)}$.
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+	\sum_{n = 1}^{\infty} \left| \dfrac{(-1)^n \cdot n^{1000}}{1 \cdot \dots \cdot (2n - 1)} \right| &= \sum_{n = 1}^{\infty} \dfrac{n^{1000}}{1 \cdot \dots \cdot (2n - 1)}
+	\end{align*}
+	Therefore, by the \nameref{d'Alembert Criteria (Ratio Test)},
+	\begin{align*}
+		\dfrac{a_{n + 1}}{a_n} &= \dfrac{\dfrac{(n + 1)^{1000}}{1 \cdot \dots \cdot (2n + 1)}}{\dfrac{n^{1000}}{1 \cdot \dots \cdot (2n - 1)}}\\
+		&= \left( \dfrac{n + 1}{n} \right)^{1000} \cdot \dfrac{1}{2n + 1}\\
+		\therefore \lim\limits_{n to \infty} \left( \dfrac{n + 1}{n} \right)^{1000} \cdot \dfrac{1}{2n + 1} &= 0\\
+		\therefore \left( \dfrac{n + 1}{n} \right)^{1000} \cdot \dfrac{1}{2n + 1} &< 1
+	\end{align*}
+	Therefore, by the \nameref{d'Alembert Criteria (Ratio Test)}, the series converges absolutely, and hence converges.
+\end{solution}
+
+\subsection{Cauchy Criteria (Cauchy Root Test)}
+
+\begin{theorem}[Cauchy Criteria (Cauchy Root Test)]
+	\begin{enumerate}
+		\item
+			If 
+			\begin{equation*}
+			\overline{\lim} \sqrt[n]{|a_n|} = L < 1
+			\end{equation*}
+			then $\sum a_n$ converges absolutely.
+		\item
+			If 
+			\begin{equation*}
+			\overline{\lim} \sqrt[n]{|a_n|} = L > 1
+			\end{equation*}
+			(including $L = \infty$), then $\sum a_n$ diverges.
+		\item If $L = 1$, the test does not apply.
+	\end{enumerate}
+	\label{Cauchy Criteria (Cauchy Root Test)}
+\end{theorem}
+
+\begin{question}
+	Check the convergence of $\sum \left( 1 - \dfrac{2}{n} \right)^{n^2}$.
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		\sqrt[n]{\left( 1 - \dfrac{2}{n} \right)^{n^2}} &= \left( 1 - \dfrac{2}{n} \right)^n\\
+		\therefore \lim\limits_{n \to \infty} \left( 1 - \dfrac{2}{n} \right)^n &= e^{-2}\\
+		\therefore \lim\limits_{n \to \infty} \left( 1 - \dfrac{2}{n} \right)^n &< 1
+	\end{align*}
+	Therefore, by the \nameref{Cauchy Criteria (Cauchy Root Test)}, $\sum \left( 1 - \dfrac{2}{n} \right)^{n^2}$ converges.
+\end{solution}
+
+\subsection{Leibniz's Criteria}
+
+\begin{definition}[Alternating series]
+	The series $\sum\limits_{n = 1}^{\infty} (-1)^{n - 1} a_n$, where all $a_n > 0$ or all $a_n < 0$ is called an alternating series.
+\end{definition}
+
+\begin{theorem}[Leibniz's Criteria for Convergence]
+	If an alternating series $\sum (-1)^{n - 1} a_n$ with $a_n > 0$ satisfies
+	\begin{enumerate}
+		\item $a_{n + 1} \le a_n$, i.e. $\{a_n\}$ is monotonically decreasing.
+		\item $\lim\limits_{n \to \infty} a_n = 0$
+	\end{enumerate}
+	then the series $(-1)^{n - 1} a_n$ converges.
+	\label{Leibniz's Criteria for Convergence}
+\end{theorem}
+
+\begin{question}
+	Prove or disprove: There exists $\{a_n\}$, such that $\sum a_n$ converges and $\sum (1 + a_n) a_n$ diverges.
+\end{question}
+
+\begin{solution}
+	Let $a_n = \dfrac{(-1)^n}{\sqrt{n}}$.\\
+	Therefore, by \nameref{Leibniz's Criteria for Convergence}, $\sum \dfrac{(-1)^n}{\sqrt{n}}$ converges.\\
+	\begin{align*}
+		\sum (1 + a_n) a_n &= \sum \left( 1 + \dfrac{(-1)^n}{\sqrt{n}} \right) \dfrac{(-1)^n}{\sqrt{n}}\\
+		&= \sum \left( \dfrac{(-1)^n}{\sqrt{n}} + \dfrac{1}{n} \right)
+	\end{align*}
+	Therefore, as $\sum \dfrac{1}{n}$ diverges, and $\sum \dfrac{(-1)^n}{\sqrt{n}}$ converges, $\sum \left( \dfrac{1}{n} + \dfrac{(-1)^n}{\sqrt{n}} \right)$ diverges.
+\end{solution}
+
+\subsection{Integral Test}
+
+\begin{theorem}[Integral Test]
+	If $f(x) : [1, \infty) \to [0, \infty)$ is monotonically decreasing.
+	Then, $\sum\limits_{n = 1}^{\infty} f(n)$ and $\int\limits_{1}^{\infty} f(x) \dif x$ converge or diverge simultaneously.
+	\label{Integral Test}
+\end{theorem}
+
+\begin{question}
+	Check the convergence of $\sum\limits_{n = 2}^{\infty} \dfrac{1}{n \ln n}$
+\end{question}
+
+\begin{solution}
+	Let
+	\begin{align*}
+		f(x) &= \dfrac{1}{x \ln x}
+	\end{align*}
+	$f(x)$ is monotonically decreasing.
+	Therefore, the \nameref{Integral Test} is applicable.\\
+	Therefore,
+	\begin{align*}
+		\int\limits_{2}^{\infty} \dfrac{1}{x \ln x} \dif x &= \int\limits_{\ln 2}^{\infty} \dfrac{1}{y} \dif y\\
+		&= \left. \ln y \right|_{\ln 2}^{\infty}\\
+		&= \infty
+	\end{align*}
+	Therefore, by the integral test, $\sum \dfrac{1}{n \ln n}$ diverges.
+\end{solution}
 
 \end{document}
