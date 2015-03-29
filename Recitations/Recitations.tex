@@ -363,7 +363,7 @@ E-mail: \href{mailto:micbromberg@gmail.com}{micbromberg@gmail.com}\\
 		\item If $\sum b_n$ converges, then $\sum a_n$ converges.
 		\item If $\sum a_n$ diverges, then $\sum b_n$ diverges.
 	\end{enumerate}
-	\label{First Comparison Test}
+	\label{First_Comparison_Test}
 \end{theorem}
 
 \begin{theorem}[Second Comparison Test]
@@ -372,7 +372,7 @@ E-mail: \href{mailto:micbromberg@gmail.com}{micbromberg@gmail.com}\\
 		\lim\limits_{n \to \infty} \dfrac{a_n}{b_n} = l
 	\end{equation*}
 	where $0 < l < \infty$, then $\sum a_n$ and $\sum b_n$ converge or diverge simultaneously.
-	\label{Second Comparison Test}
+	\label{Second_Comparison_Test}
 \end{theorem}
 
 \recitation
@@ -393,7 +393,7 @@ E-mail: \href{mailto:micbromberg@gmail.com}{micbromberg@gmail.com}\\
 		&\ge \sum_{k = 1}^{n} \dfrac{1}{k} + a_1
 	\end{align*}
 	As the harmonic series diverges, $\sum\limits_{k = 1}^{n} \dfrac{1}{k} + a_1$ diverges.\\
-	Therefore, by the \nameref{First Comparison Test}, $\sum\limits_{k = 1}^{\infty} (a_{k + 1} - a_k)$ diverges.
+	Therefore, by the \nameref{First_Comparison_Test}, $\sum\limits_{k = 1}^{\infty} (a_{k + 1} - a_k)$ diverges.
 \end{solution}
 
 \begin{question}
@@ -407,7 +407,7 @@ E-mail: \href{mailto:micbromberg@gmail.com}{micbromberg@gmail.com}\\
 		\dfrac{n + \sin n}{n^3 + \cos \pi n} &\le \dfrac{n + 1}{n^3 - 1}\\
 		\therefore \dfrac{n + \sin n}{n^3 + \cos \pi n} &\le \dfrac{2n}{n^3 - \dfrac{n^3}{2}} &\le \dfrac{4}{n^2}
 	\end{align*}
-	Therefore, by the \nameref{First Comparison Test}, as $\dfrac{4}{n^2}$ converges, $\sum_{n = 2}^{\infty} \dfrac{n + \sin n}{n^3 + \cos \pi n}$ also converges.
+	Therefore, by the \nameref{First_Comparison_Test}, as $\dfrac{4}{n^2}$ converges, $\sum_{n = 2}^{\infty} \dfrac{n + \sin n}{n^3 + \cos \pi n}$ also converges.
 \end{solution}
 
 \begin{question}
@@ -442,7 +442,7 @@ E-mail: \href{mailto:micbromberg@gmail.com}{micbromberg@gmail.com}\\
 		\therefore \lim\limits_{n \to \infty} \left( \dfrac{\sqrt{n}}{\sqrt{n + 1} + \sqrt{n}} \right)^{\sfrac{\alpha}{2}} &= \left( \dfrac{1}{2} \right)^{\sfrac{\alpha}{2}}
 	\end{align*}
 	$\sum \dfrac{1}{n^{\sfrac{\alpha}{2}}}$ converges if and only if $\dfrac{\alpha}{4} > 1$, i.e. if an inly if $\alpha > 4$.\\
-	By the \nameref{Second Comparison Test}, $\sum \dfrac{1}{n^{\sfrac{\alpha}{4}}}$ and the series converge or diverge simultaneously.\\
+	By the \nameref{Second_Comparison_Test}, $\sum \dfrac{1}{n^{\sfrac{\alpha}{4}}}$ and the series converge or diverge simultaneously.\\
 	Therefore, the series converges for $\alpha > 4$.
 \end{solution}
 
@@ -455,7 +455,7 @@ E-mail: \href{mailto:micbromberg@gmail.com}{micbromberg@gmail.com}\\
 	\begin{align*}
 		\lim\limits_{n \to \infty} \dfrac{\sin \dfrac{1}{n}}{\dfrac{1}{n}} &= 1
 	\end{align*}
-	Therefore, by \nameref{Second Comparison Test}, $\sum \dfrac{1}{n}$ and $\sum \sin \dfrac{1}{n}$ diverge simultaneously.
+	Therefore, by \nameref{Second_Comparison_Test}, $\sum \dfrac{1}{n}$ and $\sum \sin \dfrac{1}{n}$ diverge simultaneously.
 \end{solution}
 
 \subsection{d'Alembert Criteria (Ratio Test)}
@@ -485,7 +485,7 @@ E-mail: \href{mailto:micbromberg@gmail.com}{micbromberg@gmail.com}\\
 			(including $L = \infty$), then $\sum a_n$ converges diverges.
 		\item If $L = 1$, the test does not apply.
 	\end{enumerate}
-	\label{d'Alembert Criteria (Ratio Test)}
+	\label{d'Alembert_Criteria_(Ratio_Test)}
 \end{theorem}
 
 \begin{question}
@@ -496,14 +496,14 @@ E-mail: \href{mailto:micbromberg@gmail.com}{micbromberg@gmail.com}\\
 	\begin{align*}
 	\sum_{n = 1}^{\infty} \left| \dfrac{(-1)^n \cdot n^{1000}}{1 \cdot \dots \cdot (2n - 1)} \right| &= \sum_{n = 1}^{\infty} \dfrac{n^{1000}}{1 \cdot \dots \cdot (2n - 1)}
 	\end{align*}
-	Therefore, by the \nameref{d'Alembert Criteria (Ratio Test)},
+	Therefore, by the \nameref{d'Alembert_Criteria_(Ratio_Test)},
 	\begin{align*}
 		\dfrac{a_{n + 1}}{a_n} &= \dfrac{\dfrac{(n + 1)^{1000}}{1 \cdot \dots \cdot (2n + 1)}}{\dfrac{n^{1000}}{1 \cdot \dots \cdot (2n - 1)}}\\
 		&= \left( \dfrac{n + 1}{n} \right)^{1000} \cdot \dfrac{1}{2n + 1}\\
 		\therefore \lim\limits_{n to \infty} \left( \dfrac{n + 1}{n} \right)^{1000} \cdot \dfrac{1}{2n + 1} &= 0\\
 		\therefore \left( \dfrac{n + 1}{n} \right)^{1000} \cdot \dfrac{1}{2n + 1} &< 1
 	\end{align*}
-	Therefore, by the \nameref{d'Alembert Criteria (Ratio Test)}, the series converges absolutely, and hence converges.
+	Therefore, by the \nameref{d'Alembert_Criteria_(Ratio_Test)}, the series converges absolutely, and hence converges.
 \end{solution}
 
 \subsection{Cauchy Criteria (Cauchy Root Test)}
@@ -524,7 +524,7 @@ E-mail: \href{mailto:micbromberg@gmail.com}{micbromberg@gmail.com}\\
 			(including $L = \infty$), then $\sum a_n$ diverges.
 		\item If $L = 1$, the test does not apply.
 	\end{enumerate}
-	\label{Cauchy Criteria (Cauchy Root Test)}
+	\label{Cauchy_Criteria_(Cauchy_Root_Test)}
 \end{theorem}
 
 \begin{question}
@@ -537,7 +537,7 @@ E-mail: \href{mailto:micbromberg@gmail.com}{micbromberg@gmail.com}\\
 		\therefore \lim\limits_{n \to \infty} \left( 1 - \dfrac{2}{n} \right)^n &= e^{-2}\\
 		\therefore \lim\limits_{n \to \infty} \left( 1 - \dfrac{2}{n} \right)^n &< 1
 	\end{align*}
-	Therefore, by the \nameref{Cauchy Criteria (Cauchy Root Test)}, $\sum \left( 1 - \dfrac{2}{n} \right)^{n^2}$ converges.
+	Therefore, by the \nameref{Cauchy_Criteria_(Cauchy_Root_Test)}, $\sum \left( 1 - \dfrac{2}{n} \right)^{n^2}$ converges.
 \end{solution}
 
 \subsection{Leibniz's Criteria}
@@ -553,7 +553,7 @@ E-mail: \href{mailto:micbromberg@gmail.com}{micbromberg@gmail.com}\\
 		\item $\lim\limits_{n \to \infty} a_n = 0$
 	\end{enumerate}
 	then the series $(-1)^{n - 1} a_n$ converges.
-	\label{Leibniz's Criteria for Convergence}
+	\label{Leibniz's_Criteria_for_Convergence}
 \end{theorem}
 
 \begin{question}
@@ -562,7 +562,7 @@ E-mail: \href{mailto:micbromberg@gmail.com}{micbromberg@gmail.com}\\
 
 \begin{solution}
 	Let $a_n = \dfrac{(-1)^n}{\sqrt{n}}$.\\
-	Therefore, by \nameref{Leibniz's Criteria for Convergence}, $\sum \dfrac{(-1)^n}{\sqrt{n}}$ converges.\\
+	Therefore, by \nameref{Leibniz's_Criteria_for_Convergence}, $\sum \dfrac{(-1)^n}{\sqrt{n}}$ converges.\\
 	\begin{align*}
 		\sum (1 + a_n) a_n &= \sum \left( 1 + \dfrac{(-1)^n}{\sqrt{n}} \right) \dfrac{(-1)^n}{\sqrt{n}}\\
 		&= \sum \left( \dfrac{(-1)^n}{\sqrt{n}} + \dfrac{1}{n} \right)
@@ -575,7 +575,7 @@ E-mail: \href{mailto:micbromberg@gmail.com}{micbromberg@gmail.com}\\
 \begin{theorem}[Integral Test]
 	If $f(x) : [1, \infty) \to [0, \infty)$ is monotonically decreasing.
 	Then, $\sum\limits_{n = 1}^{\infty} f(n)$ and $\int\limits_{1}^{\infty} f(x) \dif x$ converge or diverge simultaneously.
-	\label{Integral Test}
+	\label{Integral_Test}
 \end{theorem}
 
 \begin{question}
@@ -588,7 +588,7 @@ E-mail: \href{mailto:micbromberg@gmail.com}{micbromberg@gmail.com}\\
 		f(x) &= \dfrac{1}{x \ln x}
 	\end{align*}
 	$f(x)$ is monotonically decreasing.
-	Therefore, the \nameref{Integral Test} is applicable.\\
+	Therefore, the \nameref{Integral_Test} is applicable.\\
 	Therefore,
 	\begin{align*}
 		\int\limits_{2}^{\infty} \dfrac{1}{x \ln x} \dif x &= \int\limits_{\ln 2}^{\infty} \dfrac{1}{y} \dif y\\
@@ -596,6 +596,184 @@ E-mail: \href{mailto:micbromberg@gmail.com}{micbromberg@gmail.com}\\
 		&= \infty
 	\end{align*}
 	Therefore, by the integral test, $\sum \dfrac{1}{n \ln n}$ diverges.
+\end{solution}
+
+\recitation
+
+\subsection*{}
+
+\begin{question}
+	Let $d_n \ge 0$ and suppose 
+	\begin{equation*}
+		\sum\limits_{n = 0}^{\infty} d_n = \infty
+	\end{equation*}
+	Prove that
+	\begin{equation*}
+		\sum_{n = 0}^{\infty} \dfrac{d_n}{1 + d_n} = \infty
+	\end{equation*}
+\end{question}
+
+\begin{solution}
+	If possible, let $d_n$ be a bounded sequence.
+	Then there exists $M$, such that $d_n \le M$, $\forall n \in \mathbb{N}$.\\
+	Therefore,
+	\begin{align*}
+		\dfrac{d_n}{1 + d_n} &\ge \dfrac{d_n}{1 + M}
+	\end{align*}
+	Therefore, by the \nameref{Second_Comparison_Test}, as $\sum d_n$ diverges, $\sum \dfrac{d_n}{1 + d_n}$ also diverges.\\
+	~\\
+	If $d_n$ is not bounded, then there is a subsequence $d_{n_k}$ which diverges.
+	Therefore,
+	\begin{align*}
+		\dfrac{d_{n_k}}{1 + d_{n_k}} &= \dfrac{1}{\dfrac{1}{d_{n_k}} + 1}\\
+		\therefore \lim\limits_{k \to \infty} \dfrac{d_{n_k}}{1 + d_{n_k}} &= 1
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\lim\limits_{n \to \infty} \dfrac{d_n}{1 + d_n} &\neq 0
+	\end{align*}
+	Therefore, the necessary condition for convergence is not fulfilled.
+	Therefore, the series converges.
+\end{solution}
+
+\begin{question}
+	Let
+	\begin{equation*}
+		d_n = 
+			\begin{cases}
+				1 &;\quad n = k^2, k \in \mathbb{N}\\
+				0 &;\quad n \neq k^2, k \in \mathbb{N}\\
+			\end{cases}
+	\end{equation*}
+	Does $\sum \dfrac{d_n}{1 + n \cdot d_n}$ diverge?
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		d_n &= 
+			\begin{cases}
+				1 &;\quad n = k^2, k \in \mathbb{N}\\
+				0 &;\quad n \neq k^2, k \in \mathbb{N}\\
+			\end{cases}\\
+		\therefore \dfrac{d_n}{1 + n \cdot d_n} &=
+			\begin{cases}
+				\dfrac{1}{1 + k^2} &;\quad n = k^2, k \in \mathbb{N}\\
+				0 &;\quad n \neq k^2, k \in \mathbb{N}\\
+			\end{cases}
+	\end{align*}
+	As $\dfrac{1}{1 + k^2} \le \dfrac{1}{k^2}$ and as $\dfrac{1}{k^2}$ converges, $\sum \dfrac{1}{1 + k^2}$ also converges.
+\end{solution}
+
+\begin{question}
+	Let $a_n$ be a sequence such that $|a_{n + 1} - a_n| \le b_{n + 1}$ for all $n \in \mathbb{N}$ where $\sum b_k$ converges.
+	Prove that $\{a_n\}$ converges.
+\end{question}
+
+\begin{solution}
+	Let $\varepsilon > 0$.
+	\begin{align*}
+		|a_m - a_n| &= |a_m - a_{m - 1} + a_{m - 1} + \dots - a_n|\\
+		&\le \sum_{k = n + 1}^{m} |a_k - a_{k - 1}|\\
+		&\le \sum_{k = n + 1}^{m} b_k
+	\end{align*}
+	Therefore, as $\sum b_n$ converges, the series satisfies the \nameref{Cauchy_Criteria_(Cauchy_Root_Test)}.
+	Therefore, there exists $N$, such that $\forall m > n > N, \left| \sum\limits_{k = n + 1}^{m} b_k \right| < \varepsilon$.
+	Therefore, for $m > n > N$,
+	\begin{equation*}
+		|a_m - a_n| \le \sum_{k = n + 1}^{m} b_n < \varepsilon
+	\end{equation*}
+\end{solution}
+
+\subsection{Power Series}
+
+\begin{definition}[Power series]
+	A power series around $x_0$ is a function of the form
+	\begin{equation*}
+		f(x) = \sum_{n = 0}^{\infty} a_n (x - x_0)^n
+	\end{equation*}
+	where $\{a_n\}$ is a sequence of real numbers.
+\end{definition}
+
+\begin{theorem}[Abel's Theorem]
+	For every power series $\sum a_n (x - x_0)^n$, there exists $R \in [0,\infty]$, such that for all $x$ satisfying $|x - x_0| < R$, the series converges and for all $x$ satisfying $|x - x_0| > R$ the series diverges.
+	\label{Abel's_Theorem}
+\end{theorem}
+
+\begin{theorem}[Cauchy's Formula for Radius of Convergence]
+	\begin{equation*}
+		R = \dfrac{1}{\overline{\lim} \sqrt[n]{|a_n|}}
+	\end{equation*}
+	\label{Cauchy's_Formula_for_Radius_of_Convergence}
+\end{theorem}
+
+\begin{theorem}[Hadamard's Formula for Radius of Convergence]
+	If $\lim\limits_{n \to \infty} \left| \dfrac{a_n}{a_{n + 1}} \right|$ exists, then
+	\begin{equation*}
+		\lim\limits_{n \to \infty} \left| \dfrac{a_n}{a_{n + 1}} \right| = R
+	\end{equation*}
+	\label{Hadamard's_Formula_for_Radius_of_Convergence}
+\end{theorem}
+
+\begin{question}
+	Find the domain of convergence of $\sum\limits_{n = 1}^{\infty} \dfrac{(2x - 4)^n}{n}$.
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		\sum_{n = 1}^{\infty} \dfrac{(2x - 4)^n}{n} &= \sum_{n = 1}^{\infty} \dfrac{2^n (x - 2)^n}{n}
+	\end{align*}
+	Therefore, by \nameref{Cauchy's_Formula_for_Radius_of_Convergence},
+	\begin{align*}
+		R &= \dfrac{1}{\overline{\lim} \sqrt[n]{|a_n|}}\\
+		&= \dfrac{1}{\lim\limits_{n \to \infty} \sqrt[n]{\dfrac{2^n}{n}}}\\
+		&= \dfrac{1}{\lim\limits_{n \to \infty} \dfrac{2}{\sqrt[n]{n}}}\\
+		&= \dfrac{1}{2}
+	\end{align*}
+	Therefore, the series converges for
+	\begin{equation*}
+		|x - 2| < \dfrac{1}{2}
+	\end{equation*}
+	and diverges for
+	\begin{equation*}
+		|x - 2| > \dfrac{1}{2}
+	\end{equation*}
+	If $x = \dfrac{5}{2}$, 
+	\begin{align*}
+		\sum_{n = 1}^{\infty} \dfrac{2^n}{n} \left( \dfrac{5}{2} - 2 \right)^n\\
+		&= \sum_{n = 1}^{\infty} \dfrac{1}{n}
+	\end{align*}
+	Therefore, the series diverges.\\
+	If $x = \dfrac{3}{2}$, 
+	\begin{align*}
+		\sum_{n = 1}^{\infty} \dfrac{2^n}{n} \left( \dfrac{3}{2} - 2 \right)^n\\
+		&= \sum_{n = 1}^{\infty} (-1)^n \dfrac{1}{n}
+	\end{align*}
+	Therefore, by \nameref{Leibniz's_Criteria_for_Convergence}, the series converges.\\
+	Therefore, the domain of convergence is $\left[ \dfrac{3}{2} , \dfrac{5}{2} \right)$.
+\end{solution}
+
+\begin{question}
+	Find the radius of convergence of $\sum_{n = 0}^{\infty} n! x^{n!}$.
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		\dfrac{1}{\overline{\sqrt[n]{a_n}}} &= x + x + 2 x^2 + 6 x^6 + 24 x^{24} + \dots
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		a_n &=
+			\begin{cases}
+				n &;\quad n = k^2\\
+				0 &;\quad n \neq k^2\\
+			\end{cases}
+	\end{align*}
+	Therefore, 
+	\begin{align*}
+		R &= \dfrac{1}{\lim\limits_{n \to \infty} \sqrt[n]{a_n}}\\
+		&= \dfrac{1}{\lim\limits_{k \to \infty} \sqrt[k!]{k!}}\\
+		&= 1
+	\end{align*}
 \end{solution}
 
 \end{document}
