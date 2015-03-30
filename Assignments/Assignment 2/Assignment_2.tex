@@ -1,0 +1,432 @@
+\documentclass[fleqn, a4paper, 12pt, oneside]{amsart}
+\usepackage{exsheets, tasks}
+\usepackage{amsmath, amssymb, amsthm} %standard AMS packages
+\usepackage{marginnote} %marginnotes
+\usepackage{gensymb} %miscellaneous symbols
+\usepackage{commath} %differential symbols
+\usepackage{xcolor} %colours
+\usepackage{cancel} %cancelling terms
+\usepackage{siunitx} %formatting units
+\usepackage{tikz, pgfplots} %diagrams
+\usetikzlibrary{calc, hobby, patterns, intersections}
+\usepackage{graphicx} %inserting graphics
+\usepackage{hyperref} %hyperlinks
+\usepackage{datetime} %date and time
+\usepackage{ulem} %underline for \emph{}
+\usepackage{xfrac} %inline fractions
+\usepackage{enumerate} %numbered lists
+\usepackage{float} %inserting floats
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}} %adds numbers to specific equations in non-numbered list of equations
+
+\newcommand{\AxisRotator}[1][rotate=0]{
+	\tikz [x=0.25cm,y=0.60cm,line width=.2ex,-stealth,#1] \draw (0,0) arc (-150:150:1 and 1);%
+} %rotation symbols on axes
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+
+\newcommand{\curl}{\mathrm{curl\,}}
+
+\makeatletter
+\@addtoreset{section}{part} %resets section numbers in new part
+\makeatother
+
+\renewcommand{\thesubsection}{(\arabic{subsection})}
+\renewcommand{\thesection}{(\arabic{section})}
+
+%section headings on left
+\makeatletter
+\def\specialsection{\@startsection{section}{1}%
+	\z@{\linespacing\@plus\linespacing}{.5\linespacing}%
+	%  {\normalfont\centering}}% DELETED
+	{\normalfont}}% NEW
+\def\section{\@startsection{section}{1}%
+	\z@{.7\linespacing\@plus\linespacing}{.5\linespacing}%
+	%  {\normalfont\scshape\centering}}% DELETED
+	{\normalfont\scshape}}% NEW
+\makeatother
+
+%forces newline after subsection
+\makeatletter
+\def\subsection{\@startsection{subsection}{3}%
+	\z@{.5\linespacing\@plus.7\linespacing}{.1\linespacing}%
+	{\normalfont\itshape}}
+\makeatother
+
+\settasks{counter-format = tsk[1].}
+
+\SetupExSheets{solution/print = true}
+
+%opening
+\title
+{
+	Differential and Integral Calculus\\
+	Assignment 2
+}
+\author
+{
+	Aakash Jog\\
+	ID : 989323563
+}
+\date{\formatdate{26}{3}{2015}}
+
+\begin{document}
+	
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\begin{question} % % % % % % % % % %Change tasks to (a)
+	Find the following limits (using the sandwich theorem)
+	\begin{tasks}
+		\task $\dfrac{1}{n^2} + \dfrac{1}{(n + 1)^2} + \dots + \dfrac{1}{(2n)^2}$
+		\task $\dfrac{\sin n}{n + \cos n}$
+		\task $\sqrt[n]{3n - \sqrt{n}}$
+	\end{tasks}
+\end{question}
+
+\begin{solution}
+	\begin{tasks}
+		\task
+			\begin{gather*}
+				0 \le \dfrac{1}{n^2} + \dots + \dfrac{1}{(2n)^2} \le n \cdot \dfrac{1}{n^2}\\
+				\therefore \lim\limits_{n \to \infty} 0 \le \lim\limits_{n \to \infty} \dfrac{1}{n^2} + \dots + \dfrac{1}{(2n)^2} \le \lim\limits_{n \to \infty} \dfrac{1}{n}\\
+				\therefore 0 \le \lim\limits_{n \to \infty} \dfrac{1}{n^2} + \dots + \dfrac{1}{(2n)^2} \le 0
+			\end{gather*}
+			Therefore, by the Sandwich Theorem,
+			\begin{equation*}
+				\lim\limits_{n \to \infty} \dfrac{1}{n^2} + \dots + \dfrac{1}{(2n)^2} = 0
+			\end{equation*}
+		\task
+			\begin{gather*}
+				\dfrac{-1}{n + 1} \le \dfrac{\sin n}{n + \cos n} \le \dfrac{1}{n - 1}\\
+				\therefore \lim\limits_{n \to \infty} \dfrac{-1}{n + 1} \le \lim\limits_{n \to \infty} \dfrac{\sin n}{n + \cos n} \le \lim\limits_{n \to \infty} \dfrac{1}{n - 1}\\
+				\therefore 0 \le \lim\limits_{n \to \infty} \dfrac{\sin n}{n + \cos n} \le 0
+			\end{gather*}
+			Therefore, by the Sandwich Theorem,
+			\begin{equation*}
+				\lim\limits_{n \to \infty}  \dfrac{\sin n}{n + \cos n} = 0
+			\end{equation*}
+		\task
+			\begin{gather*}
+				\sqrt[n]{3n - n} \le \sqrt[n]{3n - \sqrt{n}} \le \sqrt[n]{3n}\\
+				\therefore \lim\limits_{n \to \infty} \sqrt[n]{3n - n} \le \lim\limits_{n \to \infty} \sqrt[n]{3n - \sqrt{n}} \le \lim\limits_{n \to \infty} \sqrt[n]{3n}\\
+				\therefore \lim\limits_{n \to \infty} \sqrt[n]{2n} \le \lim\limits_{n \to \infty} \sqrt[n]{3n - \sqrt{n}} \le \lim\limits_{n \to \infty} \sqrt[n]{3n}\\
+				\therefore \lim\limits_{n \to \infty} 2^{\sfrac{1}{n}} \sqrt[n]{n} \le \lim\limits_{n \to \infty} \sqrt[n]{3n - \sqrt{n}} \le \lim\limits_{n \to \infty} 3^{\sfrac{1}{n}} \sqrt[n]{n}\\
+				\therefore 1 \le \lim\limits_{n \to \infty} \sqrt[n]{3n - \sqrt{n}} \le 1
+			\end{gather*}
+			Therefore, by the Sandwich Theorem,
+			\begin{equation*}
+				\lim\limits_{n \to \infty} \sqrt[n]{3n - \sqrt{n}} = 1
+			\end{equation*}
+	\end{tasks}
+\end{solution}
+
+\begin{question}
+	Let $a,b > 0$. Find the limit $\lim\limits_{n \to \infty} \sqrt[n]{a^n + b^n}$.
+\end{question}
+
+\begin{solution}
+	If $a > b$,
+	\begin{gather*}
+		\sqrt[n]{a^n} \le \sqrt[n]{a^n + b^n} \le \sqrt[n]{2a^n}\\
+		\therefore \lim\limits_{n \to \infty} \sqrt[n]{a^n} \le \lim\limits_{n \to \infty} \sqrt[n]{a^n + b^n} \le \lim\limits_{n \to \infty} \sqrt[n]{2a^n}\\
+		\therefore a \le \lim\limits_{n \to \infty} \sqrt[n]{a^n + b^n} \le a
+	\end{gather*}
+	Therefore, by the Sandwich Theorem,
+	\begin{equation*}
+		\lim\limits_{n \to \infty} \sqrt[n]{a^n + b^n} = a
+	\end{equation*}
+	Similarly, if $b > a$,
+	\begin{equation*}
+		\lim\limits_{n \to \infty} \sqrt[n]{a^n + b^n} = b
+	\end{equation*}
+\end{solution}
+
+\begin{question}
+	 Check whether the following sequence are bounded from above or from below (or both): (keep in mind that a convergent sequence is always bounded).
+	 \begin{tasks}
+	 	\task $a_n = \dfrac{n^2 + 1}{n + 2}$
+	 	\task $a_n = \dfrac{n^5}{2^n}$
+	 	\task $a_n = \sqrt{n^2 - n} - \sqrt{n}$
+	 	\task $a_n = \tan \left( \dfrac{\pi}{2} - \dfrac{1}{n} \right)$
+	 \end{tasks}
+\end{question}
+
+\begin{solution}
+	\begin{tasks}
+		\task
+			\begin{align*}
+				a_n &= \dfrac{n^2 + 1}{n + 2}\\
+				&= (n - 2) + \dfrac{5}{n + 2}
+			\end{align*}
+			Therefore, for $n \ge 1$, $\{a_n\}$ is monotonically increasing.\\
+			Therefore, the smallest term is
+			\begin{align*}
+				a_1 &= \dfrac{1 + 1}{1 + 2}\\
+				&= \dfrac{2}{3}
+			\end{align*}
+			Therefore, the series is bounded from below by $\dfrac{2}{3}$.\\
+			As the sequence is monotonically increasing, it is not bounded from above.
+		\task 
+			\begin{align*}
+				a_n &= \dfrac{n^5}{2^n}
+			\end{align*}
+			Let
+			\begin{align*}
+				f(x) &= \dfrac{x^5}{2^x}
+			\end{align*}
+			Differentiating and maximizing,
+			\begin{align*}
+				f(x)_{\textnormal{max}} &= \dfrac{5}{\ln 2}
+			\end{align*}
+			Therefore, as $f(x)$ is bounded from above by $\dfrac{5}{\ln 2}$, $\{a_n\}$ is also bounded from above be $\dfrac{5}{\ln 2}$.\\
+			~\\
+			\begin{align*}
+				\lim\limits_{x \to \infty} f(x) &= 0\\
+				\therefore \lim\limits_{n \to \infty} a_n &= 0
+			\end{align*}
+			Therefore, $\{a_n\}$ is bounded from below by $0$.
+		\task
+			\begin{align*}
+				a_n &= \sqrt{n^2 - n} - \sqrt{n}
+			\end{align*}
+			Let
+			\begin{align*}
+				f(x) &= \sqrt{x^2 - x} - \sqrt{x}\\
+				\therefore f'(x) &= \dfrac{1}{2} \left( \dfrac{2x - 1}{\sqrt{x (x  -1)}} - \dfrac{1}{\sqrt{x}} \right)
+			\end{align*}
+			Therefore, minimizing,
+			\begin{align*}
+				f(x)_{\textnormal{min}} &= -1
+			\end{align*}
+			Therefore, $f(x)$ has minimum value $-1$, but no maximum value.
+			Therefore, $\{a_n\}$ is bounded from below by $-1$.
+		\task
+			\begin{align*}
+				a_n = \tan \left( \dfrac{\pi}{2} - \dfrac{1}{n} \right)
+			\end{align*}
+			Let
+			\begin{align*}
+				f(x) &= \tan \left( \dfrac{\pi}{2} - \dfrac{1}{x} \right)\\
+				&= \cot \dfrac{1}{n}
+			\end{align*}
+			Therefore, as $\dfrac{1}{n}$ is monotonically decreasing $\cot \dfrac{1}{n}$ is monotonically increasing.\\
+			Therefore, the sequence is not bounded from above.
+			The minimum value of the sequence is
+			\begin{align*}
+				a_1 &= \cot 1
+			\end{align*}
+			Therefore, the sequence is bounded from below by $\cot 1$.
+	\end{tasks}
+\end{solution}
+
+\begin{question}
+	Check whether the following sequences are eventually monotone (i.e whether there exists $N \in \mathbb{N}$ such that $a_n$ is monotone for all $n > N$.
+	\begin{tasks}
+		\task $a_n = \sqrt{n} - \dfrac{1}{n}$
+		\task $a_n = \sin (\pi n)$
+	\end{tasks}
+\end{question}
+
+\begin{solution}
+	\begin{tasks}
+		\task
+			\begin{align*}
+				a_n &= \sqrt{n} - \dfrac{1}{n}
+			\end{align*}
+			Let
+			\begin{align*}
+				f(x) &= \sqrt{x} - \dfrac{1}{x}\\
+				\therefore f'(x) &= \dfrac{1}{x^2} + \dfrac{1}{2 \sqrt{x}}
+			\end{align*}
+			Therefore, $f(x)$ is monotonically increasing on $(0,\infty)$.\\
+			Therefore, $\{a_n\}$ is monotonically increasing for all $n > 1$.
+		\task
+			\begin{align*}
+				a_n &= \sin (\pi n)\\
+				\therefore \{a_n\} &= \sin (\pi), \sin (2 \pi), \sin (3 \pi), \dots\\
+				&= 0, 0, 0, \dots
+			\end{align*}
+			Therefore, for all $n \ge 1$, the sequence is monotonically increasing.
+	\end{tasks}
+\end{solution}
+
+\begin{question}
+	Prove that the following sequences converge and find their limits
+	\begin{tasks}
+		\task $a_1 = \sqrt{2}$, $a_{n + 1} = \sqrt{2 + a_n}$
+		\task $a_1 = 2$, $a_{n + 1} = \sqrt{2 a_n - 1}$
+		\task $a_1 = 2$, $a_{n + 1} = \dfrac{1}{2} \left( a_n + \dfrac{1}{a_n} \right)$
+	\end{tasks}
+\end{question}
+
+\begin{solution}
+	\begin{tasks}
+		\task
+			\begin{align*}
+				a_2 &= \sqrt{2 + \sqrt{2}}
+				&\le \sqrt{2}\\
+				\therefore a_2 &\le a_1
+			\end{align*}
+			If possible, let $a_{n - 1} \le a_n$.\\
+			Therefore,
+			\begin{align*}
+				a_n &= \sqrt{2 + a_{n - 1}}\\
+				&\le \sqrt{2 + a_n}\\
+				\therefore a_n &\le a_{n + 1}
+			\end{align*}
+			Therefore, by induction, the sequence is monotonically increasing.\\
+			~\\
+			If possible, let 
+			\begin{equation*}
+				\lim\limits_{n \to \infty} a_n = l \ge a_1
+			\end{equation*}
+			Therefore,
+			\begin{align*}
+				\lim\limits_{n \to \infty} a_n &= \lim\limits_{n \to \infty} \sqrt{2 + a_{n - 1}}\\
+				\therefore l &= \sqrt{2 + l}\\
+				\therefore l &= 2
+			\end{align*}
+			~\\
+			\begin{align*}
+				a_1 &= \sqrt{2}\\
+				\therefore a_1 &\le l
+			\end{align*}
+			If possible, let $a_n \le l$.\\
+			Therefore,
+			\begin{align*}
+				a_{n + 1} &= \sqrt{2 + a_n}\\
+				&\le \sqrt{2 + l}\\
+				\therefore a_{n + 1} &\le l
+			\end{align*}
+			Therefore, by induction, the sequence is bounded from above.\\
+			~\\
+			Therefore, the sequence is monotonically increasing and bounded from above by $l = 2$.\\
+			Therefore, it converges to $l = 2$.
+		\task
+			\begin{align*}
+				a_2 &= \sqrt{2a_1 - 1}\\
+				&= \sqrt{3}\\
+				\therefore a_2 &\le a_1
+			\end{align*}
+			If possible, let $a_{n - 1} \le a_n$.\\
+			Therefore,
+			\begin{align*}
+				a_n &= \sqrt{2 a_{n - 1} - 1}\\
+				&\ge \sqrt{2 a_n - 1}\\
+				\therefore a_n &\ge a_{n + 1}
+			\end{align*}
+			Therefore, by induction, the sequence is monotonically decreasing.\\
+			~\\
+			If possible, let 
+			\begin{equation*}
+				\lim\limits_{n \to \infty} a_n = l
+			\end{equation*}
+			Therefore,
+			\begin{align*}
+				\lim\limits_{n \to \infty} a_n &= \lim\limits_{n \to \infty} \sqrt{2 a_{n - 1} - 1}\\
+				\therefore l &= \sqrt{2l - 1}\\
+				\therefore l &= 1
+			\end{align*}\\
+			~\\
+			\begin{align*}
+				a_1 &= 2\\
+				&\ge 1\\
+				\therefore a_1 &\ge l
+			\end{align*}
+			If possible, let $a_{n} \ge l$.\\
+			Therefore,
+			\begin{align*}
+				a_{n + 1} &= \sqrt{2 a_n - 1}\\
+				&\ge \sqrt{2l - 1}\\
+				&\ge \sqrt{2 - 1}\\
+				&\ge 1\\
+				\therefore a_{n + 1} \ge l
+			\end{align*}
+			Therefore, as the sequence is monotonically decreasing and is bounded from below by $l = 1$, it converges to $l = 1$.
+		\task
+			\begin{align*}
+				a_2 &= \dfrac{1}{2} \left( a_1 + \dfrac{1}{a_1} \right)\\
+				&= \dfrac{1}{2} \left( 2 + \dfrac{1}{2} \right)\\
+				&= \dfrac{5}{4}\\
+				\therefore a_2 &\le a_1
+			\end{align*}
+			If possible let $a_{n - 1} \ge a_n$.\\
+			Therefore,
+			\begin{align*}
+				a_n &= \dfrac{1}{2} \left( a_{n - 1} + \dfrac{1}{a_{n - 1}} \right)\\
+				&\ge \dfrac{1}{2} \left( a_n + \dfrac{1}{a_n} \right)\\
+				\therefore a_n &\ge a_{n + 1}
+			\end{align*}
+			Therefore, by induction, the sequence is monotonically decreasing.\\
+			~\\
+			If possible, let 
+			\begin{equation*}
+				\lim\limits_{n \to \infty} a_n = l
+			\end{equation*}
+			Therefore,
+			\begin{align*}
+				\lim\limits_{n \to \infty} a_n &= \lim\limits_{n \to \infty} \dfrac{1}{2} \left( a_n + \dfrac{1}{a_n} \right)\\
+				\therefore l &= \dfrac{1}{2} \left( l + \dfrac{1}{l} \right)\\
+				\therefore l &= 1
+			\end{align*}
+			~\\
+			\begin{align*}
+				a_1 &= 2\\
+				&\ge 1\\
+				\therefore a_1 &\ge l
+			\end{align*}
+			If possible, let $a_n \ge l$.\\
+			Therefore,
+			\begin{align*}
+				a_{n + 1} &= \dfrac{1}{2} \left( a_n + \dfrac{1}{a_n} \right)\\
+				&\ge \dfrac{1}{l + \dfrac{1}{l}}\\
+				\therefore a_{n + 1} &\ge l
+			\end{align*}
+			Therefore, by induction, the sequence is bounded from below.\\
+			Therefore, as the sequence is monotonically decreasing and is bounded from below by $l = 1$, it converges to $l = 1$.
+	\end{tasks}
+\end{solution}
+
+\begin{question}
+	Prove or disprove: If $a_n$ and $b_n$ are bounded sequences then $a_n b_n$ is bounded.
+\end{question}
+
+\begin{solution}
+	Let
+	\begin{equation*}
+		a \le a_n \le A
+	\end{equation*}
+	and
+	\begin{equation*}
+		b \le b_n \le B
+	\end{equation*}
+	Therefore,
+	\begin{equation*}
+		a_n b \le a_n b_n \le a_n B
+	\end{equation*}
+	and 
+	\begin{equation*}
+		b_n a \le a_n b_n \le b_n A
+	\end{equation*}
+	Therefore, 
+	\begin{equation*}
+		\min \{a_n b, b_n a\} \le a_n b_n \le \max \{a_n B, b_n A\}
+	\end{equation*}
+	Therefore, $a_n b_n$ is bounded.
+\end{solution}
+
+%\begin{question}
+%	Is there a sequence $a_n$ such that $a_n \to 0$ and $\lim\limits_{n \to \infty} (n |a_n - a_{n+1}|) = \infty$?
+%\end{question}
+%
+%\begin{solution}
+%	
+%\end{solution}
+
+\end{document}
