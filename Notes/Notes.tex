@@ -16,6 +16,7 @@
 \usepackage{xfrac, lmodern} %inline fractions
 \usepackage{enumerate} %numbered lists
 \usepackage{float} %inserting floats
+\usepackage{tabularx}
 
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}} %adds numbers to specific equations in non-numbered list of equations
 
@@ -738,6 +739,98 @@ Thomas and Finney, \textit{Calculus and Analytic Geometry}, 9th edition, Addison
 		\item If $L = 1$, the test does not apply.
 	\end{enumerate}
 	\label{Cauchy Criteria (Cauchy Root Test)}
+\end{theorem}
+
+\subsubsection{Integral Test}
+
+\begin{theorem}[Integral Test for Series Convergence]
+	Let $f(x)$ be a continuous, non-negative, monotonic decreasing function on $[1,\infty)$ and let $a_n = f(n)$.
+	Then the series $\sum\limits_{n = 1}^{\infty} a_n$ converges if and only if the improper integral $\int\limits_{1}^{\infty} f(x) \dif x$ converges.
+	\label{Integral Test for Series Convergence}
+\end{theorem}
+
+\begin{question}
+	Does $\sum\limits_{n = 1}^{\infty} \dfrac{1}{n^p}$ converge or diverge?
+\end{question}
+
+\begin{solution}
+	Let
+	\begin{align*}
+		f(x) &= \dfrac{1}{x^p}
+	\end{align*}
+	with $p > 0$.\\
+	Therefore, $f(x)$ is continuous, non-negative and monotonic decreasing on $[1,\infty)$.
+	Therefore, the \nameref{Integral Test for Series Convergence} is applicable.
+	\begin{align*}
+		\int\limits_{1}^{\infty} \dfrac{1}{x^p} \dif x &= \lim\limits_{t \to \infty} \int\limits_{1}^{t} \dfrac{1}{x^p} \dif x
+	\end{align*}
+	If $p \neq 1$,
+	\begin{align*}
+		\int\limits_{1}^{\infty} \dfrac{1}{x^p} &= \lim\limits_{t \to \infty} \left. \dfrac{x^{-p + 1}}{-p + 1} \right|_{1}^{t}\\
+		&= \lim\limits_{t \to \infty} \left( \dfrac{t^{-p + 1}}{-p + 1} - \dfrac{1}{-p + 1} \right)\\
+		&= \dfrac{1}{p - 1}
+	\end{align*}
+	If $p = 1$,
+	\begin{align*}
+		\int\limits_{1}^{\infty} \dfrac{1}{x^p} &= \lim\limits_{t \to \infty} \left. \ln x \right|_{1}^{t}\\
+		&= \infty
+	\end{align*}
+	Therefore, the series converges for $p > 1$ and diverges for $p \le 1$.
+\end{solution}
+
+\begin{theorem}
+	If the series $\sum a_n$ absolutely converges and the series $\sum b_n$ is obtained from $\sum a_n$ by changing the order of the terms in $\sum a_n$ then $\sum b_n$ also absolutely converges and $\sum b_n = \sum a_n$.
+\end{theorem}
+
+\begin{theorem}
+	If a series converges then the series with brackets without changing the order of terms also converges.
+	That is, if $\sum a_n$ converges, then any series of the form $(a_1 + a_2) + (a_3 + a_4 + a_5) + a_6 + \dots$ also converges.
+\end{theorem}
+
+\begin{theorem}
+	If a series with brackets converges and the terms in the brackets have the same sign, then the series without brackets also converges.
+\end{theorem}
+
+\section{Power Series}
+
+\begin{definition}[Power series]
+	The series $\sum\limits_{n = 0}^{\infty} a_n (x - c)^n$ is called a power series.
+\end{definition}
+
+\begin{theorem}[Cauchy-Hadamard Theorem]
+	For any power series $\sum\limits_{n = 0}^{\infty} a_n (x - c)^n$ there exists the limit, which may be infinity,
+	\begin{align*}
+		R &= \dfrac{1}{\overline{\lim\limits_{n \to \infty}} \sqrt[n]{|a_n|}}
+	\end{align*}
+	and the series converges for $|x - c| < R$ and diverges for $|x - c| > R$.
+	The end points of the interval, i.e. $x = c - R$ and $x = c + R$ must be separately checked for series convergence.
+\end{theorem}
+
+\begin{definition}[Radius of convergence and convergence interval]
+	The number $R$ is called the radius of convergence and the interval $|x - c| < R$ is called the convergence interval of the series.
+	The point $c$ is called the centre of the convergence interval.
+\end{definition}
+
+\begin{theorem}
+	If $\exists \lim\limits_{n \to \infty} \left| \dfrac{a_n}{a_{n + 1}} \right|$, which may be infinite, then,
+	\begin{equation*}
+		R = \lim\limits_{n \to \infty} \left| \dfrac{a_n}{a_{n + 1}} \right|
+	\end{equation*}
+\end{theorem}
+
+\begin{tabularx}{\linewidth}{|X|X|X|X|}
+	Series & Centre of convergence interval & Radius of convergence & Convergence interval\\
+	$\displaystyle \sum_{n = 0}^{\infty} x^n$ & & &\\
+	$\displaystyle \sum_{n = 0}^{\infty} n! x^n$ & & &\\
+	$\displaystyle \sum_{n = 1}^{\infty} \dfrac{(x - 3)^n}{n}$ & & &\\
+	$\displaystyle \sum_{n = 0}^{\infty} \dfrac{(-1)^n x^{2n}}{2^{2n} (n!)^2}$ & & &\\
+\end{tabularx}
+
+\begin{theorem}[Stirling's Approximation]
+	For $n \to \infty$,
+	\begin{equation*}
+		n! \approx \left( \dfrac{n}{e} \right)^n \sqrt{2 \pi n}
+	\end{equation*}
 \end{theorem}
 
 \end{document}
