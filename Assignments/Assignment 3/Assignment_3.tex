@@ -1,0 +1,254 @@
+\documentclass[fleqn, a4paper, 12pt, oneside]{amsart}
+\usepackage{exsheets, tasks}
+\usepackage{amsmath, amssymb, amsthm} %standard AMS packages
+\usepackage{marginnote} %marginnotes
+\usepackage{gensymb} %miscellaneous symbols
+\usepackage{commath} %differential symbols
+\usepackage{xcolor} %colours
+\usepackage{cancel} %cancelling terms
+\usepackage{siunitx} %formatting units
+\usepackage{tikz, pgfplots} %diagrams
+\usetikzlibrary{calc, hobby, patterns, intersections}
+\usepackage{graphicx} %inserting graphics
+\usepackage{hyperref} %hyperlinks
+\usepackage{datetime} %date and time
+\usepackage{ulem} %underline for \emph{}
+\usepackage{xfrac} %inline fractions
+\usepackage{enumerate, enumitem} %numbered lists
+\usepackage{float} %inserting floats
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}} %adds numbers to specific equations in non-numbered list of equations
+
+\newcommand{\AxisRotator}[1][rotate=0]{
+	\tikz [x=0.25cm,y=0.60cm,line width=.2ex,-stealth,#1] \draw (0,0) arc (-150:150:1 and 1);%
+} %rotation symbols on axes
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+
+\newcommand{\curl}{\mathrm{curl\,}}
+
+\makeatletter
+\@addtoreset{section}{part} %resets section numbers in new part
+\makeatother
+
+\renewcommand{\thesubsection}{(\arabic{subsection})}
+\renewcommand{\thesection}{(\arabic{section})}
+
+%section headings on left
+\makeatletter
+\def\specialsection{\@startsection{section}{1}%
+	\z@{\linespacing\@plus\linespacing}{.5\linespacing}%
+	%  {\normalfont\centering}}% DELETED
+	{\normalfont}}% NEW
+\def\section{\@startsection{section}{1}%
+	\z@{.7\linespacing\@plus\linespacing}{.5\linespacing}%
+	%  {\normalfont\scshape\centering}}% DELETED
+	{\normalfont\scshape}}% NEW
+\makeatother
+
+%forces newline after subsection
+\makeatletter
+\def\subsection{\@startsection{subsection}{3}%
+	\z@{.5\linespacing\@plus.7\linespacing}{.1\linespacing}%
+	{\normalfont\itshape}}
+\makeatother
+
+\settasks{counter-format = tsk[1].}
+
+\SetupExSheets{solution/print = true}
+
+%opening
+\title
+{
+	Differential and Integral Calculus\\
+	Assignment 3
+}
+\author
+{
+	Aakash Jog\\
+	ID : 989323563
+}
+\date{\formatdate{16}{4}{2015}}
+
+\begin{document}
+	
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\begin{question}
+	Prove or disprove:
+	\begin{enumerate}[leftmargin=*]
+		\item There exist two sequence $\{a_n\}$, $\{b_n\}$ such that $b_n \to -\infty$ and $a_n + b_n \to \infty$.
+		\item If $a_n$ and $b_n$ are divergent sequences, then $a_n b_n$ is divergent.
+		\item If $\{a_n\}$ has a subsequence that tends to infinity and $\{b_n\}$ has a subsequence that tends to infinity, then
+$a_n + b_n$ is divergent.
+		\item If $a_n$ is a convergent sequence, then $\lim_{n \to \infty} (a_{n + 1} - a_n) = 0$.
+	\end{enumerate}
+\end{question}
+
+\begin{solution}
+	\begin{enumerate}[leftmargin=*]
+		\item 
+			Let
+			\begin{align*}
+				a_n &= 2 n\\
+				b_n &= -n
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				\lim\limits_{n \to \infty} b_n &= -\infty\\
+				\lim\limits_{n \to \infty} a_n + b_n &= \lim\limits_{n \to \infty} n\\
+				&= \infty
+			\end{align*}
+			\qed
+		\item
+			Let
+			\begin{align*}
+				a_n &= (-1)^n\\
+				b_n &= (-1)^n
+			\end{align*}
+			Therefore
+			\begin{align*}
+				a_n b_n &= (-1)^{2 n}\\
+				&= 1
+			\end{align*}
+			Therefore $a_n b_n$ converges.\\
+			Therefore the statement is false.
+		\item
+			Let $k \in \mathbb{N}$.\\
+			Let
+			\begin{align*}
+				a_n &= 
+					\begin{cases}
+						n &;\quad n = 2 k\\
+						-n &;\quad n \neq 2 k\\
+					\end{cases}\\
+				b_n &= 
+					\begin{cases}
+						-n &;\quad n = 2 k\\
+						n &;\quad n \neq 2 k\\
+					\end{cases}
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				a_n + b_n &= 
+					\begin{cases}
+						n + (-n) &;\quad n = 2 k\\
+						-n + n &;\quad n \neq 2 k\\
+					\end{cases}\\
+				&= 0
+			\end{align*}
+			Therefore $a_n + b_n$ converges.\\
+			Therefore the statement is false.
+		\item
+			Let
+			\begin{align*}
+				\lim\limits_{n \to \infty} a_n &= l
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				\lim\limits_{n \to \infty} a_{n + 1} - a_n &= \lim\limits_{n \to \infty} a_{n + 1} - \lim\limits_{n \to \infty} a_n\\
+				&= l - l\\
+				&= 0
+			\end{align*}
+			\qed
+	\end{enumerate}
+\end{solution}
+
+\begin{question}
+	Let $\{a_n\}$ be a sequence.
+	Prove that if the subsequences $a_{2 k}$ and $a_{2 k + 1}$ converge to the same limit $L$ then $\lim\limits_{n \to \infty} a_n = L$.
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		\{a_n\} &= a_1, a_2, \dots, a_{2 k}, a_{2 k + 1}, \dots\\
+		\therefore, \{a_n\} &= \{a_k, a_{2 k + 1}\}
+	\end{align*}
+	Therefore, as $n \to \infty$, if the even terms of $\{a_n\}$ and the odd terms of $\{a_n\}$ all tend to $L$, then $\{a_n\}$ itself tends to $L$.
+	\qed
+\end{solution}
+
+\begin{question}
+	Show that if $\{a_n\}$ is a sequence that is unbounded from above (i.e $\forall M > 0$ there exists $n \in \mathbb{N}$ such that $a_n > M$) then there exists a subsequence $\{a_{n_k}\}$ such that $\lim\limits_{k \to \infty} a_{n_k} = \infty$.
+\end{question}
+
+\begin{solution}
+	If possible, $\nexists \{a_{n_k}\}$ such that $\lim\limits_{k \to \infty} a_{n_k} = \infty$.\\
+	Therefore, there must be a maximum term in $\{a_n\}$, say $a_p$.\\
+	Therefore, $\{a_n\}$ is bounded from above by any number greater than or equal to $a_p$.\\
+	However, this contradicts the assumption that $\{a_n\}$ is unbounded from above.
+	Therefore, there must exist a subsequence $\{a_{n_k}\}$ which tends to infinity.
+	\qed
+\end{solution}
+
+\begin{question}
+	Let $\{a_n\}$ be a sequence.
+	Show that if $a_{n + 1} a_n \le 0$, $\forall n \in \mathbb{N}$ and the limit $\lim\limits_{n \to \infty} a_n$ exists, then $\lim\limits_{n \to \infty} a_n = 0$.
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		a_{n + 1} a_n &\le 0
+	\end{align*}
+	Therefore, either $a_{n + 1}$ and $a_n$ must have opposite parity, or at least one must be zero.\\
+	~\\
+	If $\forall n \in \mathbb{N}$, $a_{n + 1}$ and $a_n$ have opposite parity, then $\{a_n\}$ diverges.
+	This contradicts the existence of $\lim\limits_{n \to \infty} a_n$.
+	Therefore at least one of them must be zero.\\
+	Therefore $\lim\limits_{n \to \infty} a_n = 0$.
+\end{solution}
+
+\begin{question}
+	Give an example of a sequence $\{a_n\}_{n = 1}^{\infty}$ that satisfies $\lim\limits_{n \to \infty} (a_{n + 1} - a_n) = 0$, but the limit $\lim\limits_{n \to \infty} a_n$ does not exist (in the strict sense).
+\end{question}
+
+\begin{solution}
+	Let
+	\begin{align*}
+		a_n &= \ln n\\
+		\therefore \lim\limits_{n \to \infty} a_{n + 1} - a_n &= \lim\limits_{n \to \infty} \ln (n + 1) - \ln n\\
+		&= \lim\limits_{n \to \infty} \ln \left( \dfrac{n + 1}{n} \right)\\
+		&= \lim\limits_{n \to \infty} \ln \left( 1 + \dfrac{1}{n} \right)\\
+		&= 0
+	\end{align*}
+	\begin{align*}
+		\lim\limits_{n \to \infty} a_n &= \lim\limits_{n \to \infty} \ln n\\
+		&= \infty
+	\end{align*}
+	Therefore, $\lim\limits_{n \to \infty} a_{n + 1} - a_n = 0$, but $\lim\limits_{n \to \infty} a_n$ does not exist.
+\end{solution}
+
+\begin{question}
+	Find the following limits:
+	\begin{enumerate}[leftmargin=*]
+		\item $\lim\limits_{n \to \infty} \left( 1 + \dfrac{x}{n} \right)^n$ for $x \in \mathbb{R}$.
+		\item $\lim\limits_{n \to \infty} n \tan^{-1} \left( \dfrac{1}{n} \right)$
+	\end{enumerate}
+\end{question}
+
+\begin{solution}
+	\begin{enumerate}[leftmargin=*]
+		\item 
+			\begin{align*}
+				\lim\limits_{n \to \infty} \left( 1 + \dfrac{x}{n} \right)^n &= \lim\limits_{n \to \infty} \left( 1 + \dfrac{x}{n} \right)^{\frac{n}{x} \cdot x}\\
+				&= \lim\limits_{n \to \infty} \left( \left( 1 + \dfrac{x}{n} \right)^{\frac{n}{x}} \right)^x\\
+				&= e^x
+			\end{align*}
+		\item
+			\begin{align*}
+				\tan^{-1} x &= x - \dfrac{x^3}{3} + \dfrac{x^5}{5} - \dfrac{x^7}{7} + \dots\\
+				\therefore \tan^{-1} \left( \dfrac{1}{n} \right) &= \dfrac{1}{n} - \dfrac{1}{3 n^3} + \dfrac{1}{5 n^5} - \dfrac{1}{7 n^7} + \dots\\
+				\therefore n \tan^{-1} \left( \dfrac{1}{n} \right) &= n \left( \dfrac{1}{n} - \dfrac{1}{3 n^3} + \dfrac{1}{5 n^5} - \dfrac{1}{7 n^7} + \dots \right)\\
+				&= 1 - \dfrac{1}{3 n^2} + \dfrac{1}{5 n^4} - \dfrac{1}{7 n^6} + \dots\\
+				&= \sum\limits_{i = 0}^{\infty} \dfrac{(-1)^i}{(2 i + 1) n^{2 i}}
+			\end{align*}
+	\end{enumerate}
+\end{solution}
+
+\end{document}
