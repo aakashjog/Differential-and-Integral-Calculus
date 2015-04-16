@@ -71,7 +71,7 @@
 		\includegraphics[height = 12pt]{sa.eps}
 	\end{figure}
 	This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. To view a copy of this license, visit \url{http://creativecommons.org/licenses/by-nc-sa/4.0/}.
-} %CC-BY-NC-SA licencse
+} %CC-BY-NC-SA license
 
 \tableofcontents
 
@@ -684,7 +684,7 @@ E-mail: \href{mailto:micbromberg@gmail.com}{micbromberg@gmail.com}\\
 	\end{equation*}
 \end{solution}
 
-\subsection{Power Series}
+\section{Power Series}
 
 \begin{definition}[Power series]
 	A power series around $x_0$ is a function of the form
@@ -753,7 +753,7 @@ E-mail: \href{mailto:micbromberg@gmail.com}{micbromberg@gmail.com}\\
 \end{solution}
 
 \begin{question}
-	Find the radius of convergence of $\sum_{n = 0}^{\infty} n! x^{n!}$.
+	Find the radius of convergence of $\sum\limits_{n = 0}^{\infty} n! x^{n!}$.
 \end{question}
 
 \begin{solution}
@@ -774,6 +774,118 @@ E-mail: \href{mailto:micbromberg@gmail.com}{micbromberg@gmail.com}\\
 		&= \dfrac{1}{\lim\limits_{k \to \infty} \sqrt[k!]{k!}}\\
 		&= 1
 	\end{align*}
+\end{solution}
+
+\recitation
+
+\subsection{Power Series Representation of a Function}
+
+\begin{theorem}
+	The power series representation of a function $f(x)$ is equal to its Taylor series if and only if $\lim\limits_{n \to \infty} R_n(x) = 0$, where $R_n(x)$ is the Lagrange remainder.
+\end{theorem}
+
+\subsection{Differentiation and Integrations of Power Series}
+
+\begin{question}
+	Find the power series representation of $\tan^{-1} x$.
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		\dod{\tan^{-1} x}{x} &= \dfrac{1}{1 + x^2}\\
+		&= \sum\limits_{n = 0}^{\infty} (-1)^n x^{2 n}\\
+		\intertext{Integrating term by term,}
+		\tan^{-1} x &= \sum\limits_{n = 0}^{\infty} (-1)^n \dfrac{x^{2 n + 1}}{2 n + 1} + c\\
+		\intertext{As $\tan^{-1} 0 = 0$, $c = 0$. Therefore,}
+		\tan^{-1} x &= \sum\limits_{n = 0}^{\infty} (-1)^n \dfrac{x^{2 n + 1}}{2 n + 1}\\
+	\end{align*}
+\end{solution}
+
+\begin{question}
+	Find an explicit formula for $\sum\limits_{n = 1}^{\infty} x^n n^2$.
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		\sum\limits_{n = 1}^{\infty} x^n n^2 &= x \cdot \sum\limits_{n = 1}^{\infty} x^{n - 1} n^2
+	\end{align*}
+	Let
+	\begin{align*}
+		g(x) &= \sum\limits_{n = 1}^{\infty} n^2 x^{n - 1}
+	\end{align*}
+	Integrating term by term,
+	\begin{align*}
+		\int g(x) \dif x &= \sum\limits_{n = 1}^{\infty} n^2 \dfrac{x^n}{n}\\
+		&= \sum\limits_{n = 1}^{\infty} n x^n\\
+		&= x \cdot \sum\limits_{n = 1}^{\infty} n x^{n - 1}
+	\end{align*}
+	Let
+	\begin{align*}
+		h(x) &= \sum\limits_{n = 1}^{\infty} n x^{n - 1}\\
+		\therefore \int h(x) \dif x &= \dfrac{x}{1 - x}
+	\end{align*}
+	Therefore, inside radius of convergence $R = 1$, differentiating $\int h(x) \dif x$,
+	\begin{align*}
+		h(x) &= \dfrac{1 - x + x}{(1 - x)^2}\\
+		&= \dfrac{1}{(1 - x)^2}\\
+		\therefore \int g(x) \dif x &= x h(x)\\
+		&= \dfrac{x}{(1 - x)^2}\\
+		\therefore g(x) &= \dfrac{(1 - x)^2 + 2 (1 - x) x}{(1 - x)^4}\\
+		\therefore \sum\limits_{n = 1}^{\infty} x^n n^2 &= x \cdot \dfrac{(1 - x)^2 + 2 (1 - x) x}{(1 - x)^4}
+	\end{align*}
+\end{solution}
+
+\begin{question}
+	Find the sum $\sum\limits_{n = 1}^{\infty} \dfrac{1}{n 2^n}$.
+\end{question}
+
+\begin{solution}
+	Let
+	\begin{align*}
+		f(x) &= \sum\limits_{n = 1}^{\infty} \dfrac{x^n}{n}
+	\end{align*}
+	be a power series with radius $R$.\\
+	Therefore,
+	\begin{align*}
+		\sum\limits_{n = 1}^{\infty} \dfrac{1}{n 2^n} &= f\left( \dfrac{1}{2} \right)
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		f'(x) &= \sum\limits_{n = 1}^{\infty} x^{n - 1}\\
+		&= \dfrac{1}{1 - x}\\
+		\therefore f(x) &= -\ln (1 - x) + c\\
+		\intertext{As $f(0) = 0$, $c = 0$. Therefore,}
+		f(x) &= -\ln (1 - x)
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		f\left( \dfrac{1}{2} \right) &= -\ln \left( \dfrac{1}{2} \right)\\
+		&= \ln 2
+	\end{align*}
+\end{solution}
+
+\section{Sequences of Functions}
+
+\begin{definition}[Point-wise convergence and domain of convergence]
+	$\{f_n\}$ is said to converge point-wise in some domain $E \subset D$ if $\forall x \in E$, the sequence $\{f_n(x)\}$ converges.
+	In this case, $E$ is said to be a domain of convergence of $\{f_n\}$.
+\end{definition}
+
+\begin{question}
+	Let $f(x) : (0,\infty) \to \mathbb{R}$ be some function such that $\lim\limits_{x \to \infty} f(x) = 0$.
+	Let $f_n(x) = f(n x)$.
+	What is the domain of convergence of $f_n$?
+	What is the limit function?
+\end{question}
+
+\begin{solution}
+	Let $x$ be a particular number in $(0,\infty)$.
+	\begin{align*}
+		\lim\limits_{n \to \infty} f_n(x) &= \lim\limits_{n \to \infty} f(n x)\\
+		\intertext{Therefore, as $\lim\limits_{x \to \infty} f(x) = 0$,}
+		\lim\limits_{n \to \infty} f_n(x) &= 0
+	\end{align*}
+	Therefore the domain of convergence is $(0,\infty)$ and the limit function is a constant $0$.
 \end{solution}
 
 \end{document}
