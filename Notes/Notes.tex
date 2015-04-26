@@ -818,19 +818,172 @@ Thomas and Finney, \textit{Calculus and Analytic Geometry}, 9th edition, Addison
 	\end{equation*}
 \end{theorem}
 
-\begin{tabularx}{\linewidth}{|X|X|X|X|}
-	Series & Centre of convergence interval & Radius of convergence & Convergence interval\\
-	$\displaystyle \sum_{n = 0}^{\infty} x^n$ & & &\\
-	$\displaystyle \sum_{n = 0}^{\infty} n! x^n$ & & &\\
-	$\displaystyle \sum_{n = 1}^{\infty} \dfrac{(x - 3)^n}{n}$ & & &\\
-	$\displaystyle \sum_{n = 0}^{\infty} \dfrac{(-1)^n x^{2n}}{2^{2n} (n!)^2}$ & & &\\
-\end{tabularx}
-
 \begin{theorem}[Stirling's Approximation]
 	For $n \to \infty$,
 	\begin{equation*}
 		n! \approx \left( \dfrac{n}{e} \right)^n \sqrt{2 \pi n}
 	\end{equation*}
 \end{theorem}
+
+\subsection{Differentiation and Integration of Power Series}
+
+\begin{theorem}
+	If $R$ is a radius of convergence of the power series $\sum\limits_{n = 0}^{\infty} a_n (x - c)^n$ then the function $f(x) = \sum\limits_{n = 0}^{\infty} a_n (x - c)^n$ is differentiable on $(c - R, c + R)$ and the derivative is
+	\begin{equation*}
+		f'(x) = \sum\limits_{n = 0}^{\infty} n a_n (x - c)^{n - 1}
+	\end{equation*}
+\end{theorem}
+
+\begin{theorem}
+	If $R$ is a radius of convergence of the series $\sum\limits_{n = 0}^{\infty} a_n (x - c)^n$ then the function $f(x) = \sum\limits_{n = 0}^{\infty} a_n (x - c)^n$ is integrable in $(c - R, c + R)$ and 
+	\begin{equation*}
+		\int f(x) \dif x = \sum\limits_{n = 0}^{\infty} a_n \dfrac{(x - c)^{n + 1}}{n + 1} + A
+	\end{equation*}
+	where $c - R < x < c + R$.
+\end{theorem}
+
+\begin{question}
+	Find $\int\limits_{0}^{x} e^{-t^2} \dif t$.
+\end{question}
+
+\begin{solution}
+	$\forall s \in \mathbb{R}$,
+	\begin{align*}
+		e^s &= 1 + \dfrac{s}{1!} + \dfrac{s^2}{2!} + \dots + \dfrac{s^n}{n!} + \dots\\
+		\therefore e^{-t^2} &= =1 - \dfrac{t^2}{1!} + \dfrac{t^4}{2!} + \dots + (-1)^n \dfrac{t^{2 n}}{n!} + \dots\\
+		\therefore \int\limits_{0}^{x} e^{-t^2} \dif t &= x - \dfrac{x^3}{1! 3} + \dfrac{x^5}{2! 5} + \dots + (-1)^n \dfrac{x^{2 n - 1}}{n! (2 n + 1} + \dots
+	\end{align*}
+\end{solution}
+
+\begin{theorem}
+	If the series $A(x) = \sum\limits_{n = 0}^{\infty} a_n x^n$ and $B(x) = \sum\limits_{n = 0}^{\infty} B_n x^n$ absolutely converge for $|x| < R$ and $c_n = \sum\limits_{k = 0}^{n} a_k b_{n - k}$, then the series $C(x) = \sum\limits_{n = 0}^{\infty} c_n x^n$ also absolutely converges for $|x| < R$ and $C(x) = A(x) B(x)$.
+\end{theorem}
+
+\subsection{Taylor Series}
+
+\begin{definition}[Taylor series]
+	Let $f(x)$ be infinitely differentiable on an open interval about $a$ and let $x$ be an arbitrary point in the interval.
+	Then the power series $\sum\limits_{n = 0}^{\infty} \dfrac{f^{(n)}(a)}{n!} (x - a)^n$ is called the Taylor series of $f(x)$ at $a$.
+	If $a = 0$ then it is called the Maclaurin series of $f(x)$ at $0$.
+\end{definition}
+
+\begin{theorem}
+	If there exists a power series which converges to $f(x)$, i.e. if, for $|x - a| < R$,
+	\begin{equation*}
+		f(x) = \sum\limits_{n = 0}^{\infty} a_n (x - a)^n
+	\end{equation*}
+	then, for $|x - a| < R$,
+	\begin{equation*}
+		f(x) = \sum\limits_{n = 0}^{\infty} \dfrac{f^{(n)}(a)}{n!} (x - a)^n
+	\end{equation*}
+	that is, $\forall n$,
+	\begin{equation*}
+		a_n = \dfrac{f^{(n)}(a)}{n!}
+	\end{equation*}
+\end{theorem}
+
+\begin{question}
+	Show that
+	\begin{equation*}
+		f(x) = 
+		\begin{cases}
+			0 &;\quad x = 0\\
+			e^{-\frac{1}{x^2}} &;\quad x \neq 0\\
+		\end{cases}
+	\end{equation*}
+	is not equal to it's Taylor series at $a = 0$.
+\end{question}
+
+\begin{solution}
+	If $n = 1$,
+	\begin{align*}
+		f^{(n)}(0) &= \lim\limits_{\Delta x \to 0} \dfrac{f(0 + \Delta x) - f(0)}{\Delta x}\\
+		&= \lim\limits_{\Delta x \to 0} \dfrac{e^{-\frac{1}{(\Delta x)^2}}}{\Delta x}\\
+		\intertext{Let $t = \dfrac{1}{\Delta x}$}
+		\therefore f'(0) &= \lim\limits_{t \to \infty} \dfrac{e^{-t^2}}{\dfrac{1}{t}}\\
+		&= \lim\limits_{t\ to \infty} \dfrac{t}{e^{t^2}}\\
+		&= \lim\limits_{t \to \infty} \dfrac{1}{e^{t^2} 2 t}\\
+		&= 0
+	\end{align*}
+	Therefore,
+	\begin{equation*}
+		f'(x) = 
+			\begin{cases}
+				0 &;\quad x = 0\\
+				e^{-\frac{1}{x^2} \cdot 2 \cdot x^{-3}} &;\quad x \neq 0
+			\end{cases}
+	\end{equation*}
+	Similarly, $\forall n \ge 1$, $f^{(n)}(0) = 0$\\
+	Therefore, the Taylor series is not equal to $f(x)$.
+\end{solution}
+
+\begin{question}
+	Find the Maclaurin series of $f(x) = e^x$ and prove that the series converges to $f(x)$ for any $x \in \mathbb{R}$.
+\end{question}
+
+\begin{solution}
+	$\forall n \ge 1$, $f^{(n)}(x) = e^x$.\\
+	Therefore,
+	\begin{equation*}
+		e^x = 1 + \dfrac{x}{1!} + \dfrac{x^2}{2!} + \dots + \dfrac{x^n}{n!} + \dfrac{e^c x^{n + 1}}{(n + 1)!}
+	\end{equation*}
+	where $c$ is between $0$ and $x$.\\
+	Therefore, as
+	\begin{equation*}
+		0 \le |R_n(x)| \le \dfrac{|x|^{n + 1}}{(n + 1)!}
+	\end{equation*}
+	by the \nameref{sandwich theorem} 
+	\begin{equation*}
+		\lim\limits_{n \to \infty} |R_n (x)| = 0
+	\end{equation*}
+	Therefore,
+	\begin{equation*}
+		e^x = 1 + \dfrac{x}{1!} + \dfrac{x^2}{2!} + \dots + \dfrac{x^n}{n!} + \dots
+	\end{equation*}
+\end{solution}
+
+\section{Series of Real-valued Functions}
+
+\begin{definition}[Sequence of functions]
+	A sequence $\{f_n\} = f_1(x), f_2(x), \dots$ defined on $D \subseteq \mathbb{R}$ is called a sequence of functions.
+\end{definition}
+
+\begin{definition}[Pointwise convergence and domain of convergence]
+	$\{f_n\}$ converges pointwise in some domain $E \subseteq D$ if for every $x \in E$, the sequence of $\{f_n(x)\}$ converges.
+	In such a case, $E$ is said to be a domain of convergence of $\{f_n\}$.
+\end{definition}
+
+\begin{question}
+	Find the domain of convergence of $f_n(x) = x^n$, defined on some $D \subseteq \mathbb{R}$.
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		\lim\limits_{n \to \infty} f_n(x) &= 
+			\begin{cases}
+				0               & ;\quad -1 < x < 1      \\
+				1               & ;\quad x = 1           \\
+				\text{diverges} & ;\quad x \notin (-1,1] \\
+			\end{cases}
+	\end{align*}
+	Therefore, the domain of convergence of $\{f_n\}$ is $(-1,1]$.
+\end{solution}
+
+\begin{question}
+	Let $f(x) : (0,\infty) \to \mathbb{R}$ be some function such that $\lim\limits_{x \to \infty} f(x) = 0$.
+	Let $f_n(x) = f(n x)$.
+	What is the domain of convergence of $f_n$?
+	What is the limit function?
+\end{question}
+
+\begin{solution}
+	Let $x$ have some fixed value in $(0,\infty)$.
+	Therefore, as $\lim\limits_{x \to \infty} f(x) = 0$,
+	\begin{align*}
+		\lim\limits_{n \to \infty} f_n(x) & = \lim\limits_{n \to \infty} f(n x) \\
+                                                  & = 0
+	\end{align*}
+	Therefore, the domain of convergence is $(0,\infty)$ and the limit function is a constant function with value $0$.
+\end{solution}
 
 \end{document}
