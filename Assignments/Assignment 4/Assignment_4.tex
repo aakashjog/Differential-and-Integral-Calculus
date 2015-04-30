@@ -1,0 +1,389 @@
+\documentclass[fleqn, a4paper, 12pt, oneside]{amsart}
+\usepackage{exsheets, tasks}
+\usepackage{amsmath, amssymb, amsthm} %standard AMS packages
+\usepackage{marginnote} %marginnotes
+\usepackage{gensymb} %miscellaneous symbols
+\usepackage{commath} %differential symbols
+\usepackage{xcolor} %colours
+\usepackage{cancel} %cancelling terms
+\usepackage{siunitx} %formatting units
+\usepackage{tikz, pgfplots} %diagrams
+\usetikzlibrary{calc, hobby, patterns, intersections}
+\usepackage{graphicx} %inserting graphics
+\usepackage{hyperref} %hyperlinks
+\usepackage{datetime} %date and time
+\usepackage{ulem} %underline for \emph{}
+\usepackage{xfrac} %inline fractions
+\usepackage{enumerate, enumitem} %numbered lists
+\usepackage{float} %inserting floats
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}} %adds numbers to specific equations in non-numbered list of equations
+
+\newcommand{\AxisRotator}[1][rotate=0]{
+	\tikz [x=0.25cm,y=0.60cm,line width=.2ex,-stealth,#1] \draw (0,0) arc (-150:150:1 and 1);%
+} %rotation symbols on axes
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+
+\newcommand{\curl}{\mathrm{curl\,}}
+
+\makeatletter
+\@addtoreset{section}{part} %resets section numbers in new part
+\makeatother
+
+\renewcommand{\thesubsection}{(\arabic{subsection})}
+\renewcommand{\thesection}{(\arabic{section})}
+
+%section headings on left
+\makeatletter
+\def\specialsection{\@startsection{section}{1}%
+	\z@{\linespacing\@plus\linespacing}{.5\linespacing}%
+	%  {\normalfont\centering}}% DELETED
+	{\normalfont}}% NEW
+\def\section{\@startsection{section}{1}%
+	\z@{.7\linespacing\@plus\linespacing}{.5\linespacing}%
+	%  {\normalfont\scshape\centering}}% DELETED
+	{\normalfont\scshape}}% NEW
+\makeatother
+
+%forces newline after subsection
+\makeatletter
+\def\subsection{\@startsection{subsection}{3}%
+	\z@{.5\linespacing\@plus.7\linespacing}{.1\linespacing}%
+	{\normalfont\itshape}}
+\makeatother
+
+\settasks{counter-format = tsk[1].}
+
+\SetupExSheets{solution/print = true}
+
+%opening
+\title
+{
+	Differential and Integral Calculus\\
+	Assignment 4
+}
+\author
+{
+	Aakash Jog\\
+	ID : 989323563
+}
+\date{\formatdate{30}{4}{2015}}
+
+\begin{document}
+	
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\begin{question}
+	Let $\sum\limits_{n = 0}^{\infty}$ be a non-negative series (i.e. $a_n \le 0$).
+	Prove that the series either converges to a finite limit or else, diverges to $\infty$.
+\end{question}
+
+\begin{solution}
+	As the series is non-negative, the sum must always be non-negative.
+	Therefore, as $n \to \infty$, the sum will go on increasing, and will always remain non-negative.
+	Therefore, the series will converge in a wide sense.
+	Therefore, it will either converge to a finite limit, or an infinite one, i.e. either it will converge to a finite limit or diverge to $\infty$.
+\end{solution}
+
+\begin{question}
+	Check whether the following series converge:
+	\begin{enumerate}[label=(\alph*)]
+		\item $\sum\limits_{n = 1}^{\infty} \frac{\sqrt{7 n}}{n^2 + 3 n + 5}$
+		\item $\sum\limits_{n = 1}^{\infty} \frac{1}{\sqrt{n (n + 3)}}$
+		\item $\sum\limits_{n = 1}^{\infty} \frac{1}{\sqrt{n^3 + 4 n^2 + 8}}$
+		\item $\sum\limits_{n = 1}^{\infty} \frac{1}{n 2^n}$
+		\item $\sum\limits_{n = 1}^{\infty} \frac{1}{2^n} \cdot \sin \frac{10 \pi}{n^2}$
+		\item $\sum\limits_{n = 1}^{\infty} \frac{(n!)^2}{(2n)!}$
+		\item $\sum\limits_{n = 1}^{\infty} \frac{n^n}{2^n n!}$
+		\item $\sum\limits_{n = 1}^{\infty} \frac{n^n}{3^n n!}$
+		\item $\sum\limits_{n = 1}^{\infty} \frac{1}{(\ln n)^n}$
+		\item $\sum\limits_{n = 1}^{\infty} \left( \frac{2 n + 1}{3 n - 1} \right)^n$
+		\item $\sum\limits_{n = 1}^{\infty} \frac{n!}{a^n}$, $a > 0$
+	\end{enumerate}
+\end{question}
+
+\begin{solution}
+	\begin{enumerate}[label=(\alph*), leftmargin=*]
+		\item 
+			\begin{align*}
+				a_n & = \frac{\sqrt{7 n}}{n^2 + 3 n + 5}
+			\end{align*}
+			Therefore, let
+			\begin{align*}
+				b_n & = \frac{1}{n^{\frac{3}{2}}}
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				\lim\limits_{n \to \infty} \frac{a_n}{b_n} & = \lim\limits_{n \to \infty} \frac{\frac{\sqrt{7 n}}{n^2 + 3 n + 5}}{\frac{1}{n^{\frac{3}{2}}}} \\
+                                                                           & = \sqrt{7}
+			\end{align*}
+			As $\sum b_n$ is a $p$-series, and as $\frac{3}{2} > 1$, $\sum b_n$ converges.\\
+			Therefore, by the second comparison test, as $\sum b_n$ converges, $\sum a_n$ also converges.
+		\item
+			\begin{align*}
+				a_n & = \frac{1}{\sqrt{n (n + 3)}}
+			\end{align*}
+			Therefore, Let
+			\begin{align*}
+				b_n & = \frac{1}{n}
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				\lim\limits_{n \to \infty} \frac{a_n}{b_n} & = \lim\limits_{n \to \infty} \frac{\frac{1}{n (n + 3)}}{\frac{1}{n}} \\
+                                                                           & = 1
+			\end{align*}
+			Therefore, by the second comparison test, as $\sum b_n$ diverges, $\sum b_n$ also diverges.
+		\item
+			\begin{align*}
+				a_n & = \frac{1}{\sqrt{n^3 + 4 n^2 + 8}}
+			\end{align*}
+			Therefore, let
+			\begin{align*}
+				b_n & = \frac{1}{n^{\frac{3}{2}}}
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				\lim\limits_{n \to \infty} \frac{a_n}{b_n} & = \lim\limits_{n \to \infty} \frac{\frac{1}{\sqrt{n^3 + 4 n^2 + 8}}}{\frac{1}{n^{\frac{3}{2}}}} \\
+                                                                           & = 1
+			\end{align*}
+			Therefore, by the second comparison test, as $\sum b_n$ diverges, $\sum b_n$ also diverges.
+		\item
+			\begin{align*}
+				a_n & = \frac{1}{n 2^n}
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				\lim\limits_{n \to \infty} \left| \frac{a_{n + 1}}{a_n} \right|            & = \lim\limits_{n \to \infty} \left| \frac{n 2^n}{(n + 1) 2^{n + 1}} \right| \\
+                                                                                                           & = \frac{1}{2}                                                               \\
+				\therefore \lim\limits_{n \to \infty} \left| \frac{a_{n + 1}}{a_n} \right| & < 1
+			\end{align*}
+			Therefore, by the d'Alembert Criteria, $\sum a_n$ converges.
+		\item
+			\begin{align*}
+				a_n & = \frac{1}{2^n} \cdot \sin \frac{10 \pi}{n^2}
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				\lim\limits_{n \to \infty} \sqrt[n]{\left| \frac{1}{2^n} \cdot \sin \frac{10 \pi}{n^2} \right|} & = \lim\limits_{n \to \infty} \frac{1}{2} \sqrt[n]{\sin \frac{10 \pi}{n^2}} \\
+				\therefore \lim\limits_{n \to \infty} \sqrt[n]{\frac{1}{2^n} \cdot \sin \frac{10 \pi}{n^2}}     & < 1
+			\end{align*}
+			Therefore, by the Cauchy Root Test, $\sum a_n$ converges.
+		\item
+			\begin{align*}
+				a_n & = \frac{(n!)^2}{(2n)!}
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				\lim\limits_{n \to \infty} \left| \frac{a_{n + 1}}{a_n} \right| & = \lim\limits_{n \to \infty} \left| \frac{\left( (n + 1)! \right)^2 (2n)!}{2(n + 1)! (n!)^2} \right| \\
+                                                                                                & = \lim\limits_{n \to \infty} \left| \frac{(n + 1)^2}{(2 n + 1) (2 n + 2)} \right|                    \\
+                                                                                                & = \frac{1}{4}
+			\end{align*}
+			Therefore, by the d'Alembert Criteria, $\sum a_n$ converges.
+		\item
+			\begin{align*}
+				a_n & = \frac{n^n}{2^n n!}
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				\lim\limits_{n \to \infty} \sqrt[n]{|a_n|} & = \lim\limits_{n \to \infty} \sqrt[n]{\frac{n^n}{2^n n!}}                                          \\
+                                                                           & = \lim\limits_{n \to \infty} \sqrt[n]{\frac{n^n}{2^n \left( \frac{n}{e} \right)^n \sqrt{2 \pi n}}} \\
+                                                                           & = \lim\limits_{n \to \infty} \frac{e}{2} \frac{1}{\sqrt[2 n]{2 \pi n}}                             \\
+                                                                           & = \frac{e}{2}
+			\end{align*}
+			Therefore, by the Cauchy Root Test, $\sum a_n$ diverges.
+		\item
+			\begin{align*}
+				a_n & = \frac{n^n}{3^n n!}
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				\lim\limits_{n \to \infty} \sqrt[n]{|a_n|} & = \lim\limits_{n \to \infty} \sqrt[n]{\frac{n^n}{3^n n!}}                                          \\
+                                                                           & = \lim\limits_{n \to \infty} \sqrt[n]{\frac{n^n}{3^n \left( \frac{n}{e} \right)^n \sqrt{2 \pi n}}} \\
+                                                                           & = \lim\limits_{n \to \infty} \frac{e}{3} \frac{1}{\sqrt[2 n]{2 \pi n}}                             \\
+                                                                           & = \frac{e}{3}
+			\end{align*}
+			Therefore, by the Cauchy Root Test, $\sum a_n$ diverges.
+		\item
+			\begin{align*}
+				a_n & = \frac{1}{(\ln n)^n}
+			\end{align*}
+			Therefore, $a_1$ is infinite.\\
+			Therefore, as the series is non-negative, and as $\lim\limits_{n \to \infty} a_n = 0$, $\sum a_1$ cannot converge to any finite value.\\
+			Therefore, $\sum a_n$ diverges.
+		\item
+			\begin{align*}
+				a_n & = \left( \frac{2 n + 1}{3 n - 1} \right)^n
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				\lim\limits_{n \to \infty} \sqrt[n]{|a_n|} & = \lim\limits_{n \to \infty} \sqrt[n]{\left( \frac{2 n + 1}{3 n - 1} \right)^n} \\
+                                                                           & = \lim\limits_{n \to \infty} \frac{2 n + 1}{3 n - 1}                            \\
+                                                                           & = \frac{2}{3}
+			\end{align*}
+			Therefore, by the Cauchy Root Test, $\sum a_n$ converges.
+		\item
+			\begin{align*}
+				a_n & = \frac{n!}{a^n}
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				\lim\limits_{n \to \infty} \sqrt[n]{a_n} & = \lim\limits_{n \to \infty} \sqrt[n]{\frac{n!}{a^n}}                                          \\
+                                                                         & = \lim\limits_{n \to \infty} \sqrt[2]{\frac{\left( \frac{n}{2} \right)^n \sqrt{2 \pi n}}{a^n}} \\
+                                                                         & = \lim\limits_{n \to \infty} \frac{n}{a e} \sqrt[n]{\sqrt{2 \pi n}}                            \\
+                                                                         & = \infty
+			\end{align*}
+			Therefore, by the Cauchy Root Test, $\sum a_n$ diverges.
+	\end{enumerate}
+\end{solution}
+
+\begin{question}
+	Check whether the following series converge, converge absolutely or diverge
+	\begin{enumerate}[label=(\alph*)]
+		\item $\lim\limits_{n \to \infty} (-1)^{\frac{n^2 + n}{2}} \cdot \frac{1}{n^{2 - \frac{1}{n}}}$
+		\item $\lim\limits_{n \to \infty} (-1)^n \cdot \left( \frac{n - 1}{n} \right)^{n^2}$
+		\item $\lim\limits_{n \to \infty} (-1)^n \cdot \left( \frac{n - 1}{n} \right)^n$
+		\item $\lim\limits_{n \to \infty} (-1)^n \cdot \left( \frac{2 n + 100}{3 n + 1} \right)^n$
+		\item $\lim\limits_{n \to \infty} (-1)^n \cdot \frac{1}{n + 2}$
+		\item $\frac{\sin n \alpha}{n^4}$
+	\end{enumerate}
+\end{question}
+
+\begin{solution}
+	\begin{enumerate}[label=(\alph*), leftmargin=*]
+		\item 
+			\begin{align*}
+				a_n & = (-1)^{\frac{n^2 + n}{2}} \cdot \frac{1}{n^{2 - \frac{1}{n}}}
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				|a_n|                                       & = \frac{1}{n^{2 - \frac{1}{n}}}                            \\
+				\therefore \lim\limits_{n \to \infty} |a_n| & = \lim\limits_{n \to \infty} \frac{1}{n^{2 - \frac{1}{n}}} \\
+                                                                            & = 0
+			\end{align*}
+			Therefore, by Leibnitz Rule, as $a_n$ is monotonically increasing, and as $\lim\limits_{n \to \infty} |a_n| = 0$, $\sum a_n$ converges absolutely.
+		\item
+			\begin{align*}
+				a_n & = (-1)^n \cdot \left( \frac{n - 1}{n} \right)^{n^2}
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				|a_n|                                       & = \left| \left( \frac{n - 1}{n} \right)^{n^2} \right|                            \\
+				\therefore \lim\limits_{n \to \infty} |a_n| & = \lim\limits_{n \to \infty} \left| \left( \frac{n - 1}{n} \right)^{n^2} \right| \\
+                                                                            & = 0
+			\end{align*}
+			Therefore, by Leibnitz Rule, as $a_n$ is monotonically increasing, and as $\lim\limits_{n \to \infty} |a_n| = 0$, $\sum a_n$ converges absolutely.
+		\item
+			\begin{align*}
+				a_n & = (-1)^n \cdot \left( \frac{n - 1}{n} \right)^n
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				\lim\limits_{n \to \infty} |a_n| & = \lim\limits_{n \to \infty} \left| \left( \frac{n - 1}{n} \right)^n \right| \\
+                                                                 & = e
+			\end{align*}
+			Therefore, $\sum a_n$ diverges.
+		\item
+			\begin{align*}
+				a_n & = (-1)^n \cdot \left( \frac{2 n + 100}{3 n + 1} \right)^n
+			\end{align*}
+			Therefore
+			\begin{align*}
+				\lim\limits_{n \to \infty} \sqrt[n]{|a_n|} & = \lim\limits_{n \to \infty} \frac{2 n + 100}{3 n + 1} \\
+                                                                           & = \frac{2}{3}
+			\end{align*}
+			Therefore, by the Cauchy Root Test, $\sum a_n$ converges absolutely.
+		\item
+			\begin{align*}
+				a_n & = (-1)^n \cdot \frac{1}{n + 2}
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				|a_n|                                       & = \frac{1}{n + 2} \\
+				\therefore \lim\limits_{n \to \infty} |a_n| & = 0
+			\end{align*}
+			Therefore, as $\lim\limits_{n \to \infty} |a_n| = 0$, and as $a_n$ is monotonically decreasing, $\sum a_n$ converges absolutely.
+		\item
+			\begin{align*}
+				a_n & = \frac{\sin n \alpha}{n^4}
+			\end{align*}
+			Therefore, let
+			\begin{align*}
+				b_n & = \frac{1}{n^3}
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				\lim\limits_{n \to \infty} \frac{a_n}{b_n} & = \lim\limits_{n \to \infty} \frac{\sin n \alpha}{n} \\
+                                                                           & = 1
+			\end{align*}
+			Therefore, by the second comparison test, as $\sum b_n$ converges, $\sum a_n$ also converges.
+	\end{enumerate}
+\end{solution}
+
+\begin{question}
+	Prove or disprove the following claims
+	\begin{enumerate}[label=(\alph*)]
+		\item There exists a non-negative sequence $\{a_n\}$ such that $\sum\limits_{n = 1}^{\infty} a_n$ converges and $\sum\limits_{n = 1}^{\infty} {a_n}^2$ diverges.
+		\item There exists a sequence $\{a_n\}$ such that the series $\sum\limits_{n = 1}^{\infty} a_n$ converges absolutely and the series $\sum\limits_{n = 1}^{\infty} {a_n}^2$ diverges.
+		\item There exists a sequence $\{a_n\}$ such that $\sum\limits_{n = 1}^{\infty} a_n$ converges and $\sum\limits_{n = 1}^{\infty} {a_n}^2$ diverges.
+		\item 
+			Let $\{a_n\}$, $\{b_n\}$ be two sequences such that $\lim\limits_{n \to \infty} \frac{a_n}{b_n} = 1$.
+			If $\sum\limits_{n = 1}^{\infty} a_n$ converges then $\sum\limits_{n = 1}^{\infty} b_n$ converges.
+	\end{enumerate}
+\end{question}
+
+\begin{solution}
+	\begin{enumerate}[label=(\alph*), leftmargin=*]
+		\item 
+			Let $\{a_n\}$ be a sequence bounded between $0$ and $1$.\\
+			Therefore, $\forall n$, ${a_n}^2 < a_n$.\\
+			Therefore, by the first comparison test, as $\sum a_n$ converges, $\sum {a_n}^n$ must also converge.\\
+			Therefore the statement is false.
+		\item
+			Let $\{a_n\}$ be a sequence bounded between $-1$ and $1$.\\
+			Therefore, $\{|a_n|\}$ is bounded between $-1$ and $1$.\\
+			Therefore, as proved above, $\sum {a_n}^2$ also must converge.\\
+			Therefore, $\sum {a_n}^2$ cannot diverge.\\
+			Therefore the statement is false.
+		\item
+			Let
+			\begin{align*}
+				a_n                & = (-1)^n \frac{1}{\sqrt{n}} \\
+				\therefore {a_n}^2 & = \frac{1}{n}
+			\end{align*}
+			Therefore, $\sum a_n$ converges, but $\sum {a_n}^2$ diverges.\\
+			Therefore, such a sequence exists.
+			Hence, the statement is true.
+			\qed
+		\item
+			\begin{align*}
+				\lim\limits_{n \to \infty} \frac{a_n}{b_n} & = 1
+			\end{align*}
+			Therefore, by the second comparison test, as $\sum a_n$ converges, $\sum b_n$ also converges.
+			\qed
+	\end{enumerate}
+\end{solution}
+
+\begin{question}
+	Let $\{a_n\}$ be a non-negative sequence such that $\sum\limits_{n = 1}^{\infty} a_n$ converges.
+	Prove that $\sum\limits_{n = 1}^{\infty} a_n a_{n + 1}$ also converges.
+\end{question}
+
+\begin{solution}
+	As $\sum a_n$ converges, $\{a_n\}$ is monotonically decreasing.
+	Therefore, $\exists a_n$, such that 
+	\begin{align*}
+		a_{n + 1}                     & < 1   \\
+		\therefore a_n a_{n + 1}      & < a_n \\
+		\therefore \sum a_n a_{n + 1} & < \sum a_n
+	\end{align*}
+	Therefore, by the first comparison test, as $\sum a_n$ converges, $\sum a_n a_{n + 1}$ also converges.
+\end{solution}
+
+\end{document}
