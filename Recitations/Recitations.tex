@@ -41,6 +41,31 @@
 \@addtoreset{section}{part} %resets section numbers in new part
 \makeatother
 
+\makeatletter
+\newcommand*{\relrelbarsep}{.386ex}
+\newcommand*{\relrelbar}{%
+  \mathrel{%
+    \mathpalette\@relrelbar\relrelbarsep
+  }%
+}
+\newcommand*{\@relrelbar}[2]{%
+  \raise#2\hbox to 0pt{$\m@th#1\relbar$\hss}%
+  \lower#2\hbox{$\m@th#1\relbar$}%
+}
+\providecommand*{\rightrightarrowsfill@}{%
+  \arrowfill@\relrelbar\relrelbar\rightrightarrows
+}
+\providecommand*{\leftleftarrowsfill@}{%
+  \arrowfill@\leftleftarrows\relrelbar\relrelbar
+}
+\providecommand*{\xrightrightarrows}[2][]{%
+  \ext@arrow 0359\rightrightarrowsfill@{#1}{#2}%
+}
+\providecommand*{\xleftleftarrows}[2][]{%
+  \ext@arrow 3095\leftleftarrowsfill@{#1}{#2}%
+}
+\makeatother
+
 \newcommand\blfootnote[1]{%
 	\begingroup
 	\renewcommand\thefootnote{}\footnote{#1}%
@@ -872,7 +897,7 @@ E-mail: \href{mailto:micbromberg@gmail.com}{micbromberg@gmail.com}\\
 \end{definition}
 
 \begin{question}
-	Let $f(x) : (0,\infty) \to \mathbb{R}$ be some function such that $\lim\limits_{x \to \infty} f(x) = 0$.
+	Let $f(x) : \mathbb{R} \to \mathbb{R}$ be some function such that $\lim\limits_{x \to \infty} f(x) = 0$.
 	Let $f_n(x) = f(n x)$.
 	What is the domain of convergence of $f_n$?
 	What is the limit function?
@@ -880,12 +905,134 @@ E-mail: \href{mailto:micbromberg@gmail.com}{micbromberg@gmail.com}\\
 
 \begin{solution}
 	Let $x$ be a particular number in $(0,\infty)$.
-	\begin{align*}
+	\begin{align*} 
 		\lim\limits_{n \to \infty} f_n(x) &= \lim\limits_{n \to \infty} f(n x)\\
 		\intertext{Therefore, as $\lim\limits_{x \to \infty} f(x) = 0$,}
 		\lim\limits_{n \to \infty} f_n(x) &= 0
 	\end{align*}
-	Therefore the domain of convergence is $(0,\infty)$ and the limit function is a constant $0$.
+	Therefore the domain of convergence is $(0,\infty)$ and the limit function is a constant $0$.\\
+	~\\
+	Although the all functions in $\{f_n\}$ are continuous, the limit function is not continuous.
+\end{solution}
+
+\recitation
+
+\begin{definition}[Uniform convergence]
+	A sequence of functions $\{f_n\}$ is said to converge uniformly to $f$ in the domain $E$, if $\forall \varepsilon$, $\exists N$ such that $\forall n > N$ and $\forall x \in E$, $|f_n(x) - f_(x)| < \varepsilon$.
+	If $f_n$ converges to $f$ uniformly in $E$, it is denoted as $f_n \xrightrightarrows{E} f$.
+\end{definition}
+
+\subsection{Supremum and Infimum of Sets}
+
+\begin{definition}[Supremum]
+	Let $A \subseteq \mathbb{R}$ be a bounded set.
+	$M$ is said to be the supremum of $A$ if
+	\begin{enumerate}
+		\item $\forall x \in A$, $x \le M$, i.e. $M$ is an upper bound of $A$.
+		\item $\forall \varepsilon$, $\exists x \in A$, such that $x > M - \varepsilon$.
+	\end{enumerate}
+	That is, the supremum of $A$ is the least upper bound of $A$.\\
+	The supremum may or may not be in $A$.
+\end{definition}
+
+\begin{definition}[Infimum]
+	Let $A \subseteq \mathbb{R}$ be a bounded set.
+	$M$ is said to be the infimum of $A$ if
+	\begin{enumerate}
+		\item $\forall x \in A$, $x \ge M$, i.e. $M$ is an upper bound of $A$.
+		\item $\forall \varepsilon$, $\exists x \in A$, such that $x < M - \varepsilon$.
+	\end{enumerate}
+	That is, the infimum of $A$ is the greatest lower bound of $A$.
+	The infimum may or may not be in $A$.
+\end{definition}
+
+\begin{theorem}
+	Every bounded set $A$ has a supremum and an infimum.
+\end{theorem}
+
+\begin{theorem}
+	$f_n \xrightrightarrows{E} f$ if and only if 
+	\begin{equation*}
+		\lim\limits_{n \to \infty} \left( \sup \{ |f_n(x) - f(x)| : x \in E \} \right) = 0
+	\end{equation*}
+\end{theorem}
+
+\begin{question}
+	Let $f_n(x) = x^n$.
+	Does $\{f_n\}$ converge uniformly?
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		f(x) &=
+			\begin{cases}
+				0 & ;\quad x \in [0,1] \\
+				1 & ;\quad x = 1       \\
+			\end{cases}
+	\end{align*}
+	If the convergence is uniform in $[0,1]$,
+	\begin{align*}
+		\lim\limits_{n \to \infty} \sup\limits_{x \in [0,1]} |f_n(x) - f(x)| &= 0
+	\end{align*}
+	Let $x = 1 - \frac{1}{n}$.\\
+	Therefore, as the supremum is a upper bound,
+	\begin{align*}
+		\sup\limits_{x \in [0,1]} |f_n(x) - f(x)|                                       & \ge \left| f_n\left( 1 - \frac{1}{n} \right)  - f\left( 1 - \frac{1}{n} \right) \right| \\
+		\therefore \sup\limits_{x \in [0,1]} |f_n(x) - f(x)|                            & \ge \left| \left( 1 - \frac{1}{n} \right)^n - 0 \right|                                 \\
+		\therefore \lim\limits_{n \to \infty} \sup\limits_{x \in [0,1]} |f_n(x) - f(x)| & \ge \lim\limits_{n \to \infty} \left( 1 - \frac{1}{n} \right)^n                         \\
+		\therefore \lim\limits_{n \to \infty} \sup\limits_{x \in [0,1]} |f_n(x) - f(x)| & \ge \frac{1}{e}                                                                         \\
+		\therefore \lim\limits_{n \to \infty} \sup\limits_{x \in [0,1]} |f_n(x) - f(x)| & \neq 0
+	\end{align*}
+	Therefore, the convergence is not uniform.
+\end{solution}
+
+\begin{question}
+	Let $f_n(x) = x + \frac{1}{n}$, $x \in \mathbb{R}$.
+	What is its domain of convergence?
+	What is the limit function?
+	Is the convergence uniform?
+\end{question}
+
+\begin{solution}
+	$\forall x \in \mathbb{R}$,
+	\begin{align*}
+		\lim\limits_{n \to \infty} \left( x + \frac{1}{n} \right) & = x
+	\end{align*}
+	Therefore $\{f_n\}$ converges pointwise to $x$, in $\mathbb{R}$.
+	\begin{align*}
+		\sup\limits_{x \in \mathbb{R}} |f_n(x) - f(x)|                                       & = \sup\limits_{x \in \mathbb{R}} \left| x + \frac{1}{n} - x \right| \\
+                                                                                                     & = \frac{1}{n}                                                       \\
+		\therefore \lim\limits_{n \to \infty} \sup\limits_{x \in \mathbb{R}} |f_n(x) - f(x)| & = 0
+	\end{align*}
+	Therefore, the convergence is uniform.
+\end{solution}
+
+\begin{question}
+	Let $f_n : [0,\infty) \to \mathbb{R}$.
+	\begin{equation*}
+		f_n(x) =
+			\begin{cases}
+				1 & ;\quad n \le x \le n + 1 \\
+				0 & ;\quad \text{otherwise}  \\
+			\end{cases}
+	\end{equation*}
+	Dows $f_n$ converge pointwise in $[0,\infty)$?
+	Dows $f_n$ converge uniformly in $[0,\infty)$?
+\end{question}
+
+\begin{solution}
+	For every $x$, the sequence $\{f_n(x)\}$ will be of the form $\{0,\dots,0,1,0,\dots,0\}$ with $1$ only when $n \le x \le n + 1$.\\
+	Therefore,
+	\begin{align*}
+		\lim\limits_{n \to \infty} f_n(x) & = 0 \\
+                                                  & = f(x)
+	\end{align*}
+	Therefore, $f_n$ converges pointwise in $[0,\infty)$.
+	\begin{align*}
+		\sup\limits_{x \in [0,\infty)} |f_n(x) - f(x)| & = \max\limits_{x \in [0,\infty)} f_n(x) \\
+                                                               & = 1
+	\end{align*}
+	Therefore, as the limit of the supremum is not $0$, the convergence is not uniform.
 \end{solution}
 
 \end{document}
