@@ -1,0 +1,527 @@
+\documentclass[fleqn, a4paper, 10pt, twoside]{amsart}
+\usepackage[top = 2cm, bottom = 2cm, inner = 1cm, outer = 2cm]{geometry}
+\usepackage{exsheets}
+\usepackage{amsmath, amssymb, amsthm} %standard AMS packages
+\usepackage{marginnote} %marginnotes
+\usepackage{gensymb} %miscellaneous symbols
+\usepackage{commath} %differential symbols
+\usepackage{xcolor} %colours
+\usepackage{cancel} %cancelling terms
+\usepackage{siunitx} %formatting units
+\usepackage{tikz, pgfplots} %diagrams
+	\usetikzlibrary{calc, hobby, patterns, intersections}
+\usepackage{graphicx} %inserting graphics
+\usepackage{hyperref} %hyperlinks
+\usepackage{datetime} %date and time
+\usepackage{ulem} %underline for \emph{}
+\usepackage{xfrac, lmodern} %inline fractions
+\usepackage{enumerate} %numbered lists
+\usepackage{float} %inserting floats
+\usepackage{tabularx}
+\usepackage{multicol}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}} %adds numbers to specific equations in non-numbered list of equations
+
+\newcommand{\AxisRotator}[1][rotate=0]{
+	\tikz [x=0.25cm,y=0.60cm,line width=.2ex,-stealth,#1] \draw (0,0) arc (-150:150:1 and 1);%
+} %rotation symbols on axes
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+
+\newcommand{\curl}{\mathrm{curl\,}}
+
+\makeatletter
+\@addtoreset{section}{part} %resets section numbers in new part
+\makeatother
+
+\SetupExSheets{solution/print = true} %prints all solutions by default
+%opening
+\title{Differential and Integral Calculus : Compendium}
+\author{Aakash Jog}
+\date{\formatdate{29}{4}{2015}}
+
+\begin{document}
+
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+%\tableofcontents
+
+\begin{multicols}{2}
+
+\section{Sequences}
+
+\begin{definition}[Sequences bounded from above]
+	$\{a_n\}$ is said to be bounded from above if $\exists M \in \mathbb{R}$, s.t. $a_n \leq M$, $\forall n \in \mathbb{N}$.
+	Each such $M$ is called an upper bound of $\{a_n\}$.
+\end{definition}
+
+\begin{definition}[Sequences bounded from below]
+	$\{a_n\}$ is said to be bounded from below if $\exists m \in \mathbb{R}$, s.t. $a_n \geq M$, $\forall n \in \mathbb{N}$.
+	Each such $M$ is called an lower bound of $\{a_n\}$.
+\end{definition}
+
+\begin{definition}
+	$\{a_n\}$ is said to be bounded if it is bounded from below and bounded from above.
+\end{definition}
+
+\begin{definition}[Monotonic increasing sequence]
+	A sequence $\{a_n\}$ is called monotonic increasing if $\exists n_0 \in \mathbb{N}$, s.t. $a_n \leq a_{n + 1}$, $\forall n \geq n_0$.
+\end{definition}
+
+\begin{definition}[Monotonic decreasing sequence]
+	A sequence $\{a_n\}$ is called monotonic decreasing if $\exists n_0 \in \mathbb{N}$, s.t. $a_n \geq a_{n + 1}$, $\forall n \geq n_0$.
+\end{definition}
+
+\begin{definition}[Strongly increasing sequence]
+	A sequence $\{a_n\}$ is called monotonic increasing if $\exists n_0 \in \mathbb{N}$, s.t. $a_n < a_{n + 1}$, $\forall n \geq n_0$.
+\end{definition}
+
+\begin{definition}[Strongly decreasing sequence]
+	A sequence $\{a_n\}$ is called monotonic decreasing if $\exists n_0 \in \mathbb{N}$, s.t. $a_n > a_{n + 1}$, $\forall n \geq n_0$.
+\end{definition}
+
+\begin{example}
+	The sequence $\left\{ \frac{n^2}{2^n} \right\}$ is strongly decreasing.
+	However, this is not evident by observing the first few terms.
+	$\frac{1}{2}, 1, \frac{9}{8}, 1, \frac{25}{32}, \dots$
+	\begin{align*}
+		a_n &> a_{n + 1}\\
+		\iff \frac{n^2}{2^n} &> \frac{(n + 1)^2}{2^{n + 1}}\\
+		\iff 2 n^2 &> (n + 1)^2\\
+		\iff \sqrt{2} n &> n + 1\\
+		\iff n(\sqrt{2} - 1) &> 1\\
+		\iff n &> \frac{1}{\sqrt{2} - 1}\\
+		\iff n &> 3
+	\end{align*}
+\end{example}
+
+\subsection{Limit of a Sequence}
+
+\begin{definition}[Limit of a sequence]
+	Let $\{a_n\}$ be a given sequence.
+	A number $L$ is said to be the limit of the sequence if $\forall \varepsilon > 0$, $\exists n_0 \in \mathbb{N}$, s.t. $|a_n - L| < \varepsilon$, $\forall n \geq n_0$.
+	That is, there are infinitely many terms inside the interval and a finite number of terms outside it.
+\end{definition}
+
+\begin{question}
+	Prove that 2 is not a limit of $\left\{ \frac{3n + 1}{n} \right\}$.
+\end{question}
+
+\begin{solution}
+	If possible, let 
+	\begin{align*}
+		\lim\limits_{n \to \infty} \frac{3n + 1}{n} = 2
+	\end{align*}
+	Then, $\forall \varepsilon > 0$, $\exists n_0 \in \mathbb{N}$, s.t. $\left| \frac{3n + 1}{n} - 2 \right| < \varepsilon$, $\forall n \geq n_0$.
+	However,
+	\begin{equation*}
+		\left| \frac{3n + 1}{n} - 2 \right| = 1 + \frac{1}{n} > 1
+	\end{equation*}
+	This is a contradiction for $\varepsilon = \frac{1}{2}$.
+	Therefore, 2 is not a limit.
+\end{solution}
+
+\begin{theorem}
+	If a sequence $\{a_n\}$ has a limit $L$ then the limit is unique.
+	\label{uniquness of a limit}
+\end{theorem}
+
+\begin{theorem}
+	If a sequence $\{a_n\}$ has limit $L$, then the sequence is bounded.
+	\label{existence of limit implies boundedness}
+\end{theorem}
+
+\begin{theorem}
+	Let
+	\begin{align*}
+		\lim\limits_{n \to \infty} a_n &= a\\
+		\lim\limits_{n \to \infty} b_n &= b
+	\end{align*}
+	and let $c$ be a constant.
+	Then,
+	\begin{align*}
+		\lim c &= c\\
+		\lim (c a_n) &= c \lim a_n\\
+		\lim (a_n \pm b_n) &= \lim a_n \pm \lim b_n\\
+		\lim (a_n b_n) &= \lim a_n \lim b_n\\
+		\lim (\frac{a_n}{b_n}) &= \frac{\lim a_n}{\lim b_n} \quad (\textnormal{ if } \lim b \neq 0)
+	\end{align*}
+	\label{limit arithmetic}
+\end{theorem}
+
+\begin{theorem}
+	Let $\{b_n\}$ be bounded and let $\lim a_n = 0$. Then,
+	\begin{equation*}
+		\lim (a_n b_n) = 0
+	\end{equation*}
+\end{theorem}
+
+\begin{theorem}[Sandwich Theorem]
+	Let $\{a_n\}$, $\{b_n\}$, $\{c_n\}$ be three sequences. If
+	\begin{equation*}
+		\lim a_n = \lim b_n = L
+	\end{equation*}
+	and $\exists n_0 \in \mathbb{N}$, s.t. $\forall n \geq n_0$, $a_n \leq b_n \leq c_n$.
+	Then,
+	\begin{equation*}
+		\lim b_n = L
+	\end{equation*}
+	\label{sandwich theorem}
+\end{theorem}
+
+\begin{question}
+	Calculate $\lim\limits_{n \to \infty} \sqrt[n]{2^n + 3^n}$
+\end{question}
+
+\begin{solution}[print]
+	\begin{gather*}
+		\sqrt[n]{3^n} \leq \sqrt[n]{2^n + 3^n} \leq \sqrt[n]{3^n + 3^n} = \sqrt[3]{2 \cdot 3^n}\\
+		\therefore 3 \leq \sqrt[n]{2^n + 3^n} \leq 3 \sqrt[n]{2}
+	\end{gather*}
+	Therefore, by the \nameref{sandwich theorem}, $\lim\limits_{n \to \infty} \sqrt[n]{2^n + 3^n} = 3$.
+\end{solution}
+
+\begin{theorem}
+	Any monotonically increasing sequence which is bounded from above converges.
+	Similarly, any monotonically decreasing sequence which is bounded from below converges.
+	\label{monotonicity and boundedness implies convergence}
+\end{theorem}
+
+\begin{question}
+	Prove that there exists a limit for $a_n = \underbrace{\sqrt{2 + \sqrt{2 + \sqrt{2 + \dots}}}}_{n \textnormal{ times }}$ and find it.
+\end{question}
+
+\begin{solution}[print]
+	\begin{equation*}
+		a_1 = \sqrt{2} < \sqrt{2 + \sqrt{2}} = a_2
+	\end{equation*}
+	If possible, let
+	\begin{align*}
+		a_{n - 1} &< a_n\\
+		\therefore \sqrt{2 + a_{n - 1}} &< \sqrt{2 + a_n}\\
+		\therefore a_n &< a_{n + 1}
+	\end{align*}
+	Hence, by induction, $\{a_n\}$ is monotonically increasing.
+	~\\
+	\begin{equation*}
+		a_1 = \sqrt{2} \leq 2
+	\end{equation*}
+	If possible, let
+	\begin{align*}
+		a_n &\leq 2\\
+		\therefore \sqrt{2 + a_n} &\leq \sqrt{2 + 2}\\
+		\therefore a_{n + 1} \leq 2
+	\end{align*}
+	Hence, by induction, $\{a_n\}$ is bounded from above by 2.
+	Therefore, by \nameref{monotonicity and boundedness implies convergence}, $\{a_n\}$ converges.
+\end{solution}
+
+\subsection{Sub-sequences}
+
+\begin{definition}[Sub-sequence]
+	Let $\{a_n\}_{n = 1} ^{\infty}$ be a sequence.
+	Let $\{n_k\}_{k = 1}^{\infty}$ be a strongly increasing sequence of natural numbers.
+	Let $\{b_k\}_{k = 1}^{\infty}$ be a sequence such that $b_k = a_{n_k}$.
+	Then $\{b_k\}_{k = 1}^{\infty}$ is called a sub-sequence of $\{a_n\}_{n = 1}^{\infty}$.
+\end{definition}
+
+\begin{theorem}
+	If the sequence $\{a_n\}$ converges to $L$ in a wide sense, i.e. $L$ can be infinite, then any sub-sequence of $\{a_n\}$ converges to the same limit $L$.
+	\label{Any subsequence converges to the limit of the sequence}
+\end{theorem}
+
+\begin{definition}[Partial limit]
+	A real number $a$, which may be infinite, is called a partial limit of the sequence $\{a_n\}$ is there exists a sub-sequence of $\{a_n\}$ which converges to $a$.
+\end{definition}
+
+\begin{theorem}[Bolzano-Weierstrass Theorem]
+	For any bounded sequence there exists a subsequence which is convergent, s.t. there exists at least one partial limit.
+	\label{Bolzano-Weierstrass Theorem}
+\end{theorem}
+
+\begin{definition}[Upper partial limit]
+	The largest partial limit of a sequence is called the upper partial limit.
+	It is denoted by $\overline{\lim} a_n$ or $\limsup a_n$.
+\end{definition}
+
+\begin{definition}[Lower partial limit]
+	The smallest partial limit of a sequence is called the upper partial limit.
+	It is denoted by $\underline{\lim} a_n$ or $\liminf a_n$.
+\end{definition}
+
+\begin{theorem}
+	If the sequence $\{a_n\}$ is bounded and $\overline{\lim} a_n = \underline{\lim} a_n = a$ then $\exists \lim a_n = a$.
+	\label{Equal upper and lower partial limits imply existence of limit}
+\end{theorem}
+
+\subsection{Cauchy Characterisation of Convergence}
+
+\begin{definition}
+	A sequence $\{a_n\}$ is called a Cauchy sequence if $\forall \varepsilon > 0$, $\exists n_0 \in \mathbb{N}$, s.t. $\forall m, n \geq n_0$, $|a_n - a_m| < \varepsilon$.
+\end{definition}
+
+\begin{theorem}[Cauchy Characterisation of Convergence]
+	A sequence $\{a_n\}$ converges if and only if it is a Cauchy sequence.
+	\label{Cauchy Characterisation of Convergence}
+\end{theorem}
+
+\begin{theorem}[Another Formulation of the Cauchy Characterisation Theorem]
+	The sequence $\{a_n\}$ converges if and only if $\forall \varepsilon > 0$, $\exists n_0 \in \mathbb{N}$, such that $\forall n \geq n_0$ and $\forall p \in \mathbb{N}$, $|a_{n + p} - a_n| < \varepsilon$.
+	\label{Another formulation of the Cauchy characterisation theorem}
+\end{theorem}
+
+\end{multicols}
+
+\begin{question}
+	Prove that the sequence $a_n = \frac{1}{1^2} + \frac{1}{2^2} + \dots + \frac{1}{n^2}$ is convergent.
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		|a_{n + p} - a_n| &= \left| \frac{1}{1^2} + \frac{1}{2^2} + \dots + \frac{1}{(n + p)^2} - \left( \frac{1}{1^2} + \frac{1}{2^2} + \dots + \frac{1}{n^2} \right) \right|\\
+		&= \frac{1}{(n + 1)^2} + \frac{1}{(n + 2)^2} + \dots + \frac{1}{(n + p)^2}\\
+		\therefore |a_{n + p} - a_n| &< \frac{1}{n (n + 1)} + \frac{1}{(n + 1)(n + 2)} + \dots + \frac{1}{(n + p - 1)(n + p)}\\
+		\therefore |a_{n + p} - a_n| &< \frac{1}{n} - \cancel{\frac{1}{n + 1}} + \cancel{\frac{1}{n + 1}} + \dots + \cancel{\frac{1}{n + p - 1}} - \frac{1}{n + p}\\
+		\therefore |a_{n + p} - a_n| &< \frac{1}{n} - \frac{1}{n + p}\\
+		\therefore |a_{n + p} - a_n| &< \frac{1}{n}
+	\end{align*}
+	Therefore, $\forall \varepsilon > 0$, $\exists n_0 \in \mathbb{N}$, s.t. $\forall n \geq n_0$ and $\forall p \in \mathbb{N}$, $|a_{n + p} - a_n| < \varepsilon$, where $n_0 > \frac{1}{\varepsilon}$.
+	\qed
+\end{solution}
+
+\begin{question}
+	Prove that the sequence
+	\begin{equation*}
+		a_n = \frac{1}{1} + \frac{1}{n} + \dots + \frac{1}{n}
+	\end{equation*}
+	diverges.
+\end{question}
+
+\begin{solution}
+	If possible, let the sequence converge.
+	Then, by the \nameref{Cauchy Characterisation of Convergence}, $\forall \varepsilon > 0$, $\exists n_0 \in \mathbb{N}$, s.t. $\forall n \geq n_0$ and $\forall p \in \mathbb{N}$, $|a_{n + p} - a_n| < \varepsilon$.\\
+	Therefore,
+	\begin{align*}
+		|a_{n + p} - a_n| &= \left| \frac{1}{1} + \frac{1}{2} + \dots + \frac{1}{n} + \frac{1}{n + p} - \left( \frac{1}{n} + \dots + \frac{1}{n} \right) \right|\\
+		&= \frac{1}{n + 1} + \dots + \frac{1}{n + p}\\
+		&\ge p \cdot \frac{1}{n + p}\\
+		\therefore |a_{n + p} - a_n| &> \frac{p}{n + p}
+	\end{align*}
+	If $n = p$,
+	\begin{align*}
+		\frac{p}{n + p} &= \frac{1}{2}
+	\end{align*}
+	This contradicts the result obtained from the \nameref{Cauchy Characterisation of Convergence}, for $\varepsilon = \frac{1}{4}$.\\
+	Therefore, the sequence diverges.
+\end{solution}
+
+\begin{multicols}{2}
+
+\section{Series}
+
+\begin{definition}[$p$-series]
+	The series $\sum\limits_{n = 1}^{\infty} \frac{1}{n^p}$ is called the $p$-series.
+\end{definition}
+
+\begin{theorem}
+	The $p$-series converges for $p > 1$ and diverges for $p \le 1$.
+	\label{convergence and divergence of p-series}
+\end{theorem}
+
+\begin{theorem}
+	If $\sum a_n$ converges, then $\lim\limits_{n \to \infty} a_n = 0$, but the converse is not true.
+\end{theorem}
+
+\begin{theorem}
+	If $\sum a_n$ and $\sum b_n$ converge, then $\sum (a_n \pm b_n)$ and $\sum c a_n$, where $c$ is a constant, also converge. Also,
+	\begin{align*}
+		\sum (a_n \pm b_n) &= \sum a_n \pm \sum b_n\\
+		\sum (c a_n) &= c \sum a_n
+	\end{align*}
+\end{theorem}
+
+\subsection{Convergence Criteria}
+
+\subsubsection{Leibniz's Criteria}
+
+\begin{theorem}[Leibniz's Criteria for Convergence]
+	If an alternating series $\sum (-1)^{n - 1} a_n$ with $a_n > 0$ satisfies
+	\begin{enumerate}
+		\item $a_{n + 1} \le a_n$, i.e. $\{a_n\}$ is monotonically decreasing.
+		\item $\lim\limits_{n \to \infty} a_n = 0$
+	\end{enumerate}
+	then the series $(-1)^{n - 1} a_n$ converges.
+	\label{Leibniz's Criteria for Convergence}
+\end{theorem}
+
+\begin{example}
+	The alternating harmonic series $\sum \frac{(-1)^{n - 1}}{n}$ converges as $a_n = \frac{1}{n} > 0$, $a_n$ decreases and $\lim a_n = 0$.
+\end{example}
+
+\subsubsection{Comparison Test}
+
+\begin{theorem}[First Comparison Test for Convergence]
+	Assume $\exists n_0 \in \mathbb{N}$, such that $a_n \ge 0$, $b_n \ge 0$, $\forall n \ge n_0$.
+	\begin{enumerate}
+		\item If $a_n \le b_n$, $\forall n \ge n_0$ and $\sum\limits_{n = 1}^{\infty} b_n$ converges, then $\sum\limits_{n = 1}^{\infty} a_n$ converges.
+		\item If $a_n \ge b_n$, $\forall n \ge n_0$ and $\sum\limits_{n = 1}^{\infty} b_n$ diverges, then $\sum\limits_{n = 1}^{\infty} a_n$ diverges.
+	\end{enumerate}
+\end{theorem}
+
+\begin{theorem}[Another Formulation of the Comparison Test for Convergence]
+	Assume $\exists n_0 \in \mathbb{N}$, such that $a_n \ge 0$, $b_n \ge 0$, $\forall n \ge n_0$, then if $\lim\limits_{n \to \infty} \frac{a_n}{b_n}$ exists, then $\sum a_n$ and $\sum b_n$ converge or diverge simultaneously.
+\end{theorem}
+
+\subsubsection{d'Alembert Criteria (Ratio Test)}
+
+\begin{definition}[Absolute and conditional convergence]
+	The series $\sum a_n$ is said to converge absolutely if $\sum |a_n|$ converges.
+	The series $\sum a_n$ is said to converge conditionally if it converges but $\sum |a_n|$ diverges.
+\end{definition}
+
+\begin{theorem}
+	If the series $\sum a_n$ converges absolutely then it converges.
+\end{theorem}
+
+\begin{theorem}[d'Alembert Criteria (Ratio Test)]
+	\begin{enumerate}
+		\item 
+			If $\lim\limits_{n \to \infty} \left| \frac{a_{n - 1}}{a_n} \right| = L < 1$ then $\sum a_n$ converges absolutely.
+		\item 
+			If $\lim\limits_{n \to \infty} \left| \frac{a_{n - 1}}{a_n} \right| = L > 1$(including $L = \infty$), then $\sum a_n$ converges diverges.
+		\item
+			If $L = 1$, the test does not apply.
+	\end{enumerate}
+	\label{d'Alembert Criteria (Ratio Test)}
+\end{theorem}
+
+\subsubsection{Cauchy Criteria (Cauchy Root Test)}
+
+\begin{theorem}[Cauchy Criteria (Cauchy Root Test)]
+	\begin{enumerate}
+		\item
+			If $\overline{\lim} \sqrt[n]{|a_n|} = L < 1$ then $\sum a_n$ converges absolutely.
+		\item
+			If $\overline{\lim} \sqrt[n]{|a_n|} = L > 1$ (including $L = \infty$), then $\sum a_n$ diverges.
+		\item
+			If $L = 1$, the test does not apply.
+	\end{enumerate}
+	\label{Cauchy Criteria (Cauchy Root Test)}
+\end{theorem}
+
+\subsubsection{Integral Test}
+
+\begin{theorem}[Integral Test for Series Convergence]
+	Let $f(x)$ be a continuous, non-negative, monotonic decreasing function on $[1,\infty)$ and let $a_n = f(n)$.
+	Then the series $\sum\limits_{n = 1}^{\infty} a_n$ converges if and only if the improper integral $\int\limits_{1}^{\infty} f(x) \dif x$ converges.
+	\label{Integral Test for Series Convergence}
+\end{theorem}
+
+\begin{theorem}
+	If the series $\sum a_n$ absolutely converges and the series $\sum b_n$ is obtained from $\sum a_n$ by changing the order of the terms in $\sum a_n$ then $\sum b_n$ also absolutely converges and $\sum b_n = \sum a_n$.
+\end{theorem}
+
+\begin{theorem}
+	If a series converges then the series with brackets without changing the order of terms also converges.
+	That is, if $\sum a_n$ converges, then any series of the form $(a_1 + a_2) + (a_3 + a_4 + a_5) + a_6 + \dots$ also converges.
+\end{theorem}
+
+\begin{theorem}
+	If a series with brackets converges and the terms in the brackets have the same sign, then the series without brackets also converges.
+\end{theorem}
+
+\section{Power Series}
+
+\begin{definition}[Power series]
+	The series $\sum\limits_{n = 0}^{\infty} a_n (x - c)^n$ is called a power series.
+\end{definition}
+
+\begin{theorem}[Cauchy-Hadamard Theorem]
+	For any power series $\sum\limits_{n = 0}^{\infty} a_n (x - c)^n$ there exists the limit, which may be infinity, $R = \frac{1}{\overline{\lim\limits_{n \to \infty}} \sqrt[n]{|a_n|}}$	and the series converges for $|x - c| < R$ and diverges for $|x - c| > R$.
+	The end points of the interval, i.e. $x = c - R$ and $x = c + R$ must be separately checked for series convergence.
+\end{theorem}
+
+\begin{definition}[Radius of convergence and convergence interval]
+	The number $R$ is called the radius of convergence and the interval $|x - c| < R$ is called the convergence interval of the series.
+	The point $c$ is called the centre of the convergence interval.
+\end{definition}
+
+\begin{theorem}
+	If $\exists \lim\limits_{n \to \infty} \left| \frac{a_n}{a_{n + 1}} \right|$, which may be infinite, then, $R = \lim\limits_{n \to \infty} \left| \frac{a_n}{a_{n + 1}} \right|$.
+\end{theorem}
+
+\begin{theorem}[Stirling's Approximation]
+	For $n \to \infty$, $n! \approx \left( \frac{n}{e} \right)^n \sqrt{2 \pi n}$.
+\end{theorem}
+
+\begin{question}
+	Find the domain of convergence of $\sum\limits_{n = 1}^{\infty} \dfrac{(2x - 4)^n}{n}$.
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		\sum_{n = 1}^{\infty} \dfrac{(2x - 4)^n}{n} &= \sum_{n = 1}^{\infty} \dfrac{2^n (x - 2)^n}{n}
+	\end{align*}
+	Therefore, by Cauchy's Formula for Radius of Convergence,
+	\begin{align*}
+		R &= \dfrac{1}{\overline{\lim} \sqrt[n]{|a_n|}}\\
+		&= \dfrac{1}{\lim\limits_{n \to \infty} \sqrt[n]{\dfrac{2^n}{n}}}\\
+		&= \dfrac{1}{\lim\limits_{n \to \infty} \dfrac{2}{\sqrt[n]{n}}}\\
+		&= \dfrac{1}{2}
+	\end{align*}
+	Therefore, the series converges for
+	\begin{equation*}
+		|x - 2| < \dfrac{1}{2}
+	\end{equation*}
+	and diverges for
+	\begin{equation*}
+		|x - 2| > \dfrac{1}{2}
+	\end{equation*}
+	If $x = \dfrac{5}{2}$, 
+	\begin{align*}
+		\sum_{n = 1}^{\infty} \dfrac{2^n}{n} \left( \dfrac{5}{2} - 2 \right)^n\\
+		&= \sum_{n = 1}^{\infty} \dfrac{1}{n}
+	\end{align*}
+	Therefore, the series diverges.\\
+	If $x = \dfrac{3}{2}$, 
+	\begin{align*}
+		\sum_{n = 1}^{\infty} \dfrac{2^n}{n} \left( \dfrac{3}{2} - 2 \right)^n\\
+		&= \sum_{n = 1}^{\infty} (-1)^n \dfrac{1}{n}
+	\end{align*}
+	Therefore, by Leibniz's Criteria for Convergence, the series converges.\\
+	Therefore, the domain of convergence is $\left[ \dfrac{3}{2} , \dfrac{5}{2} \right)$.
+\end{solution}
+
+\begin{question}
+	Find the radius of convergence of $\sum\limits_{n = 0}^{\infty} n! x^{n!}$.
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		\dfrac{1}{\overline{\lim}\sqrt[n]{a_n}} &= x + x + 2 x^2 + 6 x^6 + 24 x^{24} + \dots
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		a_n &=
+			\begin{cases}
+				n &;\quad n = k^2\\
+				0 &;\quad n \neq k^2\\
+			\end{cases}
+	\end{align*}
+	Therefore, 
+	\begin{align*}
+		R &= \dfrac{1}{\lim\limits_{n \to \infty} \sqrt[n]{a_n}}\\
+		&= \dfrac{1}{\lim\limits_{k \to \infty} \sqrt[k!]{k!}}\\
+		&= 1
+	\end{align*}
+\end{solution}
+
+\end{multicols}
+
+\end{document}
