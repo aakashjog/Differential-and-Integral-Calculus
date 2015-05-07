@@ -1035,4 +1035,254 @@ E-mail: \href{mailto:micbromberg@gmail.com}{micbromberg@gmail.com}\\
 	Therefore, as the limit of the supremum is not $0$, the convergence is not uniform.
 \end{solution}
 
+\recitation
+
+\begin{theorem}
+	If $f_n \xrightrightarrows{D} f$ and all $f_n$ are continuous is $D$, then $f$ is also continuous, i.e. uniform convergence preserves continuity.
+\end{theorem}
+
+\begin{question}
+	Does $x^n$ converge to
+	\begin{equation*}
+		f(x) = 
+			\begin{cases}
+				0 & ;\quad x \in [0,1) \\
+				1 & ;\quad x = 1       \\
+			\end{cases}
+	\end{equation*}
+\end{question}
+
+\begin{solution}
+	If possible, let $x^n$ converge to $f(x)$.\\
+	Therefore, as all $f_n(x)$ are continuous, and as uniform convergence preserves continuity, $f(x)$ also must be continuous.\\
+	This contradicts the definition of $f(x)$.\\
+	Therefore, the $x^n$ does not converge to $f(x)$.
+\end{solution}
+
+\begin{question}
+	Check if $f_n(x) = \frac{x}{1 + n^2 x^2}$ converges uniformly in $[0,1]$.
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		\lim\limits_{n \to \infty} f_n(x) = 0 \\
+                                                       & = f(x)
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\sup\limits_{[0,1]} \left| f_n(x) - f(x) \right| & = \sup\limits_{[0,1]} \left| f_n(x) - 0 \right|            \\
+                                                                 & = \sup\limits_{[0,1]} \left| \frac{x}{1 + n^2 x^2} \right| \\
+                                                                 & = \sup\limits_{[0,1]} \frac{x}{1 + n^2 x^2}                \\
+		\intertext{As the function is continuous and the interval is closed, by the Weierstrass theorem, the function has a maximum. Therefore,}
+		\sup\limits_{[0,1]} \left| f_n(x) - f(x) \right| & = \max\limits_{[0,1]} \frac{x}{1 + n^2 x^2}
+	\end{align*}
+	Differentiating to find the maximum,
+	\begin{align*}
+		\dod{}{x} \left( \frac{x}{1 + n^2 x^2} \right) & = \frac{1 + n^2 x^2 - 2 x^2 n^2}{(1 + n^2 x^2)} \\
+                                                               & = \frac{1 - x^2 n^2}{(1 + n^2 x^2)^2}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\dod{}{x} \left( \frac{x}{1 + n^2 x^2} \right) & = 0       \\
+		\iff \frac{1 - x^2 n^2}{(1 + n^2 x^2)^2}       & = 0       \\
+		\iff 1                                         & = x^2 n^2 \\
+		\iff x                                         & = \frac{1}{n}
+	\end{align*}
+	Therefore, the values of the function at the critical points and the end points are,
+	\begin{align*}
+		f_n(0)                         & = 0                                         \\
+		f_n(1)                         & = \frac{1}{1 + n^2}                         \\
+		f_n \left( \frac{1}{n} \right) & = \frac{\frac{1}{n}}{1 + n^2 \frac{1}{n^2}} \\
+                                               & = \frac{1}{2 n}
+	\end{align*}
+	Therefore, the maximum is at $x = \frac{1}{2 n}$.\\
+	Therefore,
+	\begin{align*}
+		\max\limits_{[0,1]} \frac{x}{1 + n^2 x^2} & = f_n \left( \frac{1}{n} \right) \\
+                                                          & = \frac{1}{2 n}
+	\end{align*}
+	Therefore
+	\begin{align*}
+		\lim\limits_{n \to \infty} \sup\limits_{[0,1]} \left| f_n(x) - f(x) \right| & = \lim\limits_{n \to \infty} \max\limits_{[0,1]} \frac{x}{1 + n^2 x^2} \\
+                                                                                            & = \lim\limits_{n \to \infty} \frac{1}{2 n}                             \\
+                                                                                            & = 0
+	\end{align*}
+	Therefore, the convergence is uniform.
+\end{solution}
+
+\begin{question}
+	Check the pointwise and uniform convergence of $f_n(x) = x^n - x^{n + 1}$ in $[0,1]$.
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		\lim\limits_{n \to \infty} f_n(x) & = \lim\limits_{n \to \infty} x^n - x^{n + 1} \\
+                                                  & = 0                                          \\
+                                                  & = f(x)
+	\end{align*}
+	Therefore the function converges pointwise in $[0,1]$.
+	\begin{align*}
+		\sup\limits_{[0,1]} |f_n(x) - f(x)| & = \sup\limits_{[0,1]} x^n - x^{n + 1} \\
+		\intertext{As the function is continuous and the interval is closed, by the Weierstrass theorem, the function has a maximum. Therefore,}
+		\sup\limits_{[0,1]} x^n - x^{n + 1} & = \max\limits_{[0,1]} x^n - x^{n + 1} \\
+	\end{align*}
+	Differentiating to find the maximum,
+	\begin{align*}
+		\dod{(x^n - x^{n + 1})}{x} & = n x^{n - 1} - (n + 1) x^n
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\dod{(x^n - x^{n + 1})}{x}     & = 0 \\
+		\iff n x^{n - 1} - (n + 1) x^n & = 0 \\
+		\iff n - (n + 1) x             & = 0 \\
+		\iff x                         & = \frac{n}{n + 1}
+	\end{align*}
+	Therefore, the values of the function at the critical points and the end points are
+	\begin{align*}
+		f_n(0)                             & = 0 \\
+		f_n(1)                             & = 0 \\
+		f_n \left( \frac{n}{n + 1} \right) & = \left( \frac{n}{n + 1} \right)^n - \left( \frac{n}{n + 1} \right)^{n + 1}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\max\limits_{[0,1]} x^n - x^{n + 1} & = f_n \left( \frac{n}{n + 1} \right)                                        \\
+                                                    & = \left( \frac{n}{n + 1} \right)^n - \left( \frac{n}{n + 1} \right)^{n + 1} \\
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\lim\limits_{n \to \infty} \sup\limits_{[0,1]} \left| f_n(x) - f(x) \right| & = \lim\limits_{n \to \infty} \max\limits_{[0,1]} \left( \frac{n}{n + 1} \right)^n - \left( \frac{n}{n + 1} \right)^{n + 1} \\
+                                                                                            & = \frac{1}{e} - \frac{1}{e}                                                                                                \\
+                                                                                            & = 0
+	\end{align*}
+	Therefore, the convergence is uniform.
+\end{solution}
+
+\begin{theorem}[Cauchy's Theorem]
+	$\{f_n\}$ converges uniformly in $D$ if and only if $\forall \varepsilon \in N$, $\exists N$, such that $\forall m, n > N$ and $\forall x \in D$,
+	\begin{equation*}
+		|f_n(x) - f(x)| < \varepsilon
+	\end{equation*}
+	\label{Cauchy's_Theorem}
+\end{theorem}
+
+\begin{question}
+	Let $\{f_n\}$ be a sequence of function in $D$ such that $\forall x \in D$, $|f_{n + 1}(x) - f_n(x)| \le a_n$, where $\sum\limits_{n = 1}^{\infty} a_n$ converges.
+	Prove that $\{f_n\}$ converges uniformly in $D$.
+\end{question}
+
+\begin{solution}
+	As $\sum a_n$ converges, $\exists N$ such that $\forall m > n > N$, $\left| \sum\limits_{k = n}^{m} a_k \right| < \varepsilon$.\\
+	Therefore, forall $m > n > N$ and $x \in D$,
+	\begin{align*}
+		|f_m(x) - f_n(x)|            & = |f_m(x) - f_{m - 1}(x) + f_{m - 1}(x) - \dots - f_n(x)|                                    \\
+                                             & \le |f_m(x) - f_{m - 1}(x)| + |f_{m - 1}(x) - f_{m - 2}(x) + \dots + |f_{n + 1}(x) - f_n(x)| \\
+		\therefore |f_m(x) - f_n(x)| & \le \sum\limits_{k = n}^{m - 1} |f_{k + 1}(x) - f_k(x)|                                      \\
+		\therefore |f_m(x) - f_n(x)| & \le \sum\limits_{k = n}^{m - 1} a_k                                                          \\
+		\therefore |f_m(x) - f_n(x)| & \le \varepsilon\
+	\end{align*}
+	Therefore, $\{f_n\}$ satisfies Cauchy's criterion for uniform convergence.
+\end{solution}
+
+\section{Series of Functions}
+
+\begin{definition}[Pointwise convergence of series of functions]
+	Let $\{f_n\}$ be a sequence of functions defined in $D$.
+	Let $S_n(x) = \sum\limits_{k = 1}^{n} f_k(x)$.\\
+	If $S_n(x)$ converges for every $x \in D$ to a limit $S$, the series formed by $\{f_n\}$ is said to converge pointwise in $D$.
+	It is denoted as
+	\begin{equation*}
+		\sum\limits_{k = 1}^{\infty} f_k(x) = \lim\limits_{n \to \infty} S_n(x) = S_x
+	\end{equation*}
+\end{definition}
+
+\begin{definition}[Uniform convergence of series of functions]
+	The series $\sum\limits_{k = 1}^{\infty} f_k(x)$ is said to converge uniformly in $D$ if $S_n \xrightrightarrows{D} S$.
+\end{definition}
+
+\begin{theorem}
+	If $\sum\limits_{k = 1}^{\infty} f_k(x)$ converges uniformly in $D$, then the general term $f_k(x)$ must uniformly converge to $0$ in $D$.
+\end{theorem}
+
+\begin{question}
+	Check the uniform convergence of $\sum\limits_{n = 1}^{\infty} \frac{x^n}{n^2} - \frac{x^{n + 1}}{(n + 1)^2}$ in $[-1,1]$.
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		S_n(x) & = \sum\limits_{k = 1}^{n} \frac{x^k}{k^2} - \frac{x^{k + 1}}{(k + 1)^2} \\
+                       & = \frac{x^1}{1^2} - \frac{x^{n + 1}}{(n + 1)^2}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\lim\limits_{n \to \infty} S_n(x) & = \lim\limits_{n \to \infty} x = \frac{x^{n + 1}}{(n + 1)^2} \\
+                                                  & = x                                                          \\
+                                                  & = S(x)
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\sup\limits_{[-1,1]} |S_n(x) - S(x)| & = \sup\limits_{[-1,1]} \left| -\frac{x^{n + 1}}{(n + 1)^2} \right| \\
+                                                     & \le \frac{1}{(n + 1)^2}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\lim\limits_{n \to \infty} \sup\limits_{[-1,1]} |S_n(x) - S(x)|            & \le \lim\limits_{n \to \infty} \frac{1}{(n + 1)^2} \\
+		\therefore \lim\limits_{n \to \infty} \sup\limits_{[-1,1]} |S_n(x) - S(x)| & \le 0
+	\end{align*}
+	Therefore the convergence is uniform.
+\end{solution}
+
+\begin{theorem}
+	If $\sum\limits_{n = 1}^{\infty} f_n(x)$ converges uniformly in $D$ to $S(x)$ and the functions $f_n$ are continuous in $D$, then the $S(x)$ is also continuous in $D$.
+\end{theorem}
+
+\begin{theorem}
+	A Leibniz series, i.e. a series of the form $\sum\limits_{n = 1}^{\infty} (-1)^n a_n$, with $a_n$ monotonically decreasing and $\lim\limits_{n \to \infty} a_n = 0$, converges, and
+	\begin{equation*}
+		\sum\limits_{k = n}^{m} (-1)^k a_k \le a_n
+	\end{equation*}
+\end{theorem}
+
+\begin{question}
+	Check for pointwise and uniform convergence of $\sum\limits_{n = 1}^{\infty} \frac{(-1)^n}{x^2 + \sqrt{n}}$ in $\mathbb{R}$.
+\end{question}
+
+\begin{solution}
+	For $x \in \mathbb{R}$, $\frac{1}{x^2 + \sqrt{n}}$ is monotonically decreasing to $0$ as $n \to \infty$.\\
+	Therefore, for $x \in \mathbb{R}$, $\sum\limits_{n = 1}^{\infty} \frac{(-1)^n}{x^2 + \sqrt{n}}$ is a Leibniz series.
+	Hence, it converges pointwise.\\
+	\begin{align*}
+		\left| \sum\limits_{k = n}^{m} \frac{(-1)^n}{x^2 + \sqrt{k}} \right| & \le \frac{1}{x^2 + \sqrt{n}} \\
+                                                                                     & \le \frac{1}{\sqrt{n}}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\lim\limits_{n \to \infty} \left| \sum\limits_{k = n}^{m} \frac{(-1)^n}{x^2 + \sqrt{k}} \right| & = 0
+	\end{align*}
+	Therefore, $\forall \varepsilon > 0$, there exists $N$ such that $\forall m > n > N$, and $\forall x \in \mathbb{R}$,
+	\begin{equation*}
+		\left| \sum\limits_{k = n}^{m} \frac{(-1)^n}{x^2 + \sqrt{k}} \right| \le \frac{1}{\sqrt{n}} < \varepsilon
+	\end{equation*}
+	Therefore, $\left| \sum\limits_{k = n}^{m} \frac{(-1)^n}{x^2 + \sqrt{k}} \right|$ satisfies Cauchy's criterion for uniform convergence.
+	Hence it converges uniformly.
+\end{solution}
+
+\begin{question}
+	Show that $\sum\limits_{n = 1}^{\infty} 3^n \sin \left( \frac{1}{4^n x} \right)$ does not converge uniformly in $(0,\infty)$.
+\end{question}
+
+\begin{solution}
+	For any $x \in (0,\infty)$, as $\sin \left( \frac{1}{4^n x} \right) \le \frac{1}{4^n x}$,
+	\begin{align*}
+		\left| 3^n \sin (\frac{1}{4^n x}) \right| \le 3^n \frac{1}{4^n x}
+	\end{align*}
+	Therefore, as $\sum \left( \frac{3}{4} \right)^n \cdot \frac{1}{x}$ converges, by the \nameref{First_Comparison_Test}, $\sum \left| 3^n \sin \left( \frac{1}{4^n x} \right) \right|$ also converges.\\
+	Therefore, $\sum 3^n \sin (\frac{1}{4^n x})$ converges absolutely.
+	Hence, it converges.
+	\begin{align*}
+		\lim\limits_{n \to \infty} 3^n \sin \left( \frac{1}{4^n x} \right) &= \lim\limits_{n \to \infty}\\
+		&\neq 0
+	\end{align*}
+	Therefore as the general element does not tend to $0$, the series does not converge uniformly in $(0,\infty)$.
+\end{solution}
+
 \end{document}
