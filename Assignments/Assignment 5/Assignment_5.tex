@@ -1,0 +1,339 @@
+\documentclass[fleqn, a4paper, 12pt, oneside]{amsart}
+\usepackage{exsheets, tasks}
+\usepackage{amsmath, amssymb, amsthm} %standard AMS packages
+\usepackage{marginnote} %marginnotes
+\usepackage{gensymb} %miscellaneous symbols
+\usepackage{commath} %differential symbols
+\usepackage{xcolor} %colours
+\usepackage{cancel} %cancelling terms
+\usepackage{siunitx} %formatting units
+\usepackage{tikz, pgfplots} %diagrams
+\usetikzlibrary{calc, hobby, patterns, intersections}
+\usepackage{graphicx} %inserting graphics
+\usepackage{hyperref} %hyperlinks
+\usepackage{datetime} %date and time
+\usepackage{ulem} %underline for \emph{}
+\usepackage{xfrac} %inline fractions
+\usepackage{enumerate, enumitem} %numbered lists
+\usepackage{float} %inserting floats
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}} %adds numbers to specific equations in non-numbered list of equations
+
+\newcommand{\AxisRotator}[1][rotate=0]{
+	\tikz [x=0.25cm,y=0.60cm,line width=.2ex,-stealth,#1] \draw (0,0) arc (-150:150:1 and 1);%
+} %rotation symbols on axes
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+
+\newcommand{\curl}{\mathrm{curl\,}}
+
+\makeatletter
+\@addtoreset{section}{part} %resets section numbers in new part
+\makeatother
+
+\renewcommand{\thesubsection}{(\arabic{subsection})}
+\renewcommand{\thesection}{(\arabic{section})}
+
+%section headings on left
+\makeatletter
+\def\specialsection{\@startsection{section}{1}%
+	\z@{\linespacing\@plus\linespacing}{.5\linespacing}%
+	%  {\normalfont\centering}}% DELETED
+	{\normalfont}}% NEW
+\def\section{\@startsection{section}{1}%
+	\z@{.7\linespacing\@plus\linespacing}{.5\linespacing}%
+	%  {\normalfont\scshape\centering}}% DELETED
+	{\normalfont\scshape}}% NEW
+\makeatother
+
+%forces newline after subsection
+\makeatletter
+\def\subsection{\@startsection{subsection}{3}%
+	\z@{.5\linespacing\@plus.7\linespacing}{.1\linespacing}%
+	{\normalfont\itshape}}
+\makeatother
+
+\settasks{counter-format = tsk[1].}
+
+\SetupExSheets{solution/print = true}
+
+%opening
+\title
+{
+	Differential and Integral Calculus\\
+	Assignment 5
+}
+\author
+{
+	Aakash Jog\\
+	ID : 989323563
+}
+\date{\formatdate{7}{5}{2015}}
+
+\begin{document}
+	
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\begin{question}
+	Find radius of convergence and domain of convergence of the following power series.
+	\begin{enumerate}
+		\item $\sum\limits_{n = 0}^{\infty} \frac{x^n}{n + 2}$
+		\item $\sum\limits_{n = 1}^{\infty} \frac{(-1)^n x^n}{n^{\frac{1}{3}}}$
+		\item $\sum\limits_{n = 1}^{\infty} \frac{(-1)^n x^n}{n 2^n}$
+		\item $\sum\limits_{n = 1}^{\infty} \frac{(x + 1)^n}{n (n + 1)}$
+		\item $\sum\limits_{n = 0}^{\infty} \frac{n! (x - \pi)^n}{10^n}$
+		\item $\sum\limits_{n = 1}^{\infty} \frac{(x - 2)^n}{n^n}$
+		\item $\sum\limits_{n = 0}^{\infty} \left( \frac{n}{2} \right)^n (x + 6)^n$
+		\item $\sum\limits_{n = 1}^{\infty} \frac{n x^n}{(2 n - 1)!}$
+		\item $\sum\limits_{n = 0}^{\infty} \frac{n! x^n}{(2 n)!}$
+		\item $\sum\limits_{n = 0}^{\infty} \frac{x^{3 n}}{(3 n)!}$
+		\item $\sum\limits_{n = 1}^{\infty} (\ln n) x^n$
+	\end{enumerate}
+\end{question}
+
+\begin{solution}
+	\begin{enumerate}[leftmargin = *]
+		\item
+			\begin{align*}
+				R &= \lim\limits_{n \to \infty} \left| \frac{a_n}{a_{n + 1}} \right|\\
+				&= \lim\limits_{n \to \infty} \left| \frac{n + 2}{n + 3} \right|\\
+				&= 1
+			\end{align*}
+			If $x = 1$, the series is $\sum \frac{1}{n + 2}$ which diverges.\\
+			If $x = -1$, the series is $\sum \frac{(-1)^n}{n + 2}$ which converges by Leibniz's criteria.\\
+			Therefore, the domain of convergence is $[-1,1)$.
+		\item
+			\begin{align*}
+				R &= \lim\limits_{n \to \infty} \left| \frac{a_n}{a_{n + 1}} \right|\\
+				&= \lim\limits_{n \to \infty} \left| \frac{(-1)^n (n + 1)^{\frac{1}{3}}}{(-1)^{n + 1} n^{\frac{1}{3}}} \right|\\
+				&= \lim\limits_{n \to \infty} \left| -\frac{n^{\frac{1}{3}}}{(n + 1)^{\frac{1}{3}}} \right|\\
+				&= 1
+			\end{align*}
+			If $x = 1$, the series is $\sum \frac{(-1)^n}{n^{\frac{1}{3}}}$ which converges by Leibniz's criteria.\\
+			If $x = -1$, the series is $\sum \frac{(-1)^n (-1)^n}{n^{\frac{1}{3}}}$ which diverges.\\
+			Therefore, the domain of convergence is $(-1,1]$.
+		\item
+			\begin{align*}
+				R &= \lim\limits_{n \to \infty} \left| \frac{a_n}{a_{n + 1}} \right|\\
+				&= \lim\limits_{n \to \infty} \left| \frac{(-1)^n (n + 1) 2^{n + 1}}{(-1)^{n + 1} n 2^n} \right|\\
+				&= \lim\limits_{n \to \infty} \frac{2 (n + 1)}{n}\\
+				&= 2
+			\end{align*}
+			If $x = 2$, the series is $\sum \frac{(-1)^n 2^n}{n 2^n} = \sum \frac{(-1)^n}{n}$ which converges by Leibniz's criteria.\\
+			If $x = -2$, the series is $\sum \frac{(-1)^n (-2)^n}{n 2^n} = \sum \frac{1}{n}$ which diverges.
+			Therefore, the domain of convergence is $(-2,2]$.
+		\item
+			\begin{align*}
+				R &= \lim\limits_{n \to \infty} \left| \frac{a_n}{a_{n + 1}} \right|\\
+				&= \lim\limits_{n \to \infty} \left| \frac{(n + 1) (n + 2)}{n (n + 1)} \right|\\
+				&= 1
+			\end{align*}
+			If $x = 1 - 1 = 0$, the series if $\sum \frac{1}{n (n + 1)}$ which converges.\\
+			If $x = -1 - 1 = -2$, the series if $\sum \frac{(-1)^n}{n (n + 1)}$ which converges.\\
+			Therefore, the domain of convergence is $[0,-2]$.
+		\item
+			\begin{align*}
+				R &= \lim\limits_{n \to \infty} \left| \frac{a_n}{a_{n + 1}} \right|\\
+				&= \lim\limits_{n \to \infty} \left| \frac{n! 10^{n + 1}}{(n + 1)! 10^n} \right|\\
+				&= \lim\limits_{n \to \infty} \frac{10}{n + 1}\\
+				&= 0
+			\end{align*}
+			Therefore, the domain of convergence is $\{\pi\}$.
+		\item
+			\begin{align*}
+				R &= \lim\limits_{n \to \infty} \left| \frac{a_n}{a_{n + 1}} \right|\\
+				&= \lim\limits_{n \to \infty} \left| \frac{(n + 1)^{n + 1}}{n^n} \right|\\
+				&= \infty
+			\end{align*}
+			Therefore, the domain of convergence is $\mathbb{R}$.
+		\item
+			\begin{align*}
+				R &= \lim\limits_{n \to \infty} \left| \frac{a_n}{a_{n + 1}} \right|\\
+				&= \lim\limits_{n \to \infty} \left| \frac{n^n 2^{n + 1}}{(n + 1)^{n + 1} 2^n} \right|\\
+				&= \lim\limits_{n \to \infty} \frac{2 n^n}{(n + 1)^{n + 1}}\\
+				&= \lim\limits_{n \to \infty} 2 \left( \frac{n}{n + 1} \right)^n \frac{1}{n + 1}\\
+				&= 0
+			\end{align*}
+			Therefore, the domain of convergence is $\{-6\}$.
+		\item
+			\begin{align*}
+				R &= \lim\limits_{n \to \infty} \left| \frac{a_n}{a_{n + 1}} \right|\\
+				&= \lim\limits_{n \to \infty} \left| \frac{n (2 n + 1)!}{(n + 1) (2 n - 1)!} \right|\\
+				&= \lim\limits_{n \to \infty} \left| \frac{n (2 n) (2 n + 1)}{(n + 1)} \right|\\
+				&= \infty
+			\end{align*}
+			Therefore, the domain of convergence is $\mathbb{R}$.
+		\item
+			\begin{align*}
+				R &= \lim\limits_{n \to \infty} \left| \frac{a_n}{a_{n + 1}} \right|\\
+				&= \lim\limits_{n \to \infty} \left| \frac{n! (2 n + 2)!}{(n + 1)! (2 n)!} \right|\\
+				&= \lim\limits_{n \to \infty} \left| \frac{(2 n + 1)(2 n + 2)}{n + 1} \right|\\
+				&= \infty
+			\end{align*}
+			Therefore, the domain of convergence is $\mathbb{R}$.
+		\item
+			Let
+			\begin{align*}
+				3 n &= m
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				\sum\limits_{n = 0}^{\infty} \frac{x^{3 n}}{(3 n)!} &= \sum\limits_{m = 0}^{\infty} \frac{x^m}{m!}
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				R &= \lim\limits_{m \to \infty} \left| \frac{a_m}{a_{m + 1}} \right|\\
+				&= \lim\limits_{m \to \infty} \left| \frac{(m + 1)!}{m!} \right|\\
+				&= \lim\limits_{m \to \infty} m + 1\\
+				&= \infty
+			\end{align*}
+			Therefore, the domain of convergence is $\mathbb{R}$.
+		\item
+			\begin{align*}
+				R &= \lim\limits_{n \to \infty} \left| \frac{a_n}{a_{n + 1}} \right|\\
+				&= \lim\limits_{m \to \infty} \left| \frac{\ln n}{\ln (n + 1)} \right|\\
+				&= \lim\limits_{m \to \infty} \log_{n + 1} n\\
+				&= 1
+			\end{align*}
+			If $x = 1$, the series is $\sum \ln n$ which diverges.\\
+			If $x = -1$, the series is $\sum (-1)^n \ln n$ which diverges.\\
+			Therefore, the domain of convergence is $(-1,1)$.
+	\end{enumerate}
+\end{solution}
+
+\begin{question}
+	Calculate the sum of the following power series inside their radius of convergence, i.e. write these sums as an elementary function.
+	\begin{enumerate}
+		\item $\sum\limits_{n = 0}^{\infty} n^2 x^{n - 1}$
+	\end{enumerate}
+\end{question}
+
+\begin{solution}
+	\begin{enumerate}[leftmargin = *]
+		\item
+			Let
+			\begin{align*}
+				f(x) &= \sum\limits_{n = 0}^{\infty} n^2 x^{n - 1}
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				\int f(x) \dif x &= \sum\limits_{n = 0}^{\infty} n x^n\\
+				&= x \sum\limits_{n = 0}^{\infty} n x^{n - 1}
+			\end{align*}
+			Let
+			\begin{align*}
+				g(x) &= \sum\limits_{n = 0}^{\infty} n x^{n - 1}
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				\int g(x) \dif x &= \sum\limits_{n = 0}^{\infty} x^n\\
+				&= \frac{x}{1 - x}\\
+				\therefore g(x) &= \dod{}{x} \left( \frac{x}{1 - x} \right)\\
+				&= \frac{1}{(1 - x)^2}
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				\int f(x) \dif x &= x g(x)\\
+				&= \frac{x}{(1 - x)^2}\\
+				\therefore f(x) &= \dod{}{x} \left( \frac{x}{(1 - x)^2} \right)\\
+				&= \frac{2 x}{(1 - x)^3} + \frac{1}{(1 - x)^2}
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				\sum\limits_{n = 0}^{\infty} n^2 x^{n - 1} &= \frac{2 x}{(1 - x)^3} + \frac{1}{(1 - x)^2}
+			\end{align*}
+	\end{enumerate}
+\end{solution}<++>
+
+\begin{question}
+	Find the Taylor's series of the following functions.
+	\begin{enumerate}
+		\item $f(x) = \cos x$ around $0$.
+		\item $f(x) = \cos x$ around $2 \pi$.
+		\item $f(x) = e^x$ around $0$.
+		\item $f(x) = e^{-x}$ around $0$.
+		\item $f(x) = \ln (1 + x)$ around $0$.
+	\end{enumerate}
+\end{question}
+
+\begin{solution}
+	\begin{enumerate}[leftmargin = *]
+		\item
+			\begin{align*}
+				\dod{\cos x}{x} &= -\sin x\\
+				\dod[2]{\cos x}{x} &= -\cos x\\
+				\dod[3]{\cos x}{x} &= \sin x\\
+				\dod[4]{\cos x}{x} &= \cos x\\
+				&\vdots
+			\end{align*}
+			Therefore, the Taylor series of $\cos x$ around $0$ is
+			\begin{align*}
+				f(x) &= \frac{\cos 0}{0!} x^0 + \frac{-\sin 0}{1!} x^1 + \dots\\
+				&= x^0 - \frac{x^2}{2!} + \dots\\
+				&= \sum\limits_{n = 0}^{\infty} \frac{(-1)^n x^{2 n}}{(2 n)!}
+			\end{align*}
+		\item
+			\begin{align*}
+				\dod{\cos x}{x} &= -\sin x\\
+				\dod[2]{\cos x}{x} &= -\cos x\\
+				\dod[3]{\cos x}{x} &= \sin x\\
+				\dod[4]{\cos x}{x} &= \cos x\\
+				&\vdots
+			\end{align*}
+			Therefore, the Taylor series of $\cos x$ around $0$ is
+			\begin{align*}
+				f(x) &= \frac{\cos 2 \pi}{0!} (x - 2 \pi)^0 + \frac{-\sin 2 \pi}{1!} (x - 2 \pi)^1 + \dots\\
+				&= (x - 2 \pi)^0 - \frac{(x - 2 \pi)^2}{2!} + \dots\\
+				&= \sum\limits_{n = 0}^{\infty} \frac{(-1)^n (x - 2 \pi)^{2 n}}{(2 n)!}
+			\end{align*}
+		\item
+			\begin{align*}
+				\dod{e^x}{x} &= e^x\\
+				\dod[2]{e^x}{x} &= e^x\\
+				\dod[3]{e^x}{x} &= e^x\\
+				\dod[4]{e^x}{x} &= e^x\\
+				&\vdots
+			\end{align*}
+			Therefore, the Taylor series of $e^x$ around $0$ is
+			\begin{align*}
+				f(x) &= \sum\limits_{n = 0}^{\infty} \frac{e^0}{n!} (x - 0)^n\\
+				&= \sum\limits_{n = 0}^{\infty} \frac{x^n}{n!}
+			\end{align*}
+		\item
+			\begin{align*}
+				\dod{e^{-x}}{x} &= -e^x\\
+				\dod[2]{e^{-x}}{x} &= e^x\\
+				\dod[3]{e^{-x}}{x} &= -e^x\\
+				\dod[4]{e^{-x}}{x} &= e^x\\
+				&\vdots
+			\end{align*}
+			Therefore, the Taylor series of $e^x$ around $0$ is
+			\begin{align*}
+				f(x) &= \sum\limits_{n = 0}^{\infty} \frac{(-1)^n e^0}{n!} (x - 0)^n\\
+				&= \sum\limits_{n = 0}^{\infty} \frac{(-1)^n x^n}{n!}
+			\end{align*}
+		\item
+			\begin{align*}
+				\dod{\ln (1 + x)}{x} &= \frac{1}{1 + x}\\
+				\dod[2]{\ln (1 + x)}{x} &= -\frac{1}{(1 + x)^2}\\
+				\dod[3]{\ln (1 + x)}{x} &= \frac{2}{(1 + x)^3}\\
+				\dod[4]{\ln (1 + x)}{x} &= -\frac{6}{(1 + x)^4}\\
+				\dod[5]{\ln (1 + x)}{x} &= \frac{24}{(1 + x)^5}\\
+				&\vdots
+			\end{align*}
+			Therefore, the Taylor series of $\ln (1 + x)$ around $0$ is
+			\begin{align*}
+				f(x) &= \ln (1 + 0) + \sum\limits_{n = 0}^{\infty} \frac{\frac{(-1)^n n!}{1 + 0}}{n!} (x - 0)^n\\
+				&= \ln 1 + \sum\limits_{n = 0}^{\infty} (-1)^n x^n\\
+				&= \sum\limits_{n = 0}^{\infty} (-x)^n
+			\end{align*}
+	\end{enumerate}
+\end{solution}
+
+\end{document}
