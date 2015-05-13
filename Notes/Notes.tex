@@ -6,7 +6,7 @@
 \usepackage{commath} %differential symbols
 \usepackage{xcolor} %colours
 \usepackage{cancel} %cancelling terms
-\usepackage{siunitx} %formatting units
+\usepackage[free-standing-units]{siunitx} %formatting units
 \usepackage{tikz, pgfplots} %diagrams
 	\usetikzlibrary{calc, hobby, patterns, intersections}
 \usepackage{graphicx} %inserting graphics
@@ -1158,7 +1158,7 @@ Thomas and Finney, \textit{Calculus and Analytic Geometry}, 9th edition, Addison
 		&= \infty
 	\end{align*}
 	Therefore, the series does not converge uniformly on $(-1,1)$.
-\end{solution}<++>
+\end{solution}
 
 \begin{question}
 	Show that the series $f(x) = \sum\limits_{k = 1}^{\infty} x^{k - 1} = \frac{1}{1 - k}$  does not converge uniformly on $\left( -\frac{1}{2} , \frac{1}{2} \right)$.
@@ -1210,13 +1210,13 @@ Thomas and Finney, \textit{Calculus and Analytic Geometry}, 9th edition, Addison
 \begin{theorem}[Changing the order of integration and infinite summation]
 	If the functions $u_k(x)$, $k \in \{1, 2, 3, \dots\}$ are integrable on $[a,b]$ and the series $\sum\limits_{k = 1}^{\infty} u_k(x)$ converges uniformly on $[a,b]$ then
 	\begin{equation*}
-		\int]limits_{a}^{b} \left( \sum\limits_{k = 1}^{\infty} u_k(x) \right) \dif x = \sum\limits_{k = 1}^{\infty} \int\limits_{a}^{b} u_k(x) \dif x
+		\int\limits_{a}^{b} \left( \sum\limits_{k = 1}^{\infty} u_k(x) \right) \dif x = \sum\limits_{k = 1}^{\infty} \int\limits_{a}^{b} u_k(x) \dif x
 	\end{equation*}
 \end{theorem}
 
 \begin{question}
 	Solve $\int\limits_{0}^{2 \pi} \left( \sum\limits_{k = 1}^{\infty} \frac{1}{k^2} \sin(k x) \right)$.
-\end{question}<++>
+\end{question}
 
 \begin{solution}
 	The series $f(x) = \sum\limits_{k = 1}^{\infty} \frac{1}{k^2} \sin(k x)$ converges uniformly on $[0, 2 \pi]$.
@@ -1230,5 +1230,458 @@ Thomas and Finney, \textit{Calculus and Analytic Geometry}, 9th edition, Addison
 		&= 0
 	\end{align*}
 \end{solution}
+
+\begin{theorem}[Changing the order of differentiation and infinite summation]
+	If the functions $u_k(x)$, $k \in \{1, 2, 3, \dots\}$ are differentiable on $[a,b]$ and the derivatives are continuous on $[a,b]$, and the series $\sum\limits_{k = 1}^{\infty} u_k(x)$ converges pointwise on $[a,b]$ and the series $\sum\limits_{k = 1}^{\infty} {u_k}'(x)$ converges uniformly on $[a,b]$, then,
+	\begin{equation*}
+		\left( \sum\limits_{k = 1}^{\infty} u_k(x) \right)' = \sum\limits_{k = 1}^{\infty} {u_k}'(x)
+	\end{equation*}
+\end{theorem}
+
+\begin{theorem}[Changing the order of integration and limit]
+	If the functions $f_n(x)$ are integrable on $[a,b]$ and converge uniformly to $f$ on $[a,b]$, then
+	\begin{equation*}
+		\lim\limits_{n \to \infty} \int\limits_{a}^{b} f_n(x) \dif x = \int\limits_{a}^{b} \lim\limits_{n \to \infty} f_n(x) \dif x = \int\limits_{a}^{b} f(x) \dif x
+	\end{equation*}
+\end{theorem}
+
+\begin{theorem}[Changing the order of differentiation and limit]
+	If there exists the functions ${f_n}'(x)$ which are continuous on $[a,b]$, for the functions $f_n(x)$ which $\forall x \in [a,b]$, converge pointwise to $f(x)$ on $[a,b]$, and if ${f_n}'(x)$ converges uniformly to $g(x)$ on $[a,b]$, then,
+	\begin{equation*}
+		f'(x) = \left( \lim\limits_{n \to \infty} f_n(x) \right)' = \lim\limits_{n \to \infty} {f_n}'(x) = g(x) 
+	\end{equation*}
+\end{theorem}
+
+\newpage
+\part{Functions of Multiple Variables}
+
+\section{Limits, Continuity, and Differentiability}
+
+\begin{definition}[Limit of a function of two variables]
+	Let $z = f(x,y)$ be defined on some open neighbourhood about $(a,b)$, except maybe at the point itself.
+	$L \in \mathbb{R}$ is said to be a limit of $f(x,y)$ at $(a,b)$, if $\forall \varepsilon > 0$, $\exists d > 0$, such that $0 < \sqrt{(x - a)^2 + (y - b)^2} < \delta$, then,
+	\begin{equation*}
+		|f(x,y) - L| < \varepsilon
+	\end{equation*}
+\end{definition}
+
+\begin{question}
+	Does the limit $\lim\limits_{(x,y) \to (0,0)} \frac{3 x^2 y}{x^2 + y^2}$ exist?
+\end{question}
+
+\begin{solution}
+	Consider the curves $C_1 : y = 0$, and $C_2 : y = x^3$.\\
+	Therefore, as $(x,y) \to (0,0)$ along these curves, the limit of the function is
+	\begin{align*}
+		\lim\limits_{(x,y) \xrightarrow{C_1} (0,0)} \frac{3 x^2 y}{x^2 + y^2} & = \lim\limits_{x \to 0} \frac{3 x^2 \cdot 0}{x^2 + y^2} \\
+                                                                                      & = 0
+	\end{align*}
+	\begin{align*}
+		\lim\limits_{(x,y) \xrightarrow{C_2} (0,0)} \frac{3 x^2 y}{x^2 + y^2} & = \lim\limits_{x \to 0} \frac{3 x^2 (x^3)}{x^2 + (x^3)^2} \\
+                                                                                      & = \lim\limits_{x \to 0} \frac{3 x^5}{x^2 + x^6}           \\
+                                                                                      & = \lim\limits_{x \to 0} \frac{3 x^3}{x^2 + x^4}           \\
+                                                                                      & = 0
+	\end{align*}
+	If $\lim\limits_{(x,y) \to (0,0)} \frac{3 x^2 y}{x^2 + y^2} = 0$, $\forall \varepsilon > 0$, $\exists \delta > 0$ such that $0 < \sqrt{x^2 + y^2} < \delta$, then,
+	\begin{align*}
+		|f(x,y) - L| & < \varepsilon
+	\end{align*}
+	Therefore, checking $|f(x,y) - L|$,
+	\begin{align*}
+		\left| f(x,y) - L \right|            & = \left| \frac{3 x^2 y}{x^2 + y^2} - 0 \right| \\
+                                                     & = \frac{3 x^2 |y|}{x^2 + y^2}                  \\
+		\intertext{As $\frac{x^2}{x^2 + y^2} \le 1$,}
+		\left| f(x,y) - L \right|            & \le 3 |y|                                      \\
+		\therefore \left| f(x,y) - L \right| & \le 3 \sqrt{y^2}                               \\
+		\therefore \left| f(x,y) - L \right| & \le 3 \sqrt{x^2 + y^2}
+	\end{align*}
+	Therefore, $|f(x,y) - L| < \varepsilon$.\\
+	Therefore, for $\delta \le \frac{\varepsilon}{3}$, the condition is satisfied.\\
+	Hence, the limit of the function exists and is $0$.
+\end{solution}
+
+\begin{definition}[Iterative limits]
+	The limits $\lim\limits_{x \to a} \left( \lim\limits_{y \to b} f(x,y) \right)$ and $\lim\limits_{y \to b} \left( \lim\limits_{x \to a} f(x,y) \right)$ are called the iterative limits of $f(x,y)$.
+\end{definition}
+
+\begin{theorem}
+	If $\exists \lim\limits_{(x,y) \to (a,b)} f(x,y) = L$ and, for some open interval about $b$, $\forall y \neq b$, $\exists \lim\limits_{x \to a} f(x,y)$ then 
+	\begin{equation*}
+		\lim\limits_{y \to b} \left( \lim\limits_{x \to a} f(x,y) \right) = L
+	\end{equation*}
+	If $\exists \lim\limits_{(x,y) \to (a,b)} f(x,y) = L$ and, for some open interval about $a$, $\forall x \neq a$, $\exists \lim\limits_{y \to b} f(x,y)$ then 
+	\begin{equation*}
+		\lim\limits_{x \to a} \left( \lim\limits_{y \to b} f(x,y) \right) = L
+	\end{equation*}
+\end{theorem}
+
+\begin{question}
+	Do the iterative limits, as $x \to 0$, and as $y \to 0$, of the function
+	\begin{equation*}
+		f(x,y) = 
+			\begin{cases}
+				(x + y) \sin \frac{1}{x + y} & ;\quad x \neq 0, y \neq 0 \\
+				0                            & ;\quad \text{Otherwise}   \\
+			\end{cases}
+	\end{equation*}
+	exists?
+	Does the limit of the function at $(0,0)$ exist?
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		\lim\limits_{x \to 0} f(x,y) & = \lim\limits_{x \to 0} (x + y) \sin \frac{1}{x + y} \\
+                                             & = \lim\limits_{x \to 0} y \sin \frac{1}{x + y}
+	\end{align*}
+	Therefore, as $\sin \frac{1}{x + y}$ oscillates between $-1$ and $1$, the limits does not exist.
+	\begin{align*}
+		\lim\limits_{y \to 0} f(x,y) & = \lim\limits_{y \to 0} (x + y) \sin \frac{1}{x + y} \\
+                                             & = \lim\limits_{y \to 0} x \sin \frac{1}{x + y}
+	\end{align*}
+	Therefore, as $\sin \frac{1}{x + y}$ oscillates between $-1$ and $1$, the limits does not exists.\\
+	Therefore, the iterative limits do not exist.
+	\begin{align*}
+		|f(x,y) - 0|            & = |x + y| \cdot \left| \sin \frac{1}{x y} \right| \\
+		\therefore |f(x,y) - 0| & \le |x| + |y|                                     \\
+		\therefore |f(x,y) - 0| & \le \sqrt{2} \sqrt{x^2 + y^2}
+	\end{align*}
+	Therefore, for $\delta \le \frac{\varepsilon}{\sqrt{2}}$, the condition is satisfied.\\
+	Hence, the limit of the function exists and is $0$.\\
+	Therefore, even though the iterative limits do not exist, the limit of the function exists.
+\end{solution}
+
+\begin{definition}[Differential]
+	\begin{equation*}
+		\Delta z = f(a + \Delta x, b + \Delta y) - f(a, b)
+	\end{equation*}
+	\begin{equation*}
+		\dif z = f_x(a,b) \dif x + f_y(a,b) \dif y
+	\end{equation*}
+\end{definition}
+
+\begin{definition}[Differentiability]
+	The function $x = f(x,y)$ is said to be differentiable at $(a,b)$ if
+	\begin{equation*}
+		\Delta z = \dif z + \varepsilon_1(\Delta x, \Delta y) \Delta x + \varepsilon_2(\Delta x, \Delta y) \Delta y
+	\end{equation*}
+	where
+	\begin{equation*}
+		\lim\limits_{(\Delta x, \Delta y) \to (0,0)} \varepsilon_1(\Delta x, \Delta y) = \lim\limits_{(\Delta x, \Delta y) \to (0,0)} \varepsilon_2(\Delta x, \Delta y) = 0
+	\end{equation*}
+\end{definition}
+
+\begin{theorem}
+	If $f(x,y)$ is differentiable at $(a,b)$ then $f(x,y)$ is continuous at $(a,b)$.
+\end{theorem}
+
+\begin{theorem}
+	If $\exists f_x(a,b)$ and $\exists f_y(a,b)$ on some open neighbourhood of $(a,b)$ and are continuous at $(a,b)$, then $f(x,y)$ is differentiable at $(a,b)$.
+\end{theorem}
+
+\section{Directional Derivatives and Gradients}
+
+\begin{definition}[Directional derivative]
+	Let $x_0 \in \mathbb{R}$, $y_0 \in \mathbb{R}$.\\
+	Let $\hat{u} = (a,b)$ be a unit vector in the $x y$-plane.\\
+	The directional derivative of $z = f(x,y)$ with respect to the direction $\hat{u} = (a,b)$ at the point $(x_0,y_0$ is defined as
+	\begin{equation*}
+		D_{\hat{u}} f(x_0,y_0) = \lim\limits_{h \to 0} \frac{f(x_0 + a h, y_0 + b h) - f(x_0, y_0)}{h}
+	\end{equation*}
+	If the limit does not exist, the directional derivative does not exist.\\
+	~\\
+	Geometrically the directional derivative of $z = f(x,y)$ is the slope of the tangent of the curve formed due to the intersection of the curve $z = f(x,y)$, and the plane which passes through $(x_0,y_0)$ in the direction of $\hat{u}$ and is perpendicular to the $x y$-plane.
+\end{definition}
+
+\begin{definition}[Gradient]
+	If the functions $f_x(x,y)$ and $f_y(x,y)$ for $z = f(x,y)$ exist, then the vector function
+	\begin{equation*}
+		\nabla f(x,y) = \left( f_x(x,y) , f_y(x,y) \right)
+	\end{equation*}
+	is called the gradient of $f(x,y)$.
+\end{definition}
+
+\begin{theorem}
+	Let $z = f(x,y)$ be differential at $(x_0, y_0)$.
+	The function $f(x,y)$ has a directional derivative with respect to any direction $\hat{u} = (a,b)$ at $(x_0, y_0)$ and
+	\begin{equation*}
+		D_{\hat{u}} f(x_0, y_0) = f_x(x_0, y_0) a + f_y(x_0, y_0) b = \nabla f(x_0, y_0) \cdot \hat{u}
+	\end{equation*}
+\end{theorem}
+
+\begin{question}
+	Find the directional derivative of
+	\begin{align*}
+		f(x,y) & = x^3 + 4 x y + y^4
+	\end{align*}
+	with respect to the direction of $\overline{u} = (1,2)$ at any point $(x,y)$ and at $(0,1)$.
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		f(x,y) & = x^3 + 4 x y + y^4
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		f_x(x,y) & = 3 x^2 + 4 y \\
+		f_y(x,y) & = 4 x + 4 y^3
+	\end{align*}
+	\begin{align*}
+		\hat{u} & = \frac{\overline{u}}{u} \\
+                        & = \frac{(1,2)}{\sqrt{5}} \\
+                        & = \left( \frac{1}{\sqrt{5}} , \frac{2}{\sqrt{5}} \right)
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		D_{\hat{u}} f(x,y) & = \frac{1}{\sqrt{5}} (3 x^2 + 4 y) + \frac{2}{\sqrt{5}} (4 x + 4 y^2)
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		D_{\hat{u}} f(0,1) & = \frac{4}{\sqrt{5}} + \frac{8}{\sqrt{5}} \\
+                                   & = \frac{12}{\sqrt{5}}
+	\end{align*}
+\end{solution}
+
+\begin{theorem}
+	If $z = f(x,y)$ is differentiable at $(x_0,y_0)$, then $\exists \hat{u_0} = (a_0, b_0)$ such that
+	\begin{equation*}
+		\max\limits_{\hat{u} \in \mathbb{R}} D_{\hat{u}} f(x_0, y_0) = D_{\hat{u_0}} f(x_0, y_0) = \left| \nabla f(x_0, y_0) \right|
+	\end{equation*}
+	and
+	\begin{equation*}
+		\hat{u_0} = \frac{\nabla f(x_0, y_0)}{\left| \nabla f(x_0, y_0) \right|}
+	\end{equation*}
+\end{theorem}
+
+\begin{proof}
+	\begin{align*}
+		\max\limits_{\hat{u} \in \mathbb{R}} D_{\hat{u}} f(x_0, y_0) & = \max\limits_{\hat{u} \in \mathbb{R}} \nabla f(x_0, y_0) \cdot \hat{u}                                                   \\
+                                                                             & = \max\limits_{\hat{u} \in \mathbb{R}} \left| \nabla f(x_0, y_0) \right| \cancelto{1}{\left| \hat{u} \right|} \cos \theta \\
+                                                                             & = \left| \nabla f(x_0, y_0) \right| \max\limits_{\hat{u} \in \mathbb{R}} \cos \theta                                      \\
+                                                                             & = \left| \nabla f(x_0, y_0) \right|
+	\end{align*}
+\end{proof}
+
+\begin{theorem}
+	If $z = f(x,y)$ is differentiable at $(x_0,y_0)$, then $\exists \hat{u_1} = (a_0, b_0)$ such that
+	\begin{equation*}
+		\min\limits_{\hat{u} \in \mathbb{R}} D_{\hat{u}} f(x_0, y_0) = D_{\hat{u_1}} f(x_0, y_0) = -\left| \nabla f(x_0, y_0) \right|
+	\end{equation*}
+	and
+	\begin{equation*}
+		\hat{u_1} = -\frac{\nabla f(x_0, y_0)}{\left| \nabla f(x_0, y_0) \right|}
+	\end{equation*}
+\end{theorem}
+
+\begin{proof}
+	\begin{align*}
+		\min\limits_{\hat{u} \in \mathbb{R}} D_{\hat{u}} f(x_0, y_0) & = \min\limits_{\hat{u} \in \mathbb{R}} \nabla f(x_0, y_0) \cdot \hat{u}                                                   \\
+                                                                             & = \min\limits_{\hat{u} \in \mathbb{R}} \left| \nabla f(x_0, y_0) \right| \cancelto{1}{\left| \hat{u} \right|} \cos \theta \\
+                                                                             & = \left| \nabla f(x_0, y_0) \right| \min\limits_{\hat{u} \in \mathbb{R}} \cos \theta                                      \\
+                                                                             & = -\left| \nabla f(x_0, y_0) \right|
+	\end{align*}
+\end{proof}
+
+\section{Local Extrema}
+
+\begin{theorem}[A necessary condition for local extrema existence]
+	If the function $z = f(x, y)$ has a local extrema at the point $(a, b)$ and $\exists f_x (a, b)$ and $\exists f_y (a, b)$ then $f_x (a, b) = f_y (a, b) = 0$
+\end{theorem}
+
+\begin{example}
+	\begin{equation*}
+		z = x^2 + y^2
+	\end{equation*}
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		f(x, y) \geq f(0, 0)
+	\end{align*}
+	Therefore, $(0,0)$ is a point of local minimum.
+	\begin{align*}
+		f_x & = 2x \\
+		f_y & = 2y
+	\end{align*}
+	Therefore,
+	\begin{equation*}
+		f_x(0,0) = f_y(0,0) = 0
+	\end{equation*}
+\end{solution}
+
+\begin{example}
+	\begin{equation*}
+		z = \sqrt{x^2 + y^2}
+	\end{equation*}
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		\lim\limits_{\Delta x \to 0} \dfrac{f(0 + \Delta x, 0) - f(0, 0)}{\Delta x} & = \lim\limits_{\Delta x \to 0} \dfrac{\sqrt{(\Delta x)^2}}{\Delta x} \\
+                                                                                            & = \pm 1
+	\end{align*}
+	Therefore, the limit does not exist.
+\end{solution}
+
+\begin{definition}[Critical point]
+	Let the function $z = f(x, y)$ be defined on some open neighbourhood of $(a, b)$. The point $(a, b)$ is called a critical point of $z = f(x, y)$ if $f_x(a, b) = f_y(a, b) = 0$ or at least one of the partial derivative $f_x(a, b)$ and $f_y(a, b)$ does not exist.
+\end{definition}
+
+\begin{example}
+	Is $(0,0)$ an local extremum point of
+	\begin{equation*}
+		z = f(x, y) = y^2 - z^2
+	\end{equation*}
+	?
+\end{example}
+\begin{solution}
+	\begin{align*}
+		f_x(0,0) & = 0 \\
+		f_y(0,0) & = 0
+	\end{align*}
+	Therefore, $(0,0)$ is a critical point.\\
+	If possible let $(0,0)$ be a local minimum point.\\
+	Then, $f(x,y) \geq f(0,0)$ in some neighbourhood of $(0,0)$.\\
+	Therefore,
+	\begin{align*}
+		y^2 - x^2 & \geq 0
+	\end{align*}
+	For any point of the form $(x, 0)$, this is a contradiction.\\
+	Therefore $(0,0)$ is not a local minimum point.\\
+	Similarly, $(0,0)$ is not a local maximum point.
+\end{solution}
+
+\begin{theorem}[A sufficient condition for local extrema point]
+	Assume that there exist second order partial derivates of $z = f(x,y)$, they are continuous on some open neighbourhood of $(a,b)$ and $f_x(a,b) =f_y(a,b) = 0$. Denote 
+	\begin{equation*}
+		D(a, b) = f_{xx}(a,b) f_{yy}(a,b) - \left( f_{xy}(a,b) \right)^2
+	\end{equation*}
+	\begin{enumerate}
+		\item If $D(a,b) > 0$ and $f_{xx} < 0$ then $(a,b)$ is a local maximum point.
+		\item If $D(a,b) > 0$ and $f_{xx} > 0$ then $(a,b)$ is a local minimum point.
+		\item If $D(a,b) < 0$ then $(a,b)$ is called a saddle point.
+	\end{enumerate}
+\end{theorem}
+
+\begin{example}
+	Find all critical points of 
+	\begin{equation*}
+		z = f(x,y) = x^4 + y^4 - 4xy + 1
+	\end{equation*}
+	and classify them.
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		f_x(x,y) & = 4x^3 - 4y \\
+		f_y(x,y) & = 4y^3 - 4x
+	\end{align*}
+	For critical points,
+	\begin{align*}
+		f_x(x,y) & = 0 \\
+		f_y(x,y) & = 0
+	\end{align*}
+	Solving, $(0,0)$, $(1,1)$, $(-1,-1)$ are critical points.
+	\begin{align*}
+		f_{xx}(x,y)       & = 12x^2 \\
+		f_{xy}(x,y)       & = -4    \\
+		f_{yy}(x,y)       & = 12y^2 \\
+		\therefore D(x,y) & = 144 x^2 y^2 - 16
+	\end{align*}
+	For $(0,0)$,
+	\begin{align*}
+		D & = -16
+	\end{align*}
+	Therefore, $(0,0)$ is a saddle point.\\
+	For $(1,1)$,
+	\begin{align*}
+		D & = 144-16
+	\end{align*}
+	Therefore, $(1,1)$ is a local minimum point.\\
+	For $(-1,-1)$,
+	\begin{align*}
+		D & = 144-16
+	\end{align*}
+	Therefore, $(-1,-1)$ is a local minimum point.\\
+\end{solution}
+
+\section{Global Extrema}
+
+\subsection{Algorithm for Finding Maxima and Minima of a Function}
+
+\begin{enumerate}[label = Step \arabic*]
+	\item Find all critical points of $f(x,y)$ on the domain, excluding the end points. \label{Step 1}
+	\item Calculate the values of $f(x,y)$ at the critical points. \label{Step 2}
+	\item Calculate the values of $f(x,y)$ at the end points of the domain. \label{Step 3}
+	\item Select the maximum and minimum values from \ref{Step 2} and \ref{Step 3}
+\end{enumerate}
+
+\begin{example}
+	Find the global maxima and minima of
+	\begin{equation*}
+		z = x^2 - 2xy + 2y
+	\end{equation*}
+	in the domain
+	\begin{equation*}
+		D = 
+		\left\lbrace
+			(x,y) \left| 0 \leq x \leq 3, 0 \leq y \leq -\dfrac{2}{3} x + 2 \right.
+		\right\rbrace
+	\end{equation*}
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		f_x(x,y)           & = 0 \\
+		\therefore 2x - 2y & = 0 \\
+		f_y(x,y)           & = 0 \\
+		\therefore -2x + 2 & = 0
+	\end{align*}
+	Therefore, $(1,1)$ is a critical point in $D$.\\
+	The boundary of $D$ is $L_1 \cup L_2 \cup L_3$, where
+	\begin{align*}
+		L_1 &: y = 0, 0 \leq x \leq 3\\
+		L_2 &: x = 0, 0 \leq y \leq 2\\
+		L_3 &:
+	\end{align*}
+	Therefore,\\
+	over $L_1$,
+	\begin{align*}
+		f(x,y) &= x^2\\
+		\therefore \min_{L_1} f & = f(0,0) = 0 \\
+		\therefore \max_{L_1} f & = f(3,0) = 9
+	\end{align*}
+		over $L_2$,
+	\begin{align*}
+		f(x,y) &= 2y\\
+		\therefore \min_{L_2} f & = f(0,0) = 0 \\
+		\therefore \max_{L_2} f & = f(0,2) = 4
+	\end{align*}
+		over $L_3$,
+	\begin{align*}
+		f(x,y)                                                & = x^2 - 2x \left(-\dfrac{2}{3} x + 2\right) + 2 \left(-\dfrac{2}{3} x + 2\right) \\
+                                                                      & = \dfrac{7}{3} x^2 - \dfrac{16}{3} x + 4                                         \\
+		\therefore f'                                         & = \dfrac{14}{3} x - \dfrac{16}{3}                                                \\
+		\therefore f'\left(\dfrac{8}{7}\right)                & = 0                                                                              \\
+		\therefore f\left(\dfrac{8}{7}, \dfrac{26}{21}\right) & = 0.952                                                                          \\
+		\therefore \min_{L_3} f                               & = f\left(\dfrac{8}{7}, \dfrac{26}{21}\right) = 0.952                             \\
+		\therefore \max_{L_3} f                               & = f(3,0) = 9
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\therefore \min_{D} f &= f(0,0) = 0\\
+		\therefore \max_{D} f &= f(3,0) = 9
+	\end{align*}
+\end{solution}
+
+\section{Taylor's Formula}
+
+\begin{theorem}
+	\begin{align*}
+		f(a + h, b + k) & = \quad \sum\limits_{i = 0}^{n} \left( \frac{1}{i!} \left( h \dpd{}{x} + k \dpd{}{y} \right)^i f(a,b) \right) \\
+                                & \quad+ \frac{1}{(n + 1)!} \left( h \dpd{}{x} + k \dpd{}{y} \right)^{n + 1} f(a + c h, b + c k)
+	\end{align*}
+	where $0 < c < 1$.
+	\label{Taylor's_Formula_for_2_variables}
+\end{theorem}
 
 \end{document}
