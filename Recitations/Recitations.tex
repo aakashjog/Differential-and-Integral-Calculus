@@ -1285,4 +1285,180 @@ E-mail: \href{mailto:micbromberg@gmail.com}{micbromberg@gmail.com}\\
 	Therefore as the general element does not tend to $0$, the series does not converge uniformly in $(0,\infty)$.
 \end{solution}
 
+\recitation
+
+\subsection{Weierstrass M-test}
+
+\begin{theorem}[Weierstrass M-test]
+	If $|u_k(x)| \le c_k$ on $D$ for $k \in \{ 1, 2, 3, \dots \}$ and the numerical series $\sum\limits_{k = 1}^{\infty} c_k$ converges, then the series of functions $\sum\limits_{k = 1}^{\infty} u_k(x)$ converges uniformly on $D$.
+	\label{Weierstrass_M-test}
+\end{theorem}
+
+\begin{question}
+	Show that $\sum\limits_{n = 1}^{\infty} \sin \left( \frac{x}{n^2} \right)$ converges uniformly in $[0,1]$.
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		\left| \sin \frac{x}{n^2} \right|            & \le \left| \frac{x}{n^2} \right| \\
+		\therefore \left| \sin \frac{x}{n^2} \right| & \le \frac{1}{n^2}
+	\end{align*}
+	Therefore, as $\sum \frac{1}{n^2}$ converges in $[0,1]$, by \nameref{Weierstrass_M-test}, the series converges uniformly in $[0,1]$.
+\end{solution}
+
+\begin{question}
+	Does $\sum \frac{(-1)^n}{x + n}$ converge on $[0,1]$?
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		\max\limits_{[0,1]} |f_n| & = \max\limits_{[0,1]} \frac{1}{x + n} \\
+                                          & = \frac{1}{n}
+	\end{align*}
+	Therefore, as $\sum \frac{1}{n}$ diverges, the \nameref{Weierstrass_M-test} does not apply.\\
+	However, $\forall x \in [0,1]$, $\sum \frac{(-1)^n}{x + n}$ is a Leibniz series.
+	For a Leibniz series, the uniform convergence of the general term to $0$ is a necessary and sufficient condition for the convergence of the series.\\
+	Therefore, in $[0,1]$,
+	\begin{align*}
+		\lim\limits_{n \to \infty} \frac{1}{x + n} & = 0
+	\end{align*}
+	Therefore, as the general term goes to $0$, the series converges.
+\end{solution}
+
+\begin{question}
+	Does $\sum \frac{n^2 x}{1 + n^7 x^2}$ converge uniformly in $\mathbb{R}$?
+\end{question}
+
+\begin{solution}
+	As the function is even,
+	\begin{align*}
+		\sup\limits_{\mathbb{R}} \left| \frac{n^2 x}{1 + n^7 x^2} \right| & = \sup\limits{[0,\infty)} \left| \frac{n^2 x}{1 + n^7 x^2} \right| \\
+		\sup\limits_{[0,\infty)} \frac{n^2 x}{1 + n^7 x^2}
+	\end{align*}
+	Let
+	\begin{align*}
+		f_n(x) & = \frac{n^2 x}{1 + n^7 x^2}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		{f_n}'(x) & =\frac{n^2 (1 + n^7 x^2) - n^9 \cdot 2 x^2}{(1 + n^7 x^2)^2}
+	\end{align*}
+	Therefore, maximizing $f_n(x)$,
+	\begin{align*}
+		{f_n}'(x)                                & = 0 \\
+		\iff n^2 (1 + n^7 x^2 - n^7 \cdot 2 x^2) & = 0 \\
+		\iff 1 - n^7 x^2                         & = 0 \\
+		\iff x                                   & = \sqrt{\frac{1}{n^7}}
+	\end{align*}
+	Therefore, as ${f_n}'(x) \ge 0 \iff x \in \left[ 0 , \sqrt{\frac{1}{n^7}} \right]$ and ${f_n}'(x) \le 0 \iff x \in \left[ \sqrt{\frac{1}{n^7}} , \infty \right)$, $x = \sqrt{\frac{1}{n^7}}$ is a global maximum of $f_n$ in $[0,\infty)$.\\
+	Therefore,
+	\begin{align*}
+		\sup\limits_{\mathbb{R}} \left| \frac{n^2 x}{1 + n^7 x^2} \right| & = \frac{n^2 \sqrt{\frac{1}{n^7}}}{1 + 1} \\
+                                                                                  & = \frac{n^2}{2 n^{\frac{7}{2}}}          \\
+                                                                                  & = \frac{1}{2 n^{\frac{3}{2}}}
+	\end{align*}
+	Therefore, as $\sum \frac{1}{2 n^{\frac{3}{2}}}$ converges, by the \nameref{Weierstrass_M-test}, $\sum \frac{n^2 x}{1 + n^7 x^2}$ converges uniformly in $\mathbb{R}$.
+\end{solution}
+
+\subsection{Application of Uniform Convergence}
+
+\begin{theorem}[Changing the order of integration and infinite summation]
+	If the functions $u_k(x)$, $k \in \{1, 2, 3, \dots\}$ are integrable on $[a,b]$ and the series $\sum\limits_{k = 1}^{\infty} u_k(x)$ converges uniformly on $[a,b]$ then
+	\begin{equation*}
+		\int\limits_{a}^{b} \left( \sum\limits_{k = 1}^{\infty} u_k(x) \right) \dif x = \sum\limits_{k = 1}^{\infty} \int\limits_{a}^{b} u_k(x) \dif x
+	\end{equation*}
+	\label{Changing_the_order_of_integration_and_infinite_summation}
+\end{theorem}
+\begin{theorem}[Changing the order of integration and limit]
+	If the functions $f_n(x)$ are integrable on $[a,b]$ and converge uniformly to $f$ on $[a,b]$, then
+	\begin{equation*}
+		\lim\limits_{n \to \infty} \int\limits_{a}^{b} f_n(x) \dif x = \int\limits_{a}^{b} \lim\limits_{n \to \infty} f_n(x) \dif x = \int\limits_{a}^{b} f(x) \dif x
+	\end{equation*}
+	Additionally,
+	\begin{equation*}
+		\int\limits_{a}^{x} f_n(t) \dif t \xrightrightarrows{[a,b]} \int\limits_{a}^{x} f(t) \dif t
+	\end{equation*}
+\end{theorem}
+
+\begin{question}
+	Is $\sum\limits_{n = 1}^{\infty} \int\limits_{0}^{2} \frac{(-1)^{n + 1}}{x + n} = \int\limits_{0}^{2} \sum\limits_{n = 1}^{\infty} \frac{(-1)^{n + 1}}{x + n}$?
+\end{question}
+
+\begin{solution}
+	As $\sum \frac{(-1)^{n + 1}}{x + n}$ converges uniformly in $[0,2]$, by \autoref{Changing_the_order_of_integration_and_infinite_summation}, the equality holds.
+\end{solution}
+
+\begin{question}
+	Is $\int\limits_{0}^{1} \left( \sum\limits_{n = 1}^{\infty} x^{\frac{1}{2 n + 1}} - x^{\frac{1}{2 n - 1}} \right) \dif x = \sum\limits_{n = 1}^{\infty} \int\limits_{0}^{1} \left( x^{\frac{1}{2 n + 1}} - x^{\frac{1}{2 n - 1}} \right) \dif x$?
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		\sum\limits_{n = 1}^{N} x^{\frac{1}{2 n + 1}} - x^{\frac{1}{2 n - 1}}                                           & = -x + \frac{1}{x^{2 N + 1}}                                                 \\
+		\therefore \lim\limits_{n \to\infty} \sum\limits_{n = 1}^{\infty} x^{\frac{1}{2 n + 1}} - x^{\frac{1}{2 n - 1}} & = \sum\limits_{n = 1}^{\infty} x^{\frac{1}{2 n + 1}} - x^{\frac{1}{2 n - 1}} \\
+		\lim\limits_{n \to \infty} -x + \frac{1}{x^{2 N + 1}}
+	\end{align*}
+	Therefore,
+	\begin{equation*}
+		\sum\limits_{n = 1}^{\infty} x^{\frac{1}{2 n + 1}} - x^{\frac{1}{2 n - 1}} = 
+			\begin{cases}
+				1 - x & ;\quad x \in (0,1] \\
+				0     & ;\quad x = 0       \\
+			\end{cases}
+	\end{equation*}
+	Therefore, as the limit function is not continuous but the function $x^{\frac{1}{2 n + 1}} - x^{\frac{1}{2 n - 1}}$ is continuous, the convergence is not uniform.
+	Therefore, \autoref{Changing_the_order_of_integration_and_infinite_summation} is not applicable.\\
+	Therefore, checking directly,
+	\begin{align*}
+		\int\limits_{0}^{1} \left( \sum\limits_{n = 1}^{\infty} x^{\frac{1}{2 n + 1}} - x^{\frac{1}{2 n - 1}} \right) \dif x &= \int\limits_{0}^{1} 1 - x \dif x\\
+		&= \frac{1}{2}
+	\end{align*}
+	\begin{align*}
+		\sum\limits_{n = 1}^{\infty} \int\limits_{0}^{1} \left( x^{\frac{1}{2 n + 1}} - x^{\frac{1}{2 n - 1}} \right) \dif x & = \sum\limits_{n = 1}^{\infty} \left( \left. \frac{x^{\frac{1}{2 n + 1} + 1}}{\frac{1}{2 n + 1} + 1} - \frac{x^{\frac{1}{2 n - 1} + 1}}{\frac{1}{2 n - 1} + 1} \right|_{0}^{1} \right) \\
+                                                                                                                                     & = \sum\limits_{n = 1}^{\infty} \left( \frac{2 n + 1}{2 n + 2} - \frac{2 n - 1}{2 n} \right)                                                                                            \\
+                                                                                                                                     & = \lim\limits_{N \to \infty} \sum\limits_{n = 1}^{N} \frac{2 n + 1}{2 n + 2} - \frac{2 n - 1}{2 n}                                                                                     \\
+                                                                                                                                     & = \lim\limits_{N \to \infty} \frac{2 N + 1}{2 N + 2} - \frac{2 \cdot 1 - 1}{2}                                                                                                         \\
+                                                                                                                                     & = \lim\limits_{N \to \infty} \frac{2 N + 1}{2 N + 2} - \frac{1}{2}                                                                                                                     \\
+                                                                                                                                     & = 1 - \frac{1}{2}                                                                                                                                                                      \\
+                                                                                                                                     & = \frac{1}{2}
+	\end{align*}
+	Therefore, although the convergence is not uniform, the equality holds.
+\end{solution}
+
+\begin{theorem}[Changing the order of differentiation and infinite summation]
+	If the functions $u_k(x)$, $k \in \{1, 2, 3, \dots\}$ are differentiable on $[a,b]$ and the derivatives are continuous on $[a,b]$, and the series $\sum\limits_{k = 1}^{\infty} u_k(x)$ converges pointwise on $[a,b]$ and the series $\sum\limits_{k = 1}^{\infty} {u_k}'(x)$ converges uniformly on $[a,b]$, then,
+	\begin{equation*}
+		\left( \sum\limits_{k = 1}^{\infty} u_k(x) \right)' = \sum\limits_{k = 1}^{\infty} {u_k}'(x)
+	\end{equation*}
+	\label{Changing_the_order_of_differentiation_and_infinite_summation}
+\end{theorem}
+
+\begin{question}
+	If $\sum\limits_{n = 1}^{\infty} \left( \tan^{-1} \frac{x}{n^2} \right)' = \left( \sum\limits_{n = 1}^{\infty} \tan^{-1} \frac{x}{n^2} \right)$?
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		\left( \tan^{-1} \frac{x}{n^2} \right)'            & = \frac{1}{\left( 1 + \left( \frac{x}{n^2} \right)^2 \right) n^2} \\
+                                                                   & = \frac{1}{n^2 + \frac{x^2}{n^2}}                                 \\
+                                                                   & = \frac{n^2}{n^4 + x^2}                                           \\
+		\therefore \left( \tan^{-1} \frac{x}{n^2} \right)' & \le \frac{1}{n^2}
+	\end{align*}
+	Therefore, as $\sum \frac{1}{n^2}$ converges, by the \nameref{Weierstrass_M-test}, $\sum \left( \tan^{-1} \frac{x}{n^2} \right)'$ converges uniformly.\\
+	~\\
+	By Lagrange's Mean Value Theorem, for $c$ between $0$ and $x$,
+	\begin{align*}
+		\frac{\tan^{-1} x - \tan^{-1} 0}{x - 0} & = (\tan^{-1})'(c)   \\
+		\therefore \frac{|\tan^{-1} x|}{|x|}    & = \frac{1}{1 + c^2} \\
+		\therefore |\tan^{-1} x|                & \le 1               \\
+		\therefore |\tan^{-1} x|                & \le |x|
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\left| \tan^{-1} \frac{x}{n^2} \right| & \le \left| \frac{x}{n^2} \right|
+	\end{align*}
+	Therefore, as $\forall x \in \mathbb{R}$ $\sum \frac{x}{n^2}$ converges pointwise, $\sum \tan^{-1} \frac{x}{n^2}$ also converges on $\mathbb{R}$.\\
+	Therefore, by \autoref{Changing_the_order_of_differentiation_and_infinite_summation}, the equality holds.
+\end{solution}
+
 \end{document}
