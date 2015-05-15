@@ -1,0 +1,280 @@
+\documentclass[fleqn, a4paper, 12pt, oneside]{amsart}
+\usepackage{exsheets, tasks}
+\usepackage{amsmath, amssymb, amsthm} %standard AMS packages
+\usepackage{marginnote} %marginnotes
+\usepackage{gensymb} %miscellaneous symbols
+\usepackage{commath} %differential symbols
+\usepackage{xcolor} %colours
+\usepackage{cancel} %cancelling terms
+\usepackage{siunitx} %formatting units
+\usepackage{tikz, pgfplots} %diagrams
+\usetikzlibrary{calc, hobby, patterns, intersections}
+\usepackage{graphicx} %inserting graphics
+\usepackage{hyperref} %hyperlinks
+\usepackage{datetime} %date and time
+\usepackage{ulem} %underline for \emph{}
+\usepackage{xfrac} %inline fractions
+\usepackage{enumerate, enumitem} %numbered lists
+\usepackage{float} %inserting floats
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}} %adds numbers to specific equations in non-numbered list of equations
+
+\newcommand{\AxisRotator}[1][rotate=0]{
+	\tikz [x=0.25cm,y=0.60cm,line width=.2ex,-stealth,#1] \draw (0,0) arc (-150:150:1 and 1);%
+} %rotation symbols on axes
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+
+\newcommand{\curl}{\mathrm{curl\,}}
+
+\makeatletter
+\@addtoreset{section}{part} %resets section numbers in new part
+\makeatother
+
+\renewcommand{\thesubsection}{(\arabic{subsection})}
+\renewcommand{\thesection}{(\arabic{section})}
+
+%section headings on left
+\makeatletter
+\def\specialsection{\@startsection{section}{1}%
+	\z@{\linespacing\@plus\linespacing}{.5\linespacing}%
+	%  {\normalfont\centering}}% DELETED
+	{\normalfont}}% NEW
+\def\section{\@startsection{section}{1}%
+	\z@{.7\linespacing\@plus\linespacing}{.5\linespacing}%
+	%  {\normalfont\scshape\centering}}% DELETED
+	{\normalfont\scshape}}% NEW
+\makeatother
+
+%forces newline after subsection
+\makeatletter
+\def\subsection{\@startsection{subsection}{3}%
+	\z@{.5\linespacing\@plus.7\linespacing}{.1\linespacing}%
+	{\normalfont\itshape}}
+\makeatother
+
+\settasks{counter-format = tsk[1].}
+
+\SetupExSheets{solution/print = true}
+
+%opening
+\title
+{
+	Differential and Integral Calculus\\
+	Assignment 6
+}
+\author
+{
+	Aakash Jog\\
+	ID : 989323563
+}
+\date{\formatdate{14}{5}{2015}}
+
+\begin{document}
+	
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\begin{question}
+	Check the pointwise and uniform convergence of the following sequences of functions in the given domain
+	\begin{enumerate}
+		\item $f_n(x) = \frac{x^n}{3 + 2 x^n}$ in $[0,2]$.
+		\item $f_n(x) = x^{n + 1} e^{-n x}$ in $[0,\pi]$.
+		\item $f_n(x) = \frac{n^n}{n^n x - (n + 1)^n}$.
+		\item 
+			$
+				f_n(x) =
+					\begin{cases}
+						\frac{x + n x + 1}{n} & ;\quad n - 1 < x < n    \\
+						x                     & ;\quad \text{otherwise} \\
+					\end{cases}
+			$
+			in $[0,\infty)$.
+		\item $f_n(x) = n \ln \left( 1 + \frac{1}{n x^2} \right)$ in $[0,2]$.
+		\item $f_n(x) = \frac{n x \sin(n x)}{n + x^4}$ in $[0,1]$.
+	\end{enumerate}
+\end{question}
+
+\begin{solution}
+	\begin{enumerate}[leftmargin = *]
+		\item
+			\begin{align*}
+				\lim\limits_{n \to \infty} \frac{x^n}{3 + 2 x^n} &= \lim\limits_{n \to \infty} \frac{1}{\frac{3}{x^n} + 2}
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				\lim\limits_{n \to \infty} \frac{x^n}{3 + 2 x^n} &=
+					\begin{cases}
+						0           & ;\quad 0 \le x < 1 \\
+						\frac{1}{5} & ;\quad x = 1       \\
+						\frac{1}{2} & ;\quad 1 < x \le 2 \\
+					\end{cases}
+			\end{align*}
+			Therefore, $f_n(x)$ converges pointwise to
+			\begin{align*}
+				f(x) &=
+					\begin{cases}
+						0           & ;\quad 0 \le x < 1 \\
+						\frac{1}{5} & ;\quad x = 1       \\
+						\frac{1}{2} & ;\quad 1 < x \le 2 \\
+					\end{cases}
+			\end{align*}
+			As $f(x)$ is continuous but all $f_n(x)$ are, the convergence is not uniform.
+		\item
+			\begin{align*}
+				\lim\limits_{n \to \infty} x^{n + 1} e^{-n x} &= \lim\limits_{n \to \infty} \frac{x^{n + 1}}{e^{n x}}\\
+				&= \lim\limits_{n \to \infty} \frac{x^{n + 1} \ln x}{x e^{n x}}\\
+				&= \frac{\ln x}{x} \lim\limits_{n \to \infty} \frac{x^{n + 1}}{e^{n x}}\\
+				\therefore \lim\limits_{n \to \infty} x^{n + 1} e^{-n x} &= 0
+			\end{align*}
+			Therefore, $f_n(x)$ converges pointwise to $f(x) = 0$.
+			\begin{align*}
+				\sup\limits_{[0,\pi]} |f_n(x) - f(x)| &= \sup\limits_{[0,\pi]} \left| x^{n + 1} e^{-n x} \right|\\
+				\intertext{As the function is continuous and the interval is closed, by the Weierstrass theorem, the function has a maximum. Therefore,}
+				\sup\limits_{[0,\pi]} |f_n(x) - f(x)| &= \max\limits_{[0,\pi]} \left| x^{n + 1} e^{-n x} \right|
+			\end{align*}
+			Differentiating to find the maximum,
+			\begin{align*}
+				\dod{}{x} \left( x^{n + 1} e^{-n x} \right) &= e^{-n x} x^n (-n x + n + 1)
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				e^{-n x} x^n (-n x + n + 1) &= 0\\
+				\iff x^n (-n x + n + 1) &= 0
+			\end{align*}
+			$\iff$
+			\begin{align*}
+				x &=0 &\text{ or }&& x &= \frac{n + 1}{n}
+			\end{align*}
+			Therefore, the values of the functions at the critical points and the end points are
+			\begin{align*}
+				f_n(0) &= 0\\
+				f_n\left( \frac{n + 1}{n} \right) &= \left( \frac{n + 1}{n} \right)^{n + 1} e^{-n - 1}\\
+				f_n(\pi) &= \pi^{n + 1} e^{-n \pi}
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				\lim\limits_{n \to \infty} \sup\limits_{[0,\pi]} |f_n - f(x)| &= \lim\limits_{[0,\pi]} \max\limits_{[0,\pi]} x^{n + 1} e^{-n x}\\
+				&= \lim\limits_{n \to \infty} \left( 1 + \frac{1}{n} \right)^{n + 1} e^{-n - 1}\\
+				&= 0
+			\end{align*}
+			Therefore, the convergence is uniform.
+		\item
+			\begin{align*}
+				\lim\limits_{n \to \infty} \frac{n^n}{n^n x - (n + 1)^n} &= \lim\limits_{n \to \infty} \frac{1}{x - \left( \frac{n + 1}{n} \right)^n}\\
+				&= \lim\limits_{n \to \infty} \frac{1}{x - \left( 1 + \frac{1}{n} \right)^n}\\
+				&= \frac{1}{x - e}
+			\end{align*}
+			Therefore, as the function $\frac{1}{x - e}$ does not exist for $x = e$, $f_n(x)$ does not converge pointwise.\\
+			Hence there is also no uniform convergence
+		\item
+			\begin{align*}
+				\lim\limits_{n \to \infty} f_n(x) &=
+					\begin{cases}
+						0 &;\quad n - 1 < x < n\\
+						x &;\quad \text{otherwise}\\
+					\end{cases}
+			\end{align*}
+			Therefore, $f_n(x)$ converges pointwise to $f(x) = x$.
+			\begin{align*}
+				\sup\limits_{[0,\infty)} |f_n(x) - f(x)| &=
+					\begin{cases}
+						\frac{x (1 + n) + 1}{n} &;\quad n - 1 < x < n\\
+						x &;\quad \text{otherwise}\\
+					\end{cases}
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				\lim\limits_{n \to \infty} \sup\limits_{[0,\infty)} |f_n(x) - f(x)| &= \infty
+			\end{align*}
+			Therefore, the convergence is not uniform.
+		\item
+			\begin{align*}
+				\lim\limits_{n \to \infty} n \ln \left( 1 + \frac{1}{n x^2} \right) &= \lim\limits_{n \to \infty} \ln \left( 1 + \frac{1}{n x^2} \right)^n\\
+				&= \lim\limits_{n \to \infty} \ln \left( \left( 1 + \frac{1}{n x^2} \right)^{n x^2} \right)^{\frac{1}{x^2}}\\
+				&= \ln e^{\frac{1}{x^2}}\\
+				&= \frac{1}{x^2}
+			\end{align*}
+			Therefore, as the function $\frac{1}{x^2}$ does not exist for $x = 0$, $f_n(x)$ does not converge pointwise.\\
+			Hence there is also no uniform convergence
+		\item
+			\begin{align*}
+				\lim\limits_{n \to \infty} \frac{n x \sin(n x)}{n + x^4} &= \lim\limits_{n \to \infty} \frac{x \sin(n x)}{1 + \frac{x^4}{n}}\\
+				&= \lim\limits_{n \to \infty} x \sin(n x)
+			\end{align*}
+			Therefore, the limit does not exist.\\
+			Hence, $f_n(x)$ does converges neither pointwise nor uniformly.
+	\end{enumerate}
+\end{solution}
+
+\begin{question}
+	Prove or disprove
+	\begin{enumerate}
+		\item
+			Let $\{f_n(x)\}$ be a sequence of functions defined in the interval $[a,b]$.
+			Then $f_n$ converges to the constant zero function $f(x) = 0$ if and only if the sequence $|f_n(x)|$ converges to the constant zero function.
+		\item
+			Let $\sum\limits_{n = 1}^{\infty} a_n$ be a positive convergent series and let $\{f_n(x)\}$ be a sequence of functions defined in the interval $[a,b]$ satisfying $|f_n(x) - f_{n - 1}(x)| \le a_n$ for every $x \in [a,b]$.
+			Then the sequence $f_n$ converges uniformly in $[a,b]$
+			(Hint: Cauchy's criterion for uniform convergence).
+		\item
+			Let $f(x)$ be defined for every $x > 0$ and assume that $\lim\limits_{n \to \infty} f(x) = 0$.
+			For every $x > 0$ define $f_n(x) = f(n x)$.
+			\begin{enumerate}
+				\item $f_n$ converges pointwise in $(0,\infty)$.
+				\item $f_n$ converges uniformly in $(0,\infty)$.
+			\end{enumerate}
+	\end{enumerate}
+\end{question}
+
+\begin{solution}
+	\begin{enumerate}[leftmargin = *]
+		\item
+			$f_n$ converges to $f$ if and only if
+			\begin{align*}
+				\lim\limits_{n \to \infty} \sup\limits_{[a,b]} |f_n(x) - f(x)| &= 0\\
+				\iff \lim\limits_{n \to \infty} \sup\limits_{[a,b]} |f_n(x) - 0| &= 0
+				\iff \lim\limits_{n \to \infty} \sup\limits_{[a,b]} \left| |f_n(x)| - 0 \right| &= 0
+			\end{align*}
+			if and only if $|f_n(x)|$ converges to the constant function $0$.
+			\qed
+		\addtocounter{enumi}{1}
+		\item
+			\begin{align*}
+				\lim\limits_{n \to \infty} f_n(x) &= \lim\limits_{n \to \infty} f(n x)\\
+				&= 0
+			\end{align*}
+			Therefore, $f_n(x)$ converges uniformly to the constant zero function.
+			\begin{align*}
+				\sup\limits_{(0,\infty)} |f_n(x) - f(x)| &= \sup\limits_{(0,\infty)} |0 - 0|\\
+				&= 0
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				\lim\limits_{n \to \infty} \sup\limits_{(0,\infty)} |f_n(x) - f(x)| &= 0
+			\end{align*}
+			Therefore, the convergence is uniform.
+	\end{enumerate}
+\end{solution}
+
+\begin{question}
+	Let $\{f_n\}$ be a sequence of continuous functions that converge uniformly to $f$ in $[a,b]$.
+	Prove that if $x_n \to x_0$ then $f_n(x_n) \to f(x_0)$.
+\end{question}
+
+\begin{solution}
+	As $f_n(x)$ converges uniformly to $f(x)$, it also converges pointwise.\\
+	Therefore,
+	\begin{align*}
+		\lim\limits_{n \to \infty} f_n(x_n) &= f(x_n)\\
+		\therefore \lim\limits_{x_n \to x_0} \lim\limits_{n \to \infty} f_n(x_n) &= \lim\limits_{n \to \infty} f_n(x_0)\\
+		&= f(x_0)
+	\end{align*}
+\end{solution}
+
+\end{document}
