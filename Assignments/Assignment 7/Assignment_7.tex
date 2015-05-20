@@ -1,0 +1,305 @@
+\documentclass[fleqn, a4paper, 11pt, oneside]{amsart}
+\usepackage{exsheets, tasks}
+\usepackage{amsmath, amssymb, amsthm} %standard AMS packages
+\usepackage{marginnote} %marginnotes
+\usepackage{gensymb} %miscellaneous symbols
+\usepackage{commath} %differential symbols
+\usepackage{xcolor} %colours
+\usepackage{cancel} %cancelling terms
+\usepackage{siunitx} %formatting units
+\usepackage{tikz, pgfplots} %diagrams
+\usetikzlibrary{calc, hobby, patterns, intersections}
+\usepackage{graphicx} %inserting graphics
+\usepackage{hyperref} %hyperlinks
+\usepackage{datetime} %date and time
+\usepackage{ulem} %underline for \emph{}
+\usepackage{xfrac} %inline fractions
+\usepackage{enumerate, enumitem} %numbered lists
+\usepackage{float} %inserting floats
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}} %adds numbers to specific equations in non-numbered list of equations
+
+\newcommand{\AxisRotator}[1][rotate=0]{
+	\tikz [x=0.25cm,y=0.60cm,line width=.2ex,-stealth,#1] \draw (0,0) arc (-150:150:1 and 1);%
+} %rotation symbols on axes
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+
+\newcommand{\curl}{\mathrm{curl\,}}
+
+\makeatletter
+\@addtoreset{section}{part} %resets section numbers in new part
+\makeatother
+
+\renewcommand{\thesubsection}{(\arabic{subsection})}
+\renewcommand{\thesection}{(\arabic{section})}
+
+%section headings on left
+\makeatletter
+\def\specialsection{\@startsection{section}{1}%
+	\z@{\linespacing\@plus\linespacing}{.5\linespacing}%
+	%  {\normalfont\centering}}% DELETED
+	{\normalfont}}% NEW
+\def\section{\@startsection{section}{1}%
+	\z@{.7\linespacing\@plus\linespacing}{.5\linespacing}%
+	%  {\normalfont\scshape\centering}}% DELETED
+	{\normalfont\scshape}}% NEW
+\makeatother
+
+%forces newline after subsection
+\makeatletter
+\def\subsection{\@startsection{subsection}{3}%
+	\z@{.5\linespacing\@plus.7\linespacing}{.1\linespacing}%
+	{\normalfont\itshape}}
+\makeatother
+
+\settasks{counter-format = tsk[1].}
+
+\SetupExSheets{solution/print = true}
+
+%opening
+\title
+{
+	Differential and Integral Calculus\\
+	Assignment 7
+}
+\author
+{
+	Aakash Jog\\
+	ID : 989323563
+}
+\date{\formatdate{21}{5}{2015}}
+
+\begin{document}
+	
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\begin{question}
+	Check pointwise and uniform convergence of the following series of functions
+	\begin{enumerate}
+		\item $\sum\limits_{n = 0}^{\infty} \left( x^{n + 1} - x^n \right)$ in $[0,1]$.
+		\item $\sum\limits_{n = 0}^{\infty} x^n$ in $[0,1]$.
+		\item $\sum\limits_{n = 1}^{\infty} \frac{(-1)^n}{x^2 + n}$ in $\mathbb{R}$.
+		\item $\sum\limits_{n = 1}^{\infty} \frac{(-1)^n}{x^2 + n^3}$ in $\mathbb{R}$.
+		\item $\sum\limits_{n = 1}^{\infty} \ln \left( 1 + \frac{1}{n^2 + x^2} \right)$ in $\mathbb{R}$.
+		\item $\sum\limits_{n = 1}^{\infty} \frac{1}{3^n \sqrt[3]{1 + n^2 x^2}}$ in $\mathbb{R}$.
+		\item $\sum\limits_{n = 1}^{\infty} \frac{(-1)^n x^2}{(1 + x^2)^n}$ in $\mathbb{R}$.
+	\end{enumerate}
+\end{question}
+
+\begin{solution}
+	\begin{enumerate}[leftmargin = *]
+		\item
+			\begin{align*}
+				S_k & = \sum\limits_{n = 0}^{k} x^{n + 1} - x^n \\
+                                    & = x^{k + 1} - x^0                         \\
+                                    & = x^{k + 1} - 1
+			\end{align*}
+			Therefore
+			\begin{align*}
+				\lim\limits_{k \to \infty} S_k & = \lim\limits_{k \to \infty} x^{k + 1} - 1
+			\end{align*}
+			If $0 \le x < 1$,
+			\begin{align*}
+				\lim\limits_{k \to \infty} S_k & = \lim\limits_{k \to \infty} x^{k + 1} - 1 \\
+                                                               & = 0 - 1                                    \\
+                                                               & = -1
+			\end{align*}
+			If $x = 1$,
+			\begin{align*}
+				\lim\limits_{k \to \infty} S_k & = \lim\limits_{k \to \infty} 1^{k + 1} - 1 \\
+                                                               & = 0
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				S(x) &=
+					\begin{cases}
+						-1 & ;\quad 0 \le x < 1 \\
+						0  & ;\quad x = 1       \\
+					\end{cases}
+			\end{align*}
+			Therefore, $S_n(x)$ converges pointwise to $S(x)$.\\
+			As $S(x)$ is not continuous in $[0,1]$ but all $x^{n + 1} - x^n$ are, the convergence cannot be uniform.
+		\item
+			\begin{align*}
+				S_k & = \sum\limits_{n = 0}^{k} x^n
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				\lim\limits_{k \to \infty} S_k & = \lim\limits_{k \to \infty} \sum\limits_{n = 0}^{k} x^n \\
+                                                               & = \frac{x^{n + 1} - 1}{x - 1}
+			\end{align*}
+			If $0 \le x < 1$,
+			\begin{align*}
+				\lim\limits_{k \to \infty} S_k & = \lim\limits_{k \to \infty} \frac{x^{k + 1} - 1}{0 - 1} \\
+                                                               & = \lim\limits_{k \to \infty} 0                           \\
+                                                               & = 0
+			\end{align*}
+			If $x = 1$,
+			\begin{align*}
+				\lim\limits_{k \to \infty} S_k & = \lim\limits_{k \to \infty} \sum\limits_{n = 0}^{k} 1^n \\
+                                                               & = \lim\limits_{k \to \infty} k + 1                       \\
+                                                               & = \infty
+			\end{align*}
+			Therefore,
+			\begin{align*}
+				S(x) &=
+					\begin{cases}
+						0      & ;\quad 0 \le x < 1 \\
+						\infty & ;\quad x = 1       \\
+					\end{cases}
+			\end{align*}
+			Therefore, $S_n(x)$ does not converge pointwise to $S(x)$ as $S(x)$ is not defined at $x = 1$.\\
+			Hence, there is no uniform convergence.
+		\item
+			\begin{align*}
+				\lim\limits_{n \to \infty} \frac{1}{x^2 + n} & = 0
+			\end{align*}
+			Therefore, as $\sum\limits_{n = 1}^{\infty} \frac{(-1)^n}{x^2 + n}$ is a Leibniz series, and as $\lim\limits_{n \to \infty} \frac{1}{x^2 + n} = 0$, the series converges pointwise.
+			\begin{align*}
+				\left| \frac{(-1)^n}{x^2 + n} \right| & \le \frac{1}{n}
+			\end{align*}
+			Therefore, by the Weierstrass M-test, as $\sum \frac{1}{n}$ converges, the series converges uniformly on $\mathbb{R}$.
+		\item
+			\begin{align*}
+				\lim\limits_{n \to \infty} \frac{1}{x^2 + n^3} & = 0
+			\end{align*}
+			Therefore, as $\sum\limits_{n = 1}^{\infty} \frac{(-1)^n}{x^2 + n^3}$ is a Leibniz series, and as $\lim\limits_{n \to \infty} \frac{1}{x^2 + n^3} = 0$, the series converges pointwise.
+			\begin{align*}
+				\left| \frac{(-1)^n}{x^2 + n^3} \right| & \le \frac{1}{n^3}
+			\end{align*}
+			Therefore, by the Weierstrass M-test, as $\sum \frac{1}{n^3}$ converges, the series converges uniformly on $\mathbb{R}$.
+		\item
+			\begin{align*}
+				\left| \ln \left( 1 + \frac{1}{n^2 + x^2} \right) \right| & \le \frac{1}{n^2 + x^2} \\
+				\therefore \ln \left( 1 + \frac{1}{n^2 + x^2} \right)     & \le \frac{1}{n^2}
+			\end{align*}
+			Therefore, by the Weierstrass M-test, as $\sum \frac{1}{n^2}$ converges, the series converges uniformly on $\mathbb{R}$.\\
+			Hence, the series also converges pointwise on $\mathbb{R}$.
+		\item
+			\begin{align*}
+				\left| \frac{1}{3^n \sqrt[3]{1 + n^2 x^2}} \right| & \le \frac{1}{3^n}
+			\end{align*}
+			Therefore, by the Weierstrass M-test, as $\sum \frac{1}{3^n}$ converges, the series converges uniformly on $\mathbb{R}$\\
+			Hence, the series also converges pointwise on $\mathbb{R}$.
+		\item
+			\begin{align*}
+				\lim\limits_{n \to \infty} \frac{x^2}{(1 + x^2)^n} & = 0
+			\end{align*}
+			Therefore, as $\sum\limits_{n = 1}^{\infty} \frac{(-1)^n x^2}{(1 + x^2)^n}$ is a Leibniz series, and as $\lim\limits_{n \to \infty} \frac{1}{x^2 + n} = 0$, the series converges pointwise.
+			\begin{align*}
+				\sup\limits_{\mathbb{R}} \left| f_n(x) - f(x) \right| & = \sup\limits_{\mathbb{R}} \left| \frac{x^2}{(1 + x^2)^n} - 0 \right| \\
+                                                                                      & = \sup\limits_{\mathbb{R}} \frac{x^2}{(1 + x^2)^n}
+			\end{align*}
+			Therefore, differentiating, the critical points are
+			\begin{align*}
+				x & = 0 \\
+				x & = \pm \frac{1}{\sqrt{n^2 + 1}}
+			\end{align*}
+			Therefore, the maximum value of the function is at $x = \pm \frac{1}{\sqrt{n^2 + 1}}$.\\
+			Therefore,
+			\begin{align*}
+				\lim\limits_{n \to \infty} \sup\limits_{\mathbb{R}} |f_n(x) - f(x)| & = \lim\limits_{n \to \infty} \frac{\frac{1}{n^2 + 1}}{\left( 1 + \frac{1}{n^2 + 1} \right)^2} \\
+                                                                                                    & = 0
+			\end{align*}
+			Therefore, the convergence is uniform.
+	\end{enumerate}
+\end{solution}
+
+\begin{question}
+	Let $\{f_n(x)\}$ be a sequence of functions defined in the domain $I$.
+	\begin{enumerate}
+		\item Prove that if the series $\sum\limits_{n = 1}^{\infty} |f_n(x)|$ converges uniformly on $I$ then $\sum\limits_{n = 0}^{\infty} f_n(x)$ converges uniformly on $I$.
+		\item Show that the converse is not true, i.e. uniform convergence of $\sum\limits_{n = 0}^{\infty} f_n(x)$ does not imply uniform convergence of $\sum\limits_{n = 0}^{\infty} |f_n(x)|$.
+	\end{enumerate}
+\end{question}
+
+\begin{solution}
+	\begin{enumerate}
+		\item
+			As $\sum |f_n(x)|$ converges uniformly,
+			\begin{align*}
+				\lim\limits_{k \to \infty} \sum\limits_{n = 1}^{k} |f_n(x)| & = 0
+			\end{align*}
+			Therefore, as $|f_n(x)| = \pm f_n(x)$,
+			\begin{align*}
+				\lim\limits_{k \to \infty} \sum\limits_{n = 1}^{k} f_n(x)            & = \pm \lim\limits_{k \to \infty} \sum\limits_{n = 1}^{k} |f_n(x)| \\
+				\therefore \lim\limits_{k \to \infty} \sum\limits_{n = 1}^{k} f_n(x) & = \pm 0                                                           \\
+				\therefore \lim\limits_{k \to \infty} \sum\limits_{n = 1}^{k} f_n(x) & = 0
+			\end{align*}
+			Therefore, $\sum f_n(x)$ converges uniformly on $I$.
+			\qed
+		\item
+			Let
+			\begin{align*}
+				f_n(x)            & = \frac{(-1)^n}{n} \\
+				\therefore f_n(x) & = \frac{1}{n}
+			\end{align*}
+			Therefore, $\sum \frac{(-1)^n}{n}$ converges, but $\sum \frac{1}{n}$ diverges.\\
+			Hence, uniform convergence of $\sum\limits_{n = 0}^{\infty} f_n(x)$ does not imply convergence of $\sum\limits_{n = 0}^{\infty} |f_n(x)|$.
+			\qed
+	\end{enumerate}
+\end{solution}
+
+\begin{question}
+	Let $f(x) = \sum\limits_{n = 1}^{\infty} (-1)^n \frac{\cos\left( \frac{x}{n} \right)}{n^2 + 1}$.
+	Show that $f(x)$ is continuous on $\mathbb{R}$.
+	Is it possible to differentiate $f(x)$ term by term?
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		\lim\limits_{n \to \infty} \frac{\cos\left( \frac{x}{n} \right)}{n^2 + 1} & = 0
+	\end{align*}
+	Therefore, as $\sum\limits_{n = 1}^{\infty} (-1)^n \frac{\cos\left( \frac{x}{n} \right)}{n^2 + 1}$ is a Leibniz series, and as $\lim\limits_{n \to \infty} \frac{\cos\left( \frac{x}{n} \right)}{n^2 + 1} = 0$, the series converges pointwise.
+	\begin{align*}
+		\left| \frac{\cos\left( \frac{x}{n} \right)}{n^2 + 1} \right|            & \le \frac{1}{n^2 + 1} \\
+		\therefore \left| \frac{\cos\left( \frac{x}{n} \right)}{n^2 + 1} \right| & \le \frac{1}{n^2}
+	\end{align*}
+	Therefore, by the Weierstrass M-test, as $\sum \frac{1}{n^2}$ converges, the series converges uniformly.
+	Therefore, the limit function $f(x)$ is continuous.
+	\begin{align*}
+		\dod{}{x} \left( \frac{\cos\left( \frac{x}{n} \right)}{n^2 + 1} \right) & = \frac{-\frac{1}{n} \sin\left( \frac{x}{n} \right)}{n^2 + 1} \\
+                                                                                        & = -\frac{\sin\left( \frac{x}{n} \right)}{n^3 + n}
+	\end{align*}
+	As the derivative exists and is continuous on $\mathbb{R}$, it is possible to differentiate $f(x)$ term by term.
+\end{solution}
+
+\begin{question}
+	Define $f(x) = \sum\limits_{n = 0}^{\infty} \frac{x^n}{2 + n}$.
+	Find the domain of convergence of this series.
+	In what domain can we use term by term differentiation to show that $\left( x^2 f(x) \right)' = \frac{x}{1 - x}$?
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		R & = \lim\limits_{n \to \infty} \left| \frac{a_n}{a_{n + 1}} \right|     \\
+                  & = \lim\limits_{n \to \infty} \left| \frac{2 + (n + 1)}{2 + n} \right| \\
+                  & = \lim\limits_{n \to \infty} \left| \frac{n + 3}{n + 2} \right|       \\
+                  & = 1
+	\end{align*}
+	If $x = -1$,
+	\begin{align*}
+		f(x) & = \sum\limits_{n = 0}^{\infty} \frac{(-1)^n}{2 + n}
+	\end{align*}
+	Therefore, as the series is a Leibniz series, and as $\lim\limits_{n \to \infty} \frac{1}{2 + n} = 0$, the series converges pointwise.
+	If $x = 1$,
+	\begin{align*}
+		f(x) & = \sum\limits_{n = 0}^{\infty} \frac{1^n}{2 + n} \\
+                     & = \sum\limits_{n = 0}^{\infty} \frac{1}{2 + n}
+	\end{align*}
+	Therefore, the series diverges.\\
+	Therefore, the domain of convergence is $[-1,1)$.\\
+	\begin{align*}
+		\dod{}{x} \left( \frac{x^2}{2 + n} \right) & = \frac{2 x}{2 + n}
+	\end{align*}
+	As the derivative is continuous on $[-1,1)$ and the series converges in $[-1,1)$, we can use term by term differentiation in $[-1,1)$.
+\end{solution}
+
+\end{document}
