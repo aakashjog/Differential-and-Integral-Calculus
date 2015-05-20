@@ -1684,4 +1684,321 @@ Thomas and Finney, \textit{Calculus and Analytic Geometry}, 9th edition, Addison
 	\label{Taylor's_Formula_for_2_variables}
 \end{theorem}
 
+\section{Vector Functions and Curves in $\mathbb{R}^3$}
+
+\begin{definition}[Vector function]
+	A vector function is a function with a domain which consists of a set of real numbers, and with a domain which consists of a set of vectors, i.e. $\overline{\tau}(t) = \left( f(t), g(t), h(t) \right)$, $\forall t \in [a,b]$.
+\end{definition}
+
+\begin{theorem}
+	If $\exists \lim\limits_{t \to t_0} f(t)$, $\exists \lim\limits_{t \to t_0} g(t)$, $\exists \lim\limits_{t \to t_0} h(t)$, then, $\exists \lim\limits_{t \to t_0} = \left( \lim\limits_{t \to t_0} f(t), \lim\limits_{t \to t_0} g(t), \lim\limits_{t \to t_0} h(t) \right)$.
+\end{theorem}
+
+\begin{definition}[Continuous vector function]
+	A vector function $\overline{\tau}(t)$ is said to be continuous at $t_0$ if $\lim\limits_{t \to t_0} \overline{\tau}(t) = \overline{\tau}(t_0)$.
+\end{definition}
+
+\begin{definition}[Space curve]
+	Let $f(t)$, $g(t)$, $h(t)$ be continuous functions of $[a,b]$.
+	The set of points $(x,y,z)$, such that $x = f(t)$, $y = g(t)$, $z = h(t)$, $t \in [a,b]$ is called a space curve.
+\end{definition}
+
+\section{Derivatives of Vector Functions}
+
+\begin{definition}[Derivative of vector function]
+	The derivative of $\overline{r}(t) = \left( f(t), g(t), h(t) \right)$, if it exists, is defined as
+	\begin{equation*}
+		\overline{r}'(t) = \lim\limits_{\Delta t \to 0} \frac{\overline{r}(t + \Delta t) - \overline{r}(t)}{\Delta t}
+	\end{equation*}
+\end{definition}
+
+\begin{definition}[Tangent vector]
+	$\overline{r}'(t_0)$ is called a tangent vector to the curve $C = \overline{r}(t)$ at $P(t_0)$.
+\end{definition}
+
+\begin{theorem}
+	If $\exists f'(t_0)$, $\exists g'(t_0)$, $\exists h'(t_0)$, and $\overline{r}(t) = \left( f(t), g(t), h(t) \right)$, then,
+	\begin{equation*}
+		\overline{r}'(t_0) = \left( f'(t_0), g'(t_0), h'(t_0) \right)
+	\end{equation*}
+\end{theorem}
+
+\begin{definition}[Unit tangent vector]
+	The vector $\hat{T}(t) = \frac{\overline{r}'(t)}{\left| \overline{r}'(t) \right|}$ is called the unit tangent vector to $C = r(t)$ at $P(t_0)$.
+\end{definition}
+
+\begin{definition}[Tangent line]
+	A straight line passing through a point $P(t)$ on the curve $C = r(t)$, in the direction $\overline{r}'(t)$, i.e. $\hat{T}(t)$, is called a tangent line to the curve at the point.
+\end{definition}
+
+\begin{theorem}
+	Let $\overline{u}(t)$ and $\overline{v}(t)$ be vector functions, let $c$ be a constant, and let $f(t)$ be a scalar function.
+	Then,
+	\begin{enumerate}
+		\item $\left( \overline{u}(t) \pm \overline{v}(t) \right)' = \overline{u}'(t) \pm \overline{v}'(t)$
+		\item $\left( c \overline{u}(t) \right)' = c \overline{u}'(t)$
+		\item $\left( f(t) \overline{u}(t) \right)' = f'(t) \overline{u}(t) + f(t) \overline{u}'(t)$
+		\item $\left( \overline{u}(t) \cdot \overline{v}(t) \right)' = \overline{u}'(t) \cdot \overline{v}(t) + \overline{u}(t) \cdot \overline{v}'(t)$
+		\item $\left( \overline{u}(t) \times \overline{v}(t) \right)' = \overline{u}'(t) \times \overline{v}(t) + \overline{u}(t) \times \overline{v}'(t)$
+		\item $\left( \overline{u}\left( f(t) \right) \right)' = f'(t) \overline{u}'\left( f(t) \right)$
+	\end{enumerate}
+\end{theorem}
+
+\section{Change of Variables in Double Integrals}
+
+\begin{definition}[Jacobian]
+	Let
+	\begin{align*}
+		T(u,v) & = (x,y)
+	\end{align*}
+	be an operator.\\
+	The determinant
+	\begin{equation*}
+		J = \frac{\partial(x,y)}{\partial(x,y)} =
+			\begin{vmatrix}
+				x_u & x_v \\
+				y_u & y_v \\
+			\end{vmatrix}
+	\end{equation*}
+	is called the Jacobian of the operator $T$.
+\end{definition}
+
+\begin{theorem}
+	Let $R$ and $S$ be domains of the first or second kind.\\
+	Let the operator $T$ from $S$ to $R$ be one-to-one and onto.\\
+	Therefore, the inverse operator $T^{-1}$ exists.\\
+	Also, let $T$ be a $C^1$ operator, i.e. $\exists x_u$, $\exists x_v$, $\exists y_u$, $\exists y_v$, which are continuous on $S$.\\
+	Let $f(x,y)$ be a continuous function on $R$.\\
+	Then,
+	\begin{equation*}
+		\iint\limits_{R} f(x,y) \dif x \dif y = \iint\limits_{S} f\left( g(u,v), h(u,v) \right) |J| \dif u \dif v
+	\end{equation*}
+\end{theorem}
+
+\begin{question}
+	Calculate $\iint\limits_{R} (x - y)^2 \sin^2 (x + y) \dif x \dif y$, where $R$ is as shown.
+	\begin{figure}[H]
+		\begin{tikzpicture}
+			\def\xMIN{-1};
+			\def\xMAX{8};
+			\def\yMIN{-1};
+			\def\yMAX{8};
+
+			\def\PI{22/7};
+
+			\begin{scope}[-stealth]
+				\draw (\xMIN,0) -- (\xMAX,0) node [right] {$x$};
+				\draw (0,\yMIN) -- (0,\yMAX) node [above] {$y$};
+			\end{scope}
+
+			\begin{scope}
+				\draw [fill, pattern = north west lines] (\PI,0) -- (2*\PI,\PI) -- (\PI,2*\PI) -- (0,\PI) -- cycle;
+			\end{scope}
+
+			\begin{scope}
+				\node [below] at (\PI,0) {$\pi$};
+				\node [below] at (2*\PI,0) {$2 \pi$};
+
+				\node [left] at (0,\PI) {$\pi$};
+				\node [left] at (0,2*\PI) {$2 \pi$};
+			\end{scope}
+		\end{tikzpicture}
+	\end{figure}
+\end{question}
+
+\begin{solution}
+	The edges of the domain are
+	\begin{align*}
+		x + y & = \pi   \\
+		x + y & = 3 \pi \\
+		x - y & = \pi   \\
+		x - y & = -\pi
+	\end{align*}
+	Therefore, let
+	\begin{align*}
+		x - y & = u \\
+		x + y & = v
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		x & = \frac{u + v}{2} \\
+		y & = \frac{v - u}{2}
+	\end{align*}
+	Therefore, the domain $R$ can be written as $S = \{-\pi \le u \le \pi, \pi \le v \le 3 \pi\}$.\\
+	Therefore,
+	\begin{align*}
+		J &=
+			\begin{pmatrix}
+				x_u & x_v \\
+				y_u & y_v \\
+			\end{pmatrix}\\
+		  &=
+			\begin{pmatrix}
+				\frac{1}{2}  & \frac{1}{2} \\
+				-\frac{1}{2} & \frac{1}{2} \\
+			\end{pmatrix}\\
+		  &= \frac{1}{2}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\iint\limits_{R} f(x,y) \dif x \dif y                              & = \iint\limits_{S} f\left( g(u,v), h(u,v) \right) |J| \dif u \dif v                                                   \\
+		\therefore \iint\limits_{R} (x - y)^2 \sin^2 (x + y) \dif x \dif y & = \int\limits_{S} u^2 \sin^2 v \left| \frac{1}{2} \right| \dif u \dif v                                               \\
+                                                                                   & = \frac{1}{2} \int\limits_{-\pi}^{\pi} \int\limits_{\pi}^{3 \pi} u^2 \sin^2 v \dif v \dif u                           \\
+                                                                                   & = \frac{1}{2} \int\limits_{-\pi}^{\pi} u^2 \dif u \cdot \int\limits_{\pi}^{3 \pi} \sin^2 v \dif v                     \\
+                                                                                   & = \frac{1}{2} \left. \frac{u^3}{3} \right|_{-\pi}^{\pi} \cdot \int\limits_{\pi}^{3 \pi} \frac{1 - \cos 2 v}{2} \dif v \\
+                                                                                   & = \frac{1}{2} \frac{2 \pi^3}{3} \cdot \frac{1}{2} 2 \pi                                                               \\
+                                                                                   & = \frac{\pi^4}{3}
+	\end{align*}
+\end{solution}
+
+\subsection{Polar Coordinates}
+
+Polar coordinates are a special case of change of variables.\\
+The operator for the change of variables is
+\begin{align*}
+	T(r,\theta) & = (x,y)
+\end{align*}
+where
+\begin{align*}
+	x & = r \cos \theta \\
+	y & = r \sin \theta
+\end{align*}
+Therefore,
+\begin{align*}
+	J &=
+		\begin{vmatrix}
+			x_r & x_{\theta} \\
+			y_r & y_{\theta} \\
+		\end{vmatrix}
+	  &=
+		\begin{vmatrix}
+			\cos \theta & -r \sin \theta \\
+			\sin \theta & r \cos \theta  \\
+		\end{vmatrix}
+	  &= r \cos^2 \theta + r \sin^2 \theta\\
+	  &= r
+\end{align*}
+
+\begin{question}
+	Calculate $\iint\limits_{R} x y \dif x \dif y$, $R = \left\{ (x,y) | 1 \le x^2 + y^2 \le 4 , 0 \le y \le x \right\}$.
+\end{question}
+
+\begin{solution}
+	The domain $R$ is the region shown.
+	\begin{figure}[H]
+		\begin{tikzpicture}
+			\def\xMIN{-1};
+			\def\xMAX{3};
+			\def\yMIN{-1};
+			\def\yMAX{3};
+
+			\def\PI{22/7};
+
+			\begin{scope}[-stealth]
+				\draw (\xMIN,0) -- (\xMAX,0) node [right] {$x$};
+				\draw (0,\yMIN) -- (0,\yMAX) node [above] {$y$};
+			\end{scope}
+
+			\begin{scope}
+				\clip (\xMIN,\yMIN) rectangle (\xMAX,\yMAX);
+				\draw (\xMIN,\yMIN) -- (\xMAX,\xMAX);
+				\draw (0,0) circle (1);
+				\draw (0,0) circle (2);
+			\end{scope}
+
+			\begin{scope}
+				\clip (0,0) -- (\xMAX,\yMAX) -- (\xMAX,0) -- cycle;
+				\fill [pattern = north west lines] (0,0) circle (2);
+				\fill [white] (0,0) circle (1);
+			\end{scope}
+		\end{tikzpicture}
+	\end{figure}
+	Therefore, it can be written as $S = \left\{ (r,\theta) | 1 \le r \le 2 , 0 \le \theta \le \frac{\pi}{4} \right\}$.\\
+	Therefore,
+	\begin{align*}
+		\iint\limits_{R} x y \dif x \dif y & = \int\limits_{0}^{\frac{\pi}{4}} \int\limits_{1}^{2} r \cos \theta r \sin \theta r \dif r \dif \theta     \\
+                                                   & = \int\limits_{1}^{2} r^3 \dif r \cdot \int\limits_{0}^{\frac{\pi}{4}} \cos \theta \sin \theta \dif \theta \\
+                                                   & = \frac{15}{4} \cdot \frac{1}{4}                                                                           \\
+                                                   & = \frac{15}{16}
+	\end{align*}
+\end{solution}
+
+\begin{theorem}
+	Let $D$ be a domain, written as $D_{\mathrm{I}}$ in polar coordinates, i.e.,
+	\begin{equation*}
+		D_{\mathrm{I}} = \left\{ (r,\theta) | a \le r \le b , g_1(r) \le \theta \le g_2(r) \right\}
+	\end{equation*}
+	and let $f(x,y)$ be continuous on $D_{\mathrm{I}}$.\\
+	Then,
+	\begin{equation*}
+		\iint\limits_{D_{\mathrm{I}}} f(x,y) \dif x \dif y = \int\limits_{a}^{b} \int\limits_{g_1(r)}^{g_2(r)} f(r \cos \theta, r \sin \theta) r \dif \theta \dif r
+	\end{equation*}
+\end{theorem}
+
+\begin{theorem}
+	Let $D$ be a domain, written as $D_{\mathrm{II}}$ in polar coordinates, i.e.,
+	\begin{equation*}
+		D_{\mathrm{I}} = \left\{ (r,\theta) | \alpha \le \theta \le \beta , h_1(\theta) \le r \le h_2(\theta) \right\}
+	\end{equation*}
+	and let $f(x,y)$ be continuous on $D_{\mathrm{II}}$.\\
+	Then,
+	\begin{equation*}
+		\iint\limits_{D_{\mathrm{II}}} f(x,y) \dif x \dif y = \int\limits_{\alpha}^{\beta} \int\limits_{h_1(\theta)}^{h_2(\theta)} f(r \cos \theta, r \sin \theta) r \dif r\dif \theta
+	\end{equation*}
+\end{theorem}
+
+\begin{question}
+	Given $D = \left\{ x^2 + y^2 \le 2 x \right\}$, calculate $\iint\limits_{D} (x + y) \dif x \dif y$.
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		x^2 + y^2                  & = 2 x \\
+		\therefore x^2 - 2 x + y^2 & = 0   \\
+		\therefore (x - 1)^2       & = 1
+	\end{align*}
+	Therefore, the domain $D$ is as shown.
+	\begin{figure}[H]
+		\begin{tikzpicture}
+			\def\xMIN{-1};
+			\def\xMAX{3};
+			\def\yMIN{-2};
+			\def\yMAX{3};
+
+			\def\PI{22/7};
+
+			\begin{scope}[-stealth, gray, very thin]
+				\draw (\xMIN + 1,\yMIN + 1) grid (\xMAX - 1,\yMAX - 1);
+
+				\foreach \x in {\xMIN,...,\xMAX}
+				{
+					\node [below left] at (\x,0) {$\x$};
+				}
+
+				\foreach \y in {\yMIN,...,\yMAX}
+				{
+					\node [below left] at (0,\y) {$\y$};
+				}
+
+				\draw (\xMIN,0) -- (\xMAX,0) node [right] {$x$};
+				\draw (0,\yMIN) -- (0,\yMAX) node [above] {$y$};
+			\end{scope}
+
+			\begin{scope}
+				\filldraw [pattern = north west lines] (1,0) circle (1);
+			\end{scope}
+		\end{tikzpicture}
+	\end{figure}
+	Therefore, $D$ can be written as $\left\{ 0 \le r \le 2 \cos \theta , -\frac{\pi}{2} \le \theta \le \frac{\pi}{2} \right\}$.\\
+	Therefore,
+	\begin{align*}
+		\iint\limits_{D} (x + y) \dif x \dif y & = \int\limits_{-\frac{\pi}{2}}^{\frac{\pi}{2}} \int\limits_{0}^{2 \cos \theta} (r \cos \theta + r \sin \theta) r \dif r \dif \theta \\
+                                                       & = \int\limits_{-\frac{\pi}{2}}^{\frac{\pi}{2}} (\cos \theta + \sin \theta) \left. \left( \frac{r^3}{3} \right) \right|_{z = 0}^{z = 2 \cos \theta} \dif \theta
+	\end{align*}
+	Solving,
+	\begin{align*}
+		\iint\limits_{D} (x + y) \dif x \dif y & = \pi
+	\end{align*}
+\end{solution}
+
 \end{document}
