@@ -133,13 +133,13 @@
 			Therefore,
 			\begin{align*}
 				\lim\limits_{k \to \infty} S_k & = \lim\limits_{k \to \infty} \sum\limits_{n = 0}^{k} x^n \\
-                                                               & = \frac{x^{n + 1} - 1}{x - 1}
+                                                               & = \frac{x^{k + 1} - 1}{x - 1}
 			\end{align*}
 			If $0 \le x < 1$,
 			\begin{align*}
-				\lim\limits_{k \to \infty} S_k & = \lim\limits_{k \to \infty} \frac{x^{k + 1} - 1}{0 - 1} \\
-                                                               & = \lim\limits_{k \to \infty} 0                           \\
-                                                               & = 0
+				\lim\limits_{k \to \infty} S_k & = \lim\limits_{k \to \infty} \frac{x^{k + 1} - 1}{x - 1} \\
+                                                               & = \lim\limits_{k \to \infty} \frac{-1}{x - 1}            \\
+                                                               & = 1
 			\end{align*}
 			If $x = 1$,
 			\begin{align*}
@@ -151,8 +151,8 @@
 			\begin{align*}
 				S(x) &=
 					\begin{cases}
-						0      & ;\quad 0 \le x < 1 \\
-						\infty & ;\quad x = 1       \\
+						-\frac{1}{x - 1} & ;\quad 0 \le x < 1 \\
+						\infty           & ;\quad x = 1       \\
 					\end{cases}
 			\end{align*}
 			Therefore, $S_n(x)$ does not converge pointwise to $S(x)$ as $S(x)$ is not defined at $x = 1$.\\
