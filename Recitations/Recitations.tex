@@ -1461,4 +1461,309 @@ E-mail: \href{mailto:micbromberg@gmail.com}{micbromberg@gmail.com}\\
 	Therefore, by \autoref{Changing_the_order_of_differentiation_and_infinite_summation}, the equality holds.
 \end{solution}
 
+\recitation
+
+\newpage
+\part{Functions of Multiple Variables}
+
+\section{Change of Variables in Double Integrals}
+
+\begin{definition}[Jacobian]
+	Let
+	\begin{align*}
+		T(u,v) & = (x,y)
+	\end{align*}
+	be an operator.\\
+	The determinant
+	\begin{equation*}
+		J = D_T =
+			\begin{vmatrix}
+				x_u & x_v \\
+				y_u & y_v \\
+			\end{vmatrix}
+	\end{equation*}
+	is called the Jacobian of the operator $T$.
+\end{definition}
+
+\begin{theorem}
+	Let $T : \Delta \to D$ be a one-to-one, onto, continuously differentiable transformation, with $\det|D_T| \neq 0$, such that $(x,y) = T(u,v)$.
+	\footnote{Continuously differentiable means that all partial derivatives $x_u$, $x_v$, $y_u$, $y_v$, exist and are continuous.}
+	be non-zero.
+	Let $f$ be integrable on $D$.\\
+	Then,
+	\begin{equation*}
+		\iint\limits_{D} f \dif A = \iint\limits_{\Delta} f \circ T \cdot |D T| \dif A
+	\end{equation*}
+\end{theorem}
+
+\begin{question}
+	Calculate the area of the region bounded by 
+	\begin{align*}
+		y & = 0   \\
+		y & = 2   \\
+		y & = 2 x \\
+		y & = 2 x + 3
+	\end{align*}
+\end{question}
+
+\begin{solution}
+	\begin{figure}[H]
+		\begin{tikzpicture}
+			\def\xMIN{-5};
+			\def\xMAX{5};
+			\def\yMIN{-2};
+			\def\yMAX{5};
+
+			\def\PI{22/7};
+
+			\begin{scope}[ultra thin, lightgray]
+				\draw (\xMIN + 1,\yMIN + 1) grid (\xMAX - 1,\yMAX - 1);
+			\end{scope}
+
+			\begin{scope}[-stealth, gray, very thin]
+
+				\foreach \x in {\xMIN,...,\xMAX}
+				{
+					\node [below left] at (\x,0) {$\x$};
+				}
+
+				\foreach \y in {\yMIN,...,\yMAX}
+				{
+					\node [below left] at (0,\y) {$\y$};
+				}
+
+				\draw (\xMIN,0) -- (\xMAX,0) node [right] {$x$};
+				\draw (0,\yMIN) -- (0,\yMAX) node [above] {$y$};
+			\end{scope}
+
+			\begin{scope}
+				\clip (\xMIN + 1,\yMIN + 1) rectangle (\xMAX - 1,\yMAX - 1);
+				\draw plot (\x,0);
+				\draw plot (\x,2);
+				\draw plot (\x,2*\x);
+				\draw plot (\x,2*\x + 3);
+			\end{scope}
+		\end{tikzpicture}
+	\end{figure}
+	The change of variables depends on the boundaries of the region.\\
+	Therefore, let
+	\begin{align*}
+		u & = y \\
+		v & = 2 x - y
+	\end{align*}
+	Therefore,
+	\begin{align*}
+			\begin{pmatrix}
+				u \\
+				v \\
+			\end{pmatrix}
+		&=
+			\begin{pmatrix}
+				0 & 1  \\
+				2 & -1 \\
+			\end{pmatrix}
+			\begin{pmatrix}
+				x \\
+				y \\
+			\end{pmatrix}
+	\end{align*}
+	Therefore, 
+	\begin{align*}
+		y & = 0       & \to &  & u & = 0 \\
+		y & = 2       & \to &  & u & = 2 \\
+		y & = 2 x     & \to &  & v & = 0 \\
+		y & = 2 x + 3 & \to &  & v & = 3
+	\end{align*}
+	The Jacobian can be calculated by finding $T^{-1}$ and then finding its determinant, or using the formula
+	\begin{align*}
+		|D_T| &= \frac{1}{|{D_T}^{-1}|}\\
+		\therefore |D_T| &= \frac{1}{|-2|}\\
+		&= \frac{1}{2}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\iint\limits_{D} \dif A & = \iint\limits_{\Delta} \frac{1}{2} \dif A                         \\
+                                        & =\int\limits_{0}^{2} \int\limits_{0}^{3} \frac{1}{2} \dif v \dif u \\
+		&= 3
+	\end{align*}
+\end{solution}
+
+\begin{question}
+	Calculate $\iint\limits_{D} \frac{x + 3 y}{x^4} e^{\frac{y}{x^3}}$, where $D$ is bounded by
+	\begin{align*}
+		y     & = x^3   \\
+		y     & = 4 x^3 \\
+		x + y & = 1     \\
+		x + y & = \frac{1}{2}
+	\end{align*}
+\end{question}
+
+\begin{solution}
+	\begin{figure}[H]
+		\begin{tikzpicture}
+			\def\xMIN{-5};
+			\def\xMAX{5};
+			\def\yMIN{-2};
+			\def\yMAX{5};
+
+			\begin{scope}[ultra thin, lightgray]
+				\draw (\xMIN + 1,\yMIN + 1) grid (\xMAX - 1,\yMAX - 1);
+			\end{scope}
+
+			\begin{scope}[-stealth, gray, very thin]
+
+				\foreach \x in {\xMIN,...,\xMAX}
+				{
+					\node [below left] at (\x,0) {$\x$};
+				}
+
+				\foreach \y in {\yMIN,...,\yMAX}
+				{
+					\node [below left] at (0,\y) {$\y$};
+				}
+
+				\draw (\xMIN,0) -- (\xMAX,0) node [right] {$x$};
+				\draw (0,\yMIN) -- (0,\yMAX) node [above] {$y$};
+			\end{scope}
+
+			\begin{scope}[smooth, samples = 100]
+				\clip (\xMIN + 1,\yMIN + 1) rectangle (\xMAX - 1,\yMAX - 1);
+				\draw plot (\x,{pow(\x,3)});
+				\draw plot (\x,{4*pow(\x,3)});
+				\draw plot (\x,{1 - \x});
+				\draw plot (\x,{1/2 - \x});
+			\end{scope}
+		\end{tikzpicture}
+	\end{figure}
+	Let
+	\begin{align*}
+		u & = \frac{y}{x^3} \\
+		v & = x + y
+	\end{align*}
+	Therefore, the domain $D$ is transformed to $\left\{ 1 \le u \le 4 , \frac{1}{2} \le v \le 1 \right\}$.\\
+	Therefore,
+	\begin{align*}
+		J^{-1} &=
+			\begin{vmatrix}
+				u_x & u_y \\
+				v_x & v_y \\
+			\end{vmatrix}\\
+		       &=
+			\begin{vmatrix}
+				-\frac{3 y}{x^4} & \frac{1}{x^3} \\
+				1                & 1             \\
+			\end{vmatrix}\\
+		       &= \frac{3 y + x}{x^4}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		J & = \frac{1}{J^{-1}} \\
+                  & = \frac{x^4}{3 y + x}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\iint\limits_{D} \frac{x + 3 y}{x^4} e^{\frac{y}{x^3}} \dif A & = \iint\limits_{\Delta} \frac{x + 3 y}{x^4} e^u J \dif u \dif v                   \\
+                                                                              & = \iint\limits_{\Delta} \frac{x + 3 y}{x^4} \frac{x^4}{x + 3 y} e^u \dif u \dif v \\
+                                                                              & = \int\limits_{1}^{4} \int\limits_{\frac{1}{2}}^{1} e^u \dif v \dif u             \\
+                                                                              & = \int\limits_{1}^{4} \left. v e^u \right|_{\frac{1}{2}}^{1}                      \\
+                                                                              & = \int\limits_{1}^{4} \frac{1}{2} e^u \dif y                                      \\
+                                                                              & = \left. \frac{1}{2} e^u \right|_{1}^{4}                                          \\
+                                                                              & = \frac{1}{2} e^4 - \frac{1}{2} e^1                                               \\
+                                                                              & = \frac{e^4 - e}{2}
+	\end{align*}
+\end{solution}
+
+\subsection{Polar Coordinates}
+
+For polar coordinates,
+\begin{align*}
+	x & = r \cos \theta \\
+	y & = r \sin \theta \\
+	J & = r
+\end{align*}
+
+\begin{question}
+	Find $\iint\limits_{D} \frac{x}{y} \dif A$ where $D$ is $\left\{ (x,y) : 9 \le x^2 + y^2 \le 16 , \frac{\sqrt{3}}{3} x \le y \le \sqrt{3} x \right\}$.
+\end{question}
+
+\begin{solution}
+	\begin{figure}[H]
+		\begin{tikzpicture}
+			\def\xMIN{-5};
+			\def\xMAX{5};
+			\def\yMIN{-2};
+			\def\yMAX{5};
+
+			\begin{scope}[ultra thin, lightgray]
+				\draw (\xMIN + 1,\yMIN + 1) grid (\xMAX - 1,\yMAX - 1);
+			\end{scope}
+
+			\begin{scope}[-stealth, gray, very thin]
+
+				\foreach \x in {\xMIN,...,\xMAX}
+				{
+					\node [below left] at (\x,0) {$\x$};
+				}
+
+				\foreach \y in {\yMIN,...,\yMAX}
+				{
+					\node [below left] at (0,\y) {$\y$};
+				}
+
+				\draw (\xMIN,0) -- (\xMAX,0) node [right] {$x$};
+				\draw (0,\yMIN) -- (0,\yMAX) node [above] {$y$};
+			\end{scope}
+
+			\begin{scope}[smooth, samples = 100]
+				\clip (\xMIN + 1,\yMIN + 1) rectangle (\xMAX - 1,\yMAX - 1);
+
+				\draw (0,0) circle (3);
+				\draw (0,0) circle (4);
+				\draw plot (\x,{(sqrt(3)/3)*\x});
+				\draw plot (\x,{sqrt(3)*\x});
+			\end{scope}
+		\end{tikzpicture}
+	\end{figure}
+	\begin{align*}
+		x^2 + y^2   & = r^2 \\
+		\frac{y}{x} & = \tan \theta
+	\end{align*}
+	Therefore, the domain $D$ is transformed to the domain $\left\{ 3 \le r \le 4 , \frac{\pi}{6} \le \theta \le \frac{\pi}{3} \right\}$.\\
+	Therefore,
+	\begin{align*}
+		\iint\limits_{D} \frac{x}{y} \dif A & = \iint\limits_{\Delta} \frac{1}{\tan \theta} J \dif r \dif \theta                                                                    \\
+                                                    & = \iint\limits_{\Delta} r \cot \theta \dif r \dif \theta                                                                              \\
+                                                    & = \int\limits_{\frac{\pi}{6}}^{\frac{\pi}{3}} \frac{\cos \theta}{\sin \theta} \dif t \cdot \int\limits_{3}^{4} r \dif r               \\
+                                                    & = \left( \left. \ln |\sin \theta| \right|_{\frac{\pi}{6}}^{\frac{\pi}{3}} \right) \left( \left. \frac{r^2}{2} \right|_{3}^{4} \right) \\
+                                                    & = \frac{7}{2} \ln(\sqrt{3})                                                                                                           \\
+                                                    & = \frac{7}{4} \ln 3
+	\end{align*}
+\end{solution}
+
+\subsection{Generalized Polar Coordinates}
+
+In generalized polar coordinates or elliptical coordinates, the transformation is
+\begin{align*}
+	x & = a r \cos \theta \\
+	y & = b r \sin \theta
+\end{align*}
+Therefore,
+\begin{align*}
+	J & = a b r
+\end{align*}
+
+\begin{question}
+	Find the area of the ellipse $\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1$, $a > 0$, $b > 0$.
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		\iint\limits_{D} \dif A &= \iint\limits_{\Delta} J \dif A\\
+		&= \iint\limits_{\Delta} a b r \dif r \dif \theta\\
+		&= \int\limits_{0}^{2 \pi} \int\limits_{0}^{1} a b r \dif r \dif \theta\\
+		&= \frac{1}{2} a b \cdot 2 \pi\\
+		&= \pi a b
+	\end{align*}
+\end{solution}
+
 \end{document}
