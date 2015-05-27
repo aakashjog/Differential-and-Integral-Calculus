@@ -1754,7 +1754,7 @@ Thomas and Finney, \textit{Calculus and Analytic Geometry}, 9th edition, Addison
 	be an operator.\\
 	The determinant
 	\begin{equation*}
-		J = \frac{\partial(x,y)}{\partial(x,y)} =
+		J = \frac{\partial(x,y)}{\partial(u,v)} =
 			\begin{vmatrix}
 				x_u & x_v \\
 				y_u & y_v \\
@@ -1869,12 +1869,12 @@ Therefore,
 		\begin{vmatrix}
 			x_r & x_{\theta} \\
 			y_r & y_{\theta} \\
-		\end{vmatrix}
+		\end{vmatrix}\\
 	  &=
 		\begin{vmatrix}
 			\cos \theta & -r \sin \theta \\
 			\sin \theta & r \cos \theta  \\
-		\end{vmatrix}
+		\end{vmatrix}\\
 	  &= r \cos^2 \theta + r \sin^2 \theta\\
 	  &= r
 \end{align*}
@@ -1998,6 +1998,295 @@ Therefore,
 	Solving,
 	\begin{align*}
 		\iint\limits_{D} (x + y) \dif x \dif y & = \pi
+	\end{align*}
+\end{solution}
+
+\section{Change of Variables in Triple Integrals}
+
+\begin{definition}[Jacobian]
+	Let
+	\begin{align*}
+		T(u,v,w) & = (x,y,z)
+	\end{align*}
+	be an operator.\\
+	The determinant
+	\begin{equation*}
+		J = \frac{\partial(x,y,z)}{\partial(u,v,w)} =
+			\begin{vmatrix}
+				x_u & x_v & x_w \\
+				y_u & y_v & y_w \\
+				z_u & z_v & z_w \\
+			\end{vmatrix}
+	\end{equation*}
+	is called the Jacobian of the operator $T$.
+\end{definition}
+
+\begin{theorem}
+	Let $R$ and $S$ be domains of the first, second, or third kind.\\
+	Let the operator $T$ from $S$ to $R$ be one-to-one and onto.\\
+	Therefore, the inverse operator $T^{-1}$ exists.\\
+	Also, let $T$ be a $C^1$ operator, i.e. $\exists x_u$, $\exists x_v$, $\exists x_w$, $\exists y_u$, $\exists y_v$, $\exists y_w$, $\exists z_u$, $\exists z_v$, $\exists z_w$, which are continuous on $S$.\\
+	Let $f(x,y,z)$ be a continuous function on $R$.\\
+	Then,
+	\begin{equation*}
+		\iint\limits_{R} f(x,y,z) \dif x \dif y \dif z = \iint\limits_{S} f\left( x(u,v,w), y(u,v,w), z(u,v,w) \right) |J| \dif u \dif v \dif w
+	\end{equation*}
+\end{theorem}
+
+\subsection{Cylindrical Coordinates}
+
+Cylindrical coordinates are a special case of change of variables.\\
+The operator for the change of variables is
+\begin{align*}
+	T(r,\theta,z) & = (x,y,z)
+\end{align*}
+where
+\begin{align*}
+	x & = r \cos \theta \\
+	y & = r \sin \theta \\
+	z & = z
+\end{align*}
+Therefore,
+\begin{align*}
+	J &=
+		\begin{vmatrix}
+			x_r & x_{\theta} & x_z \\
+			y_r & y_{\theta} & y_z \\
+			z_r & z_{\theta} & z_z \\
+		\end{vmatrix}\\
+	  &=
+		\begin{vmatrix}
+			\cos \theta & -r \sin \theta & 0 \\
+			\sin \theta & r \cos \theta  & 0 \\
+			0           & 0              & 1 \\
+		\end{vmatrix}\\
+	  &= r \cos^2 \theta + r \sin^2 \theta\\
+	  &= r
+\end{align*}
+
+\begin{question}
+	Calculate the iterative integral
+	\begin{align*}
+		I & = \int\limits_{-2}^{2} \int\limits_{-\sqrt{4 - x^2}}^{\sqrt{4 - x^2}} \int\limits_{\sqrt{x^2 + y^2}}^{2} \left( x^2 + y^2 \right) \dif z \dif y \dif x
+	\end{align*}
+\end{question}
+
+\begin{solution}
+	The domain $\left\{ (x,y) | -2 \le x \le 2 , -\sqrt{4 - x^2} \le y \le \sqrt{4 - x^2} \right\}$ is a circle of radius $2$.\\
+	As $\sqrt{x^2 + y^2} \le z \le 2$, the domain $E$, where $-2 \le x \le 2$, $-\sqrt{4 - x^2} \le y \le \sqrt{4 - x^2}$, $\sqrt{x^2 + y^2} \le z \le 2$ is a cone, with the circular cross section of radius $x^2 + y^2$.\\
+	Therefore,
+	\begin{align*}
+		I & = \int\limits_{-2}^{2} \int\limits_{-\sqrt{4 - x^2}}^{\sqrt{4 - x^2}} \int\limits_{\sqrt{x^2 + y^2}}^{2} \left( x^2 + y^2 \right) \dif z \dif y \dif x \\
+                  & = \iiint\limits_{E} \left( x^2 + y^2 \right) \dif x \dif y \dif z
+	\end{align*}
+	Therefore, let $D_{\mathrm{I}} = \left\{ (r,\theta,z) | 0 \le r \le 2 , 0 \le \theta \le 2 \pi , r \le z \le 2 \right\}$.\\
+	Therefore,
+	\begin{align*}
+		I & = \int\limits_{-2}^{2} \int\limits_{-\sqrt{4 - x^2}}^{\sqrt{4 - x^2}} \int\limits_{\sqrt{x^2 + y^2}}^{2} \left( x^2 + y^2 \right) \dif z \dif y \dif x \\
+                  & = \iiint\limits_{E} \left( x^2 + y^2 \right) \dif x \dif y \dif z                                                                                      \\
+                  & = \iiint\limits_{D_{\mathrm{I}}} r^2 \cdot r \dif r \dif \theta \dif z                                                                                 \\
+                  & = \int\limits_{0}^{2 \pi} \int\limits_{0}^{2} \int\limits_{r}^{2} r^3 \dif z \dif r \dif \theta                                                        \\
+                  & = \int\limits_{0}^{2 \pi} \int\limits_{0}^{2} \left. r^3 z \right|_{z = r}^{z = 2} \dif r \dif \theta                                                  \\
+                  & = \int\limits_{0}^{2 \pi} \int\limits_{0}^{2} \left( 2 r^3 - r^4 \right) \dif r \dif \theta                                                            \\
+                  & = \int\limits_{0}^{2 \pi} \left. \left( \frac{r^4}{2} - \frac{r^5}{5} \right) \right|_{0}^{2} \dif \theta                                              \\
+                  & = \int\limits_{0}^{2 \pi} \left( 8 - \frac{32}{5} \right) \dif \theta                                                                                  \\
+                  & = \frac{8}{5} \cdot 2 \pi                                                                                                                              \\
+                  & = \frac{16 \pi}{5}
+	\end{align*}
+\end{solution}
+
+\subsection{Spherical Coordinates}
+
+Spherical coordinates are a special case of change of variables.\\
+The operator for the change of variables is
+\begin{align*}
+	T(\rho,\theta,\varphi) & = (x,y,z)
+\end{align*}
+where
+\begin{align*}
+	x & = \rho \cos \theta \sin \varphi \\
+	y & = \rho \sin \theta \sin \varphi \\
+	z & = \rho \cos \varphi
+\end{align*}
+Therefore,
+\begin{align*}
+	J &=
+		\begin{vmatrix}
+			x_{\rho} & x_{\theta} & x_{\varphi} \\
+			y_{\rho} & y_{\theta} & y_{\varphi} \\
+			z_{\rho} & z_{\theta} & z_{\varphi} \\
+		\end{vmatrix}\\
+	  &=
+		\begin{vmatrix}
+			\cos \theta \sin \theta & -r \sin \theta \sin \varphi & r \cos \theta \cos \varphi \\
+			\sin \theta \sin \theta & r \cos \theta \sin \varphi  & r \sin \theta \cos \varphi \\
+			\cos \varphi            & 0                           & -r \sin \varphi            \\
+		\end{vmatrix}\\
+	  &= -\rho^2 \sin \varphi
+\end{align*}
+
+\begin{question}
+	Given the sphere $B : x^2 + y^2 + z^2 \le 1$, find $I = \iiint\limits_{B} e^{\left( x^2 + y^2 + z^2 \right)^{\frac{3}{2}}} \dif x \dif y \dif z$.
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		I & = \iiint\limits_{B} e^{\left( x^2 + y^2 + z^2 \right)^{\frac{3}{2}}} \dif x \dif y \dif z                                                         \\
+                  & = \int\limits_{0}^{\pi} \int\limits_{0}^{2 \pi} \int\limits_{0}^{1} e^{\rho^{\frac{3}{2}}} |J| \dif \rho \dif \theta \dif \varphi                 \\
+                  & = \int\limits_{0}^{\pi} \int\limits_{0}^{2 \pi} \int\limits_{0}^{1} e^{\rho^{\frac{3}{2}}} \rho^2 \sin \varphi \dif \rho \dif \theta \dif \varphi \\
+                  & = \int\limits_{0}^{\pi} \int\limits_{0}^{2 \pi} \left. \frac{e^{\rho^3}}{3} \sin \varphi \right|_{\rho = 0}^{\rho = 1} \dif \theta \dif \varphi   \\
+                  & = \frac{e - 1}{3} \int\limits_{0}^{\pi} \int\limits_{0}^{2 \pi} \sin \varphi \dif \theta \dif \varphi                                             \\
+                  & = \frac{e - 1}{3} \int\limits_{0}^{\pi} \sin \varphi \cdot 2 \pi \dif \varphi                                                                     \\
+                  & = 2 \pi \frac{e - 1}{3} \left. (- \cos \theta) \right|_{0}^{\pi}                                                                                  \\
+                  & = \frac{4 \pi (e - 1)}{3}
+	\end{align*}
+\end{solution}
+
+\begin{question}
+	Calculate the volume of a body which is situated above the cone $z = \sqrt{x^2 + y^2}$ and under the sphere $x^2 + y^2 + z^2 = z$.
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		x^2 + y^2 + z^2                                         & = z \\
+		\therefore x^2 + y^2 + z^2 - z                          & = 0 \\
+		\therefore x^2 + y^2 + \left( z - \frac{1}{2} \right)^2 & = \frac{1}{4}
+	\end{align*}
+	Therefore, the sphere has centre $\left( 0 , 0 , \frac{1}{2} \right)$ and radius $\frac{1}{2}$.\\
+	Therefore, the cone and the sphere intersect each other at $z = \frac{1}{2}$.
+	The intersection is a circle with radius $\frac{1}{2}$.\\
+	Therefore, the body is made of a cone of base radius $\frac{1}{2}$ and height $\frac{1}{2}$, and a hemisphere of radius $\frac{1}{2}$.\\
+	In Cartesian coordinates, the sphere is $x^2 + y^2 + z^2 = z$.\\
+	Therefore, in spherical coordinates, the sphere is $\rho^2 = \rho \cos \varphi$.
+	Therefore,
+	\begin{align*}
+		V & = \iiint \dif x \dif y \dif z                                                                                                                                              \\
+                  & = \int\limits_{0}^{2 \pi} \int\limits_{0}^{\frac{\pi}{4}} \int\limits_{0}^{\cos \varphi} \rho^2 \sin \varphi \dif \rho \dif \varphi \dif \theta                            \\
+                  & = \int\limits_{0}^{2 \pi} \int\limits_{0}^{\frac{\pi}{4}} \left. \frac{\rho^3}{3} \sin \varphi \right|_{\rho = 0}^{\rho = \cos \varphi} \dif \rho \dif \varphi \dif \theta \\
+                  & = \int\limits_{0}^{2 \pi} \int\limits_{0}^{\frac{\pi}{4}} \frac{1}{3} \cos^3 \varphi \sin \varphi \dif \varphi \dif \theta                                                 \\
+                  & = 2 \pi \cdot \left. \left( -\frac{\cos^4 \pi}{12} \right) \right|_{0}^{\frac{\pi}{4}}                                                                                     \\
+                  & = 2 \pi \left( -\frac{1}{48} + \frac{1}{12} \right)                                                                                                                        \\
+                  & = 2 \pi \left( \frac{3}{48} \right)                                                                                                                                        \\
+                  & = \frac{\pi}{8}
+	\end{align*}
+\end{solution}
+
+\section{Line Integrals of Scalar Functions}
+
+\begin{definition}[Line integral of scalar functions]
+	Let $C$ be a curve.
+	Let the curve be divided into $n$ parts, by points $P_i$.\\
+	Let $\Delta s_i$ be the length of the curve $P_{i - 1} P_i$.
+	Let ${P_i}^*\left( {x_i}^* , {y_i}^* , {z_i}^* \right)$ be a point on the curve $P_{i - 1} P_i$.\\
+	Let 
+	\begin{align*}
+		\Delta T &= \max\left\{ \Delta s_i \right\}\\
+		\Delta x_i &= x_i - x_{i - 1}\\
+		\Delta y_i &= y_i - y_{i - 1}\\
+		\Delta z_i &= z_i - z_{i - 1}
+	\end{align*}
+	The line integral of a $f(x,y,z)$ over $C$ is defined as
+	\begin{align*}
+		\int\limits_{C} f(x,y,z) \dif s & =  \lim\limits_{\Delta T \to 0} \sum\limits_{i = 1}^{n} f\left( {x_i}^* , {y_i}^* , {z_i}^* \right) \Delta s_i
+	\end{align*}
+	The integral
+	\begin{align*}
+		\int\limits_{C} f(x,y,z) \dif x & =  \lim\limits_{\Delta T \to 0} \sum\limits_{i = 1}^{n} f\left( {x_i}^* , {y_i}^* , {z_i}^* \right) \Delta x_i
+	\end{align*}
+	is called the line integral of $f(x,y,z)$ over $C$ with respect to $x$.\\
+	This integral depends on the direction of $C$.\\
+	The integral
+	\begin{align*}
+		\int\limits_{C} f(x,y,z) \dif y & =  \lim\limits_{\Delta T \to 0} \sum\limits_{i = 1}^{n} f\left( {y_i}^* , {y_i}^* , {z_i}^* \right) \Delta y_i
+	\end{align*}
+	is called the line integral of $f(x,y,z)$ over $C$ with respect to $y$.\\
+	This integral depends on the direction of $C$.\\
+	The integral
+	\begin{align*}
+		\int\limits_{C} f(x,y,z) \dif z & =  \lim\limits_{\Delta T \to 0} \sum\limits_{i = 1}^{n} f\left( {z_i}^* , {y_i}^* , {z_i}^* \right) \Delta z_i
+	\end{align*}
+	is called the line integral of $f(x,y,z)$ over $C$ with respect to $z$.\\
+	This integral depends on the direction of $C$.\\
+	~\\
+	Geometrically, the line integral $\int\limits_{C} f(x,y) \dif s$ is the area under the curve $z = f(x,y)$ above the curve $C$.
+\end{definition}
+
+\begin{definition}[Smooth curve]
+	A curve $C$ which is parametrically given as $\overline{r}(t) = \left( x(t) , y(t) , z(t) \right)$, $t : a \to b$ is said to be smooth if $\overline{r}(t)$ is a continuous function on $[a,b]$, $\overline{r}'(t) \neq 0$ on $(a,b)$, and $\overline{r}'(t)$is continuous on $(a,b)$.
+\end{definition}
+
+\begin{theorem}
+	If $f(x,y,z)$ is continuous and $C$ is smooth, then
+	\begin{align*}
+		\int\limits_{C} f(x,y,z) \dif s & = \int\limits_{a}^{b} f\left( x(t) , y(t), z(t) \right) \sqrt{\left( x'(t) \right)^2 + \left( y'(t) \right)^2 + \left( z'(t) \right)^2} \dif t
+	\end{align*}
+\end{theorem}
+
+\begin{theorem}
+	If $f(x,y,z)$ is continuous and $C$ is smooth, then
+	\begin{align*}
+		\int\limits_{C} f(x,y,z) \dif x & = \int\limits_{a}^{b} f\left( x(t) , y(t) , z(t) \right) x'(t) \dif t
+	\end{align*}
+	\begin{align*}
+		\int\limits_{C} f(x,y,z) \dif y & = \int\limits_{a}^{b} f\left( x(t) , y(t) , z(t) \right) y'(t) \dif t
+	\end{align*}
+	\begin{align*}
+		\int\limits_{C} f(x,y,z) \dif z & = \int\limits_{a}^{b} f\left( x(t) , y(t) , z(t) \right) z'(t) \dif t
+	\end{align*}
+\end{theorem}
+
+\begin{question}
+	Calculate $\int\limits_{C} y \dif x + z \dif y + x \dif z$ for $C$ as shown.
+	\begin{figure}[H]
+		\begin{tikzpicture}
+			\def\xMIN{-1};
+			\def\xMAX{6};
+			\def\yMIN{-1};
+			\def\yMAX{6};
+			\def\zMIN{-1};
+			\def\zMAX{6};
+
+			\def\PI{22/7};
+
+			\begin{scope}[-stealth]
+				\draw (\xMIN,0,0) -- (\xMAX,0,0) node [right] {$x$};
+				\draw (0,\yMIN,0) -- (0,\yMAX,0) node [above] {$y$};
+				\draw (0,0,\zMIN) -- (0,0,\zMAX) node [above] {$z$};
+			\end{scope}
+
+			\begin{scope}
+				\node [below] at (2,0,0) {$(2,0,0)$};
+				\node [left] at (3,4,5) {$(3,4,5)$};
+				\node [above] at (3,4,0) {$(3,4,0)$};
+			\end{scope}
+
+			\begin{scope}[-stealth]
+				\draw (2,0,0) -- (3,4,5);
+				\draw (3,4,5) -- (3,4,0);
+			\end{scope}
+		\end{tikzpicture}
+	\end{figure}
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		C &= C_1 \cup C_2
+	\end{align*}
+	Therefore, for $t : 0 \to 1$,
+	\begin{gather*}
+		C_1 : \overline{r}(t) = (2 + 1 \cdot t , 0 + 4 \cdot t , 0 + 5 \cdot t) \\
+		C_2 : \overline{r}(t) = (3 + 0 \cdot t , 4 + 0 \cdot t , 5 - 5 \cdot t)
+	\end{gather*}
+	Therefore,
+	\begin{align*}
+		\int\limits_{C} y \dif x + z \dif y + x \dif z & = \int\limits_{C_1} y \dif x + z \dif y + x \dif z + \int\limits_{C_2} y \dif x + z \dif y + x \dif z    \\
+                                                               & = \quad \int\limits_{0}^{1} \left( y_1(t) {x_1}'(t) + z_1(t) {y_1}'(t) + x_1(t) {z_1}'(t) \right) \dif t \\
+                                                               & \quad + \int\limits_{0}^{1} \left( y_2(t) {x_2}'(t) + z_2(t) {y_2}'(t) + x_2(t) {z_2}'(t) \right) \dif t \\
+                                                               & = \quad \int\limits_{0}^{1} \left( 4 t + 5 t \cdot 4 + (2 + t) \cdot 5 \right) \dif t                    \\
+                                                               & + \quad \int\limits_{0}^{1} \left( 4 \cdot 0 + (5 - 5 t) \cdot 0 + 3 \cdot (-5) \right) \dif t           \\
+                                                               & = \int\limits_{0}^{1} (29 t - 5) \dif t                                                                  \\
+                                                               & = \left. \left( 29 \frac{t^2}{2} - 5 t \right) \right|_{0}^{1}                                           \\
+                                                               & = \frac{19}{2}
 	\end{align*}
 \end{solution}
 
