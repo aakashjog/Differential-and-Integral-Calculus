@@ -1766,4 +1766,202 @@ Therefore,
 	\end{align*}
 \end{solution}
 
+\recitation
+\section{Change of Variables in Triple Integrals}
+
+\begin{theorem}
+	Let $T : \Delta \to D$ be a one-to-one, onto, continuously differentiable transformation, with $\det|D_T| \neq 0$, such that $(x,y,z) = T(u,v,w)$.
+	\footnote{Continuously differentiable means that all partial derivatives $x_u$, $x_v$, $x_w$, $y_u$, $y_v$, $y_w$, $z_u$, $z_v$, $z_w$, exist and are continuous.}
+	be non-zero.
+	Let $f$ be integrable on $D$.\\
+	Then,
+	\begin{equation*}
+		\iint\limits_{D} f \dif A = \iint\limits_{\Delta} f \circ T \cdot |D T| \dif A
+	\end{equation*}
+\end{theorem}
+
+\subsection{Cylindrical Coordinates}
+
+For polar coordinates,
+\begin{align*}
+	x & = r \cos \theta \\
+	y & = r \sin \theta \\
+	z & = r             \\
+	J & = r
+\end{align*}
+
+\begin{question}
+	Calculate $\iiint\limits_{V} \frac{z}{\sqrt{z^2 + y^2}} \dif V$, where $V = \left\{ z \le \sqrt{x^2 + y^2} + 1 , x^2 + y^2 \le 1 , z \ge 0 \right\}$
+\end{question}
+
+\begin{solution}
+	$z \le \sqrt{x^2 + y^2} + 1$ is the volume under a cone with its apex at $(0,0,1)$.\\
+	Therefore, as $x^2 + y^2 \le 1$ and $z \ge 0$, $V$ is the volume under the cone, from $z = 0$ to $z = 2$.\\
+	Therefore, in cylindrical coordinates,
+	\begin{align*}
+		z         & = \sqrt{x^2 + y^2} + 1 & \to &  & z   & = r + 1 \\
+		x^2 + y^2 & = 1                    & \to &  & r^2 & = 1     \\
+		z         & = 0                    & \to &  & z   & = 0
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\iiint\limits_{V} \frac{z}{\sqrt{x^2 + y^2}} \dif V &= \iiint\limits_{\Delta} \frac{z}{r} r \dif V\\
+		&= \int\limits_{0}^{2 \pi} \int\limits_{0}^{1} \int\limits_{0}^{r + 1} z \dif z \dif r \dif \theta\\
+		&= 2 \pi \int\limits_{0}^{1} \frac{(r + 1)^2}{2} \dif r\\
+		&= 2 \pi \left. \left( \frac{(r + 1)^3}{6} \right) \right|_{0}^{1}\\
+		&= 2 \pi \left( \frac{8}{6} - \frac{1}{6} \right)\\
+		&= \frac{14 \pi}{6}
+	\end{align*}
+\end{solution}
+
+\subsection{Spherical Coordinates}
+
+For spherical coordinates,
+\begin{align*}
+	x & = r \cos \theta \sin \varphi \\
+	y & = r \sin \theta \sin \varphi \\
+	z & = r \cos \varphi             \\
+	J & = r^2 \sin t
+\end{align*}
+where $\rho$ is the distance from $(0,0,0)$ to $(x,y,z)$; $\theta$ is the angle between the line joining $(0,0,0)$ and $(x,y,z)$, and the $x$ axis; and $\varphi$ is the angle between the line joining $(0,0,0)$ and $(x,y,z)$, and the $z$ axis.
+
+\begin{question}
+	Calculate the volume of the body
+	\begin{align*}
+		V & = \left\{ (x,y,z) : x^2 + y^2 + z^2 \le 1 , z \ge \sqrt{x^2 + y^2} \right\}
+	\end{align*}
+\end{question}
+
+\begin{solution}
+	$x^2 + y^2 + z^2 \le 1$ is the volume inside a sphere of radius $1$ centred at $(0,0,0)$, and $z \ge \sqrt{x^2 + y^2}$ is the area above a right angled cone.\\
+	Therefore, in spherical coordinates,
+	\begin{align*}
+		x^2 + y^2 + z^2            & = 1 & \to &  & r^2            & = 1                                                                      \\
+		\therefore x^2 + y^2 + z^2 & = 1 & \to &  & r              & = 1                                                                      \\
+		\sqrt{x^2 + y^2}           & = z & \to &  & r \cos \varphi & = \sqrt{(r \cos \theta \sin \varphi)^2 + (r \sin \theta \sin \varphi)^2} \\
+		\sqrt{x^2 + y^2}           & = z & \to &  & r \cos \varphi & = r \sin \varphi
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\iiint\limits_{V} \dif V & = \iiint\limits_{\Delta} r^2 \sin \varphi \dif V                                                                               \\
+                                         & = \int\limits_{0}^{\frac{\pi}{4}} \int\limits_{0}^{1} \int\limits_{0}^{2 \pi} r^2 \sin \varphi \dif \theta \dif r \dif \varphi \\
+                                         & = \frac{2 \pi}{3} \left( 1 - \frac{1}{\sqrt{2}} \right)
+	\end{align*}
+\end{solution}
+
+\begin{question}
+	Calculate $\iiint\limits_{V} \frac{1}{\sqrt{x^2 + y^2 + z^2}} \dif V$ where
+	\begin{align*}
+		V & = \left\{ (x,y,z) : x^2 + y^2 + z^2 \le 2 z \right\}
+	\end{align*}
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		x^2 + y^2 + z^2 &\le 2 z\\
+		\therefore x^2 + y^2 + (z - 1)^2 &\le 1
+	\end{align*}
+	Therefore, the region is a sphere of radius $1$ centred at $(0,0,1)$.\\
+	Therefore, let
+	\begin{align*}
+		x & = r \cos \theta \sin \varphi \\
+		y & = r \sin \theta \sin \varphi \\
+		z & = r \cos \varphi + 1
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		J & = r^2 \sin \varphi
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\iiint\limits_{V} \frac{1}{\sqrt{x^2 + y^2 + z^2}} \dif V &= \iiint\limits_{\Delta} \frac{r^2 \sin \varphi}{\sqrt{x^2 + y^2 + z^2}} \dif V
+	\end{align*}
+	\begin{align*}
+		\sqrt{x^2 + y^2 + z^2} &= \sqrt{(r \cos \theta \sin \varphi)^2 (r \sin \theta \sin \varphi)^2 + (r \cos \varphi + 1)^2}\\
+		&= r^2 + 2 r \cos \varphi + 1
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\iiint\limits_{V} \frac{1}{\sqrt{x^2 + y^2 + z^2}} \dif V &= \int\limits_{0}^{2 \pi} \int\limits_{0}^{1} \int\limits_{0}^{\pi} \frac{r^2 \sin \varphi}{\sqrt{r^2 + 2 r \cos \varphi + 1}} \dif \varphi \dif r \dif \theta
+	\end{align*}
+	Let
+	\begin{align*}
+		t &= r^2 + 2 r \cos \varphi + 1\\
+		\therefore \dif t &= -2 r \sin \varphi \dif \varphi
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\int\limits_{0}^{\pi} \frac{r^2 \sin \varphi}{\sqrt{r^2 + 2 r \cos \varphi + 1}} \dif \varphi & = -\frac{r}{2} \int\limits_{r^2 + 2 r + 1}^{r^2 - 2 r + 1} \frac{1}{\sqrt{t}} \dif t \\
+                                                                                                              & = -r \cdot \left. \sqrt{t} \right|_{r^2 + 2 r + 1}^{r^2 - 2 r + 1}                   \\
+                                                                                                              & = -r \left( \sqrt{r^2 + 2 r + 1} - \sqrt{r^2 - 2 r + 1} \right)                      \\
+                                                                                                              & = -r \left( \sqrt{(r + 1)^2} - \sqrt{(r - 1)^2} \right)                              \\
+		\intertext{As $r \le 1$, $r - 1 \le 0$. Therefore, $\sqrt{(r - 1)^2} = (r - 1)$. Therefore,}
+		\int\limits_{0}^{\pi} \frac{r^2 \sin \varphi}{\sqrt{r^2 + 2 r \cos \varphi + 1}} \dif \varphi & = r \left( (r + 1) - (1 - r) \right)                                                \\
+                                                                                                              & = 2 r^2
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\iiint\limits_{V} \frac{1}{\sqrt{x^2 + y^2 + z^2}} \dif V & = \int\limits_{0}^{2 \pi} \int\limits_{0}^{1} 2 r^2 \dif r \dif \theta \\
+                                                                          & = 2 \pi \int\limits_{0}^{1} 2 r^2 \dif r                               \\
+                                                                          & = 2 \pi \cdot \frac{2}{3}                                              \\
+                                                                          & = \frac{4 \pi}{3}
+	\end{align*}
+\end{solution}
+
+\begin{question}
+	Calculate $\iiint\limits_{V} x^5 y z - y^5 x z \dif V$, where $V$ is bounded by $y = 0$, $z = 0$, $z = 1$, and satisfies $x^2 - y^2 \ge 1$ and $0 \le x^2 + y^2 \le 4$.
+\end{question}
+
+\begin{solution}
+	Let
+	\begin{align*}
+		u & = z         \\
+		v & = x^2 - y^2 \\
+		w & = x^2 + y^2
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		J^{-1} &=
+			\begin{vmatrix}
+				u_x & u_y & u_z \\
+				v_x & v_y & v_z \\
+				w_x & w_y & w_z \\
+			\end{vmatrix}\\
+		&=
+			\begin{vmatrix}
+				0   & 0    & 1 \\
+				2 x & -2 y & 0 \\
+				2 x & 2 y  & 0 \\
+			\end{vmatrix}\\
+		&= 8 x y\\
+		\therefore J &= \frac{1}{8 x y}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		z         & = 0   & \to &  & u & = 0   \\
+		z         & = 1   & \to &  & u & = 1   \\
+		y         & = 0   & \to &  & v & = w   \\
+		x^2 - y^2 & \ge 1 & \to &  & v & \ge 1 \\
+		x^2 + y^2 & = 0   & \to &  & w & = 0   \\
+		x^2 + y^2 & = 4   & \to &  & w & = 4
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\iiint\limits_{V} x^5 y z - y^5 x z \dif V &= \iiint\limits_{\Delta} \left( x^5 y z - y^5 x z \right) \frac{1}{8 x y} \dif V\\
+		&= \int\limits_{0}^{1} \int\limits_{1}^{4} \int\limits_{1}^{w} \frac{x^5 y z - y^5 x z}{8 x y} \dif v \dif w \dif u\\
+		&= \frac{1}{8} \int\limits_{0}^{1} \int\limits_{1}^{4} \int\limits_{1}^{w} x^4 z - y^4 z \dif v \dif w \dif u\\
+		&= \frac{1}{8} \int\limits_{0}^{1} \int\limits_{1}^{4} \int\limits_{1}^{w} z (x^4 - y^4) \dif v \dif w \dif u\\
+		&= \frac{1}{8} \int\limits_{0}^{1} \int\limits_{1}^{4} \int\limits_{1}^{w} z (x^2 + y^2) (x^2 - y^2) \dif v \dif w \dif u\\
+		&= \frac{1}{8} \int\limits_{0}^{1} \int\limits_{1}^{4} \int\limits_{1}^{w} u v w \dif v \dif w \dif u\\
+		&= \frac{1}{8} \int\limits_{0}^{1} \int\limits_{1}^{4} \left. \frac{u v^2 w}{2} \right|_{v = 1}^{v = w} \dif v \dif w \dif u\\
+		&= \frac{1}{8} \int\limits_{0}^{1} \int\limits_{1}^{4} \frac{u w^3}{3} - \frac{u w}{2} \dif w \dif u\\
+		&= \frac{1}{8} \int\limits_{0}^{1} \left. \frac{u w^4}{4} - \frac{u w^2}{2} \right|_{w = 1}^{w = 4}\\
+		&= \frac{1}{8} \int\limits_{0}^{1} \frac{255 u}{4} - \frac{15 u}{2} \dif u\\
+		&= \frac{1}{8} \int\limits_{0}^{1} \frac{225 u}{4} \dif u\\
+		&= \frac{1}{8} \left. \left( \frac{225 u^2}{8} \right) \right|_{0}^{1}\\
+		&= \frac{1}{8} \cdot \frac{225}{8}\\
+		&= \frac{225}{64}
+	\end{align*}
+\end{solution}
+
 \end{document}
