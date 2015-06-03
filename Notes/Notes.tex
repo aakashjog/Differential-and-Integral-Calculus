@@ -2180,10 +2180,10 @@ Therefore,
 	Let ${P_i}^*\left( {x_i}^* , {y_i}^* , {z_i}^* \right)$ be a point on the curve $P_{i - 1} P_i$.\\
 	Let 
 	\begin{align*}
-		\Delta T &= \max\left\{ \Delta s_i \right\}\\
-		\Delta x_i &= x_i - x_{i - 1}\\
-		\Delta y_i &= y_i - y_{i - 1}\\
-		\Delta z_i &= z_i - z_{i - 1}
+		\Delta T   & = \max\left\{ \Delta s_i \right\} \\
+		\Delta x_i & = x_i - x_{i - 1}                 \\
+		\Delta y_i & = y_i - y_{i - 1}                 \\
+		\Delta z_i & = z_i - z_{i - 1}
 	\end{align*}
 	The line integral of a $f(x,y,z)$ over $C$ is defined as
 	\begin{align*}
@@ -2289,5 +2289,262 @@ Therefore,
                                                                & = \frac{19}{2}
 	\end{align*}
 \end{solution}
+
+\section{Line Integrals of Vector Functions}
+
+\begin{definition}[Line integral of scalar functions]
+	Let $C$ be a curve.
+	Let the curve be divided into $n$ parts, by points $P_i$.\\
+	Let $\Delta s_i$ be the length of the curve $P_{i - 1} P_i$.
+	Let ${P_i}^*\left( {x_i}^* , {y_i}^* , {z_i}^* \right)$ be a point on the curve $P_{i - 1} P_i$.\\
+	Let 
+	\begin{align*}
+		\Delta T   & = \max\left\{ \Delta s_i \right\} \\
+		\Delta x_i & = x_i - x_{i - 1}                 \\
+		\Delta y_i & = y_i - y_{i - 1}                 \\
+		\Delta z_i & = z_i - z_{i - 1}
+	\end{align*}
+	The line integral of a $f(x,y,z)$ over $C$ is defined as
+	\begin{align*}
+		\int\limits_{C} \overline{F}(x,y,z) \cdot \hat{T}(x,y,z) \dif s & = \lim\limits_{\Delta T \to 0} \sum\limits_{i = 1}^{n} \left( \overline{F}\left( {x_i}^* , {y_i}^* , {z_i}^* \right) \cdot \hat{T}\left( {x_i}^* , {y_i}^* , {z_i}^* \right) \right) \Delta s_i
+	\end{align*}
+\end{definition}
+
+\begin{theorem}
+	If $C : \overline{r}(t) = \left( x(t) , y(t) , z(t) \right)$, $t : a \to b$, then
+	\begin{align*}
+		W & =\int\limits_{C} \overline{F} \cdot \hat{T} \dif s                                                                                                                \\
+                  & = \int\limits_{a}^{b} \left( \overline{F}\left( \overline{r}(t) \right) \cdot {\overline{r}}'(t) \dif t                                                           \\
+                  & = \int\limits_{C} \overline{F} \cdot \dif \overline{r}                                                                                                            \\
+                  & = \int\limits_{a}^{b} \left( P\left( \overline{r}(t) \right) x'(t) + Q\left( \overline{r}(t) \right) y'(t) + R\left( \overline{r}(t) \right) z'(t) \right) \dif t \\
+                  & = \int\limits_{C} P \dif x + Q \dif y + R \dif z
+	\end{align*}
+\end{theorem}
+
+\begin{theorem}[Fundamental Theorem of Line Integrals]
+	Let $C$ be a smooth curve in $\mathbb{R}^2$ or $\mathbb{R}^3$ given parametrically by $\overline{r}(t)$, $t : a \to b$.
+	Let $f$ be a continuous function of $(x,y)$ or $(x,y,z)$, on $C$, and $\nabla f$ be a continuous vector function in a connected domain $D$ which contains $C$.
+	Then
+	\begin{align*}
+		W & = \int\limits_{C} \nabla f \cdot \hat{T} \dif s                     \\
+                  & = f\left( \overline{r}(b) \right) - f\left( \overline{r}(a) \right) \\
+                  & = f(B) - f(A)
+	\end{align*}
+	\label{Fundamental_Theorem_of_Line_Integrals}
+\end{theorem}
+
+\begin{definition}[Simple curve]
+	A curve $C$ is called a simple curve if it does not intersect itself.
+\end{definition}
+
+\begin{definition}[Connected domain]
+	A domain $D \subset \mathbb{R}^2$ is called connected if for any two points from $D$, the is a path $C$ which connects the points and remains in $D$.
+\end{definition}
+
+\begin{definition}[Simple connected domain]
+	A connected domain $D \subset \mathbb{R}^2$ is called simple connected if any simple closed curve from $D$ contains inside itself only points in $D$.
+\end{definition}
+
+\begin{definition}[Curve with positive orientation]
+	A simple closed curve $C$ is called a curve with a positive orientation, or with anti-clockwise orientation if the domain $D$ bounded by $C$ always remains on the left when we circulate over $C$ by $\overline{r}(t), t : a \to b$.
+\end{definition}
+
+\begin{theorem}[Green's Theorem]
+	Let $C$ be a piecewise smooth, simple, and closed curve in $\mathbb{R}^2$ with positive orientation.
+	Let $D$ be a domain bounded by $C$.
+	If there exist continuous first order partial derivatives of $P(x,y)$ and $Q(x,y)$ in an open domain which contains $D$, then
+	\begin{align*}
+		W & = \int\limits_{C} \overline{F} \cdot \hat{T} \dif s \\
+                  & = \int\limits_{C} P \dif x + Q \dif y               \\
+                  & = \iint\limits_{D} (Q_x - P_y) \dif A
+	\end{align*}
+	\label{Green's_Theorem}
+\end{theorem}
+
+\section{Surface Integrals of Scalar Functions}
+
+\begin{definition}[Parametic representation of surfaces]
+	Let the surface $S$ be given by
+	\begin{align*}
+		\overline{r}(u,v) & = \left( f(u,v) , g(u,v) , h(u,v) \right)
+	\end{align*}
+	The equations
+	\begin{align*}
+		x & = f(u,v) \\
+		y & = g(u,v) \\
+		z & = h(u,v)
+	\end{align*}
+	are called the parametric equations of $S$
+\end{definition}
+
+\begin{question}
+	Write a parametric representation of the sphere $x^2 + y^2 + z^2 = 1$.
+\end{question}
+
+\begin{solution}
+	In spherical coordinates, with $\rho = 1$,
+	\begin{align*}
+		x & = \sin \varphi \cos \theta \\
+		y & = \sin \varphi \sin \theta \\
+		z & = \cos \varphi
+	\end{align*}
+\end{solution}
+
+\begin{definition}
+	If a smooth surface $S$ is given by $\overline{r}(u,v) = \left( x(u,v) , y(u,v) , z(u,v) \right)$, $u,v \in D$ and $\overline{r}(u,v)$ is one-to-one, then the surface area of $S$ is
+	\begin{align*}
+		A & = \iint\limits_{D} \left| \overline{r}_u \times \overline{r}_v \right| \dif u \dif v
+	\end{align*}
+	where
+	\begin{align*}
+		\overline{r}_u & = (x_u, y_u, z_u) \\
+		\overline{r}_v & = (x_v, y_v, z_v)
+	\end{align*}
+\end{definition}
+
+\begin{question}
+	Find the surface area of the sphere $x^2 + y^2 + z^2 = 1$.
+\end{question}
+
+\begin{solution}
+	In spherical coordinates, with $\rho = 1$,
+	\begin{align*}
+		x & = \sin \varphi \cos \theta \\
+		y & = \sin \varphi \sin \theta \\
+		z & = \cos \varphi
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\overline{r}(\theta , \varphi) & = (\sin \varphi \cos \theta , \sin \varphi \sin \theta , \cos \varphi)
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\overline{r}_{\theta}  & = (-\sin \varphi \sin \theta , \sin \varphi \cos \theta , 0) \\
+		\overline{r}_{\varphi} & = (\cos \varphi \cos \theta , \cos \varphi \sin \theta , -\sin \varphi)
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\overline{r}_{\theta} \times \overline{r}_{\varphi} &=
+			\begin{vmatrix}
+				\hat{i}                   & \hat{j}                  & \hat{k}       \\
+				-\sin \varphi \sin \theta & \sin \varphi \cos \theta & 0             \\
+				\cos \varphi \cos \theta  & \cos \varphi \sin \theta & -\sin \varphi \\
+			\end{vmatrix}\\
+		&= \quad \hat{i} \left( -\sin^2 \varphi \cos \theta \right)\\
+		&\quad - \hat{j} \left( \sin^2 \varphi \sin \theta \right)\\
+		&\quad + \hat{k} \left( -\sin \varphi \cos \varphi \sin^2 \theta - \sin \varphi \cos \varphi \cos^2 \theta \right)
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\left| \overline{r}_{\theta} \times \overline{r}_{\varphi} \right| & = \sqrt{\sin^4 \varphi \cos^2 \theta + \sin^4 \varphi \sin^2 \theta + \sin^2 \varphi \cos^2 \varphi} \\
+                                                                                   & = \sqrt{\sin^4 \varphi + \sin^2 \varphi \cos^2 \varphi}                                              \\
+                                                                                   & = \sqrt{\sin^2 \varphi}                                                                              \\
+                                                                                   & = \sin \varphi
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		A &= \iint\limits_{D} \sin \varphi \dif \theta \dif \varphi\\
+		&= \int\limits_{0}^{2 \pi} \int\limits_{0}^{\pi} \sin \varphi \dif \varphi \dif \theta\\
+		&= 2 \pi \left. (-\cos \varphi) \right|_{0}^{\pi}\\
+		&= 2 \pi (1 + 1)\\
+		&= 4 \pi
+	\end{align*}
+\end{solution}
+
+\begin{definition}
+	Let $S$ be a surface.
+	Let the surface be divided into small surfaces $S_{i j}$.\\
+	Let ${P_i j}^*\left( {x_i j}^* , {y_i j}^* , {z_i j}^* \right)$ be a point on $S_{i j}$.
+	Let the area of $S_{i j}$ be $\Delta S_{i j}$.\\
+	Let
+	\begin{align*}
+		\Delta T &= \max\{\Delta S_{i j}\}
+	\end{align*}
+	The surface integral of the function $f(x,y,z)$ on the surface $S$ is defined as
+	\begin{align*}
+		\iint\limits_{S} f(x,y,z) \dif S &= \lim\limits_{\Delta T \to 0} \sum\limits_{i = 1}^{n} \sum\limits_{j = 1}^{m} f\left( {x_{i j}}^* , {y_{i j}}^* , {z_{i j}}^* \right) \Delta S_{i j}
+	\end{align*}
+	if it exists and does not depend on the division and ${P_{i j}}^*$.
+\end{definition}
+
+\begin{theorem}
+	If $S$ is smooth and given by $z = g(x,y)$, $(x,y) \in D$, then
+	\begin{align*}
+		\iint\limit_{S} f(x,y,z) \dif S &= \iint\limits_{D} f\left( x , y , g(x,y) \right) \sqrt{1 + (g_x)^2 + (g_y)^2} \dif x \dif y
+	\end{align*}
+\end{theorem}
+\begin{theorem}
+	If $S$ is smooth and given parametrically by $\overline{r}(u,v) = \left( x(u,v) , y(u,v) , z(u,v) \right)$, $(u,v) \in D$, then
+	\begin{align*}
+		\iint\limits_{S} f(x,y,z) \dif S &= \iint\limits_{D} f\left( \overline{r}(u,v) \right) \left| \overline{r}_u \times \overline{r}_v \right| \dif u \dif v
+	\end{align*}
+\end{theorem}
+
+\begin{question}
+	Find $\iint\limits_{S} x^2 \dif S$ where $S : x^2 + y^2 + z^2 = 1$.
+\end{question}
+
+\begin{solution}
+	In spherical coordinates with $\rho = 1$,
+	\begin{align*}
+		x &= \cos \theta \sin \varphi\\
+		y &= \sin \theta \sin \varphi\\
+		z &= \cos \varphi
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\overline{r}(\theta , \varphi) & = (\sin \varphi \cos \theta , \sin \varphi \sin \theta , \cos \varphi)
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\overline{r}_{\theta}  & = (-\sin \varphi \sin \theta , \sin \varphi \cos \theta , 0) \\
+		\overline{r}_{\varphi} & = (\cos \varphi \cos \theta , \cos \varphi \sin \theta , -\sin \varphi)
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\overline{r}_{\theta} \times \overline{r}_{\varphi} &=
+			\begin{vmatrix}
+				\hat{i}                   & \hat{j}                  & \hat{k}       \\
+				-\sin \varphi \sin \theta & \sin \varphi \cos \theta & 0             \\
+				\cos \varphi \cos \theta  & \cos \varphi \sin \theta & -\sin \varphi \\
+			\end{vmatrix}\\
+		&= \quad \hat{i} \left( -\sin^2 \varphi \cos \theta \right)\\
+		&\quad - \hat{j} \left( \sin^2 \varphi \sin \theta \right)\\
+		&\quad + \hat{k} \left( -\sin \varphi \cos \varphi \sin^2 \theta - \sin \varphi \cos \varphi \cos^2 \theta \right)
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\left| \overline{r}_{\theta} \times \overline{r}_{\varphi} \right| & = \sqrt{\sin^4 \varphi \cos^2 \theta + \sin^4 \varphi \sin^2 \theta + \sin^2 \varphi \cos^2 \varphi} \\
+                                                                                   & = \sqrt{\sin^4 \varphi + \sin^2 \varphi \cos^2 \varphi}                                              \\
+                                                                                   & = \sqrt{\sin^2 \varphi}                                                                              \\
+                                                                                   & = \sin \varphi
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\iint\limits_{S} x^2 \dif S & = \iint\limits_{D} (\cos \theta \sin \varphi)^2 \sin \varphi \dif \theta \dif \varphi                                                                                             \\
+                                            & = \int\limits_{0}^{2 \pi} \int\limits_{0}^{\pi} \sin^3 \varphi \cos^2 \theta \dif \varphi \dif \theta                                                                             \\
+                                            & = \int\limits_{0}^{\pi} \sin^3 \varphi \dif \varphi \int\limits_{0}^{2 \pi} \cos^2 \theta \dif \theta                                                                             \\
+                                            & = \int\limits_{0}^{\pi} \left( 1 - \cos^2 \varphi \right) \sin \varphi \dif \varphi \int\limits_{0}^{2 \pi} \frac{1 + \cos 2 \theta}{2} \dif \theta                               \\
+                                            & = \int\limits_{0}^{\pi} \left( \sin \varphi - \cos^2 \varphi \sin \varphi \right) \dif \varphi \left( \left. \frac{\theta}{2} + \frac{\sin 2 \theta}{4} \right|_{0}^{\pi} \right) \\
+                                            & = \left( \left. -\cos \varphi + \frac{\cos^3 \varphi}{3} \right|_{0}^{\pi} \right) \pi                                                                                            \\
+                                            & = \left( \left( 1 - \frac{1}{3} \right) - \left( -1 + \frac{1}{3} \right) \right) \pi                                                                                             \\
+                                            & = \frac{4 \pi}{3}
+	\end{align*}
+\end{solution}
+
+\section{Surface Integrals of Vector Functions}
+
+\begin{definition}[Oriented surface]
+	If a normal vector $\overline{n}(x,y,z)$ to the surface $S$ is continuously changing on $S$ then $S$ is said to be an oriented surface.
+\end{definition}
+
+\begin{theorem}
+	If a surface is given by $F(x,y,z) = k$, then $\nabla F$ is a normal vector to the surface at a point on it.
+\end{theorem}
+
+\begin{definition}[Surface with positive orientation]
+	A surface $S$ is said to have positive orientation if $\hat{n}$ is positive.\\
+	A closed surface $S$ is said to have positive orientation if $\hat{n}$ is directed outwards.
+\end{definition}
 
 \end{document}
