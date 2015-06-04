@@ -1964,4 +1964,288 @@ where $\rho$ is the distance from $(0,0,0)$ to $(x,y,z)$; $\theta$ is the angle 
 	\end{align*}
 \end{solution}
 
+\recitation
+
+\section{Surface Integrals of Scalar Functions}
+
+\begin{question}
+	Calculate the area of the plane $z = 2 - \frac{1}{2} y - \frac{1}{3} x$, bounded by $x = 0$, $y = 0$, $z = 0$.
+\end{question}
+
+\begin{solution}
+	\begin{figure}[H]
+		\begin{tikzpicture}
+			\def\xMIN{-2};
+			\def\xMAX{8};
+			\def\yMIN{-2};
+			\def\yMAX{8};
+			\def\zMIN{-2};
+			\def\zMAX{8};
+
+			\begin{scope}[stealth-stealth, lightgray]
+				\draw (\xMIN,0,0) -- (\xMAX,0,0) node [right] {$x$};
+				\draw (0,\yMIN,0) -- (0,\yMAX,0) node [above] {$y$};
+				\draw (0,0,\zMIN) -- (0,0,\zMAX) node [below left] {$z$};
+			\end{scope}
+
+			\begin{scope}
+				\filldraw [pattern = north west lines] (6,0,0) -- (0,4,0) -- (0,0,2) -- cycle;
+			\end{scope}
+
+			\begin{scope}[lightgray]
+				\node [below] at (0,0,0) {$0$};
+
+				\foreach \x in {\xMIN,...,-2,-1,1,2,...,\xMAX}
+				{
+					\filldraw (\x,0,0) circle (0.5pt) node [below] {$\x$};
+				}
+				
+				\foreach \y in {\yMIN,...,-2,-1,1,2,...,\yMAX}
+				{
+					\filldraw (0,\y,0) circle (0.5pt) node [left] {$\y$};
+				}
+
+				\foreach \z in {\zMIN,...,-2,-1,1,2,...,\zMAX}
+				{
+					\filldraw (0,0,\z) circle (0.5pt) node [left] {$\z$};
+				}
+			\end{scope}
+		\end{tikzpicture}
+	\end{figure}
+	As the surface is the graph of a function of $x$ and $y$, it can be parametrized as,
+	\begin{align*}
+		\overline{r}(x,y) & = \left( x , y , f(x,y) \right)\\
+                                  & = \left( x , y , 2 - \frac{2}{3} y - \frac{1}{3} y \right)
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\overline{r}_u & = \left( 1 , 0 , -\frac{1}{3} \right) \\
+		\overline{r}_v & = \left( 0 , 1 , -\frac{1}{2} \right)
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\overline{r}_u \times \overline{r}_v &=
+			\begin{vmatrix}
+				\hat{i} & \hat{j} & \hat{k}      \\
+				1       & 0       & -\frac{1}{3} \\
+				0       & 1       & -\frac{1}{2} \\
+			\end{vmatrix}\\
+		&= \frac{1}{3} \hat{i} + \frac{1}{2} \hat{j} + \hat{k}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\left| \overline{r}_u \times \overline{r}_v \right| & = \sqrt{\left( \frac{1}{3} \right)^2 + \left( \frac{1}{2} \right)^2 + 1^2} \\
+                                                                    & = \sqrt{\frac{1}{9} + \frac{1}{4} + 1}                                     \\
+                                                                    & = \sqrt{\frac{49}{36}}                                                     \\
+                                                                    & = \frac{7}{6}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		A & = \iint\limits_{S} \dif S                                                           \\
+                  & = \iint\limits_{D} \left| \overline{r}_u \times\overline{r}_v \right| \dif x \dif y \\
+                  & = \iint\limits_{D} \frac{7}{6} \dif x \dif y                                        \\
+                  & = \frac{7}{6} \iint\limits_{D} \dif x \dif y                                        \\
+                  & = \frac{7}{6} \int\limits_{0}^{6} \int\limits_{0}^{4 - \frac{2}{3} x} \dif y \dif x \\
+                  & = \frac{7}{6} \int\limits_{0}^{6} \left( 4 - \frac{2}{3} x \right) \dif x           \\
+                  & = \frac{7}{6} \left( 4 \cdot 6 - \frac{2}{3} \cdot \frac{36}{2} \right)             \\
+                  & = \frac{7}{6} \left( 24 - 12 \right)                                                \\
+                  & = \frac{7}{6} \cdot 12
+                  & = 14
+	\end{align*}
+\end{solution}
+
+\begin{question}
+	Calculate the area of the surface of the part of the cone $z = \sqrt{x^2 + y^2}$ which satisfies $x^2 + y^2 \le 2 x$.
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		x^2 + y^2                  & \le 2 x \\
+		\therefore (x - 1)^2 + y^2 & \le 1
+	\end{align*}
+	Therefore, $x^2 + y^2 \le 2 x$ is the region inside a cone of radius $1$ centred at $(1,0,0)$.\\
+	As the surface is the graph of a function of $x$ and $y$, it can be parametrized as,
+	\begin{align*}
+		\overline{r}(x,y) & = \left( x , y , f(x,y) \right) \\
+                                  & = \left( x , y , \sqrt{x^2 + y^2} \right)
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\overline{r}_u & = \left( 1 , 0 , \frac{x}{\sqrt{x^2 + y^2}} \right) \\
+		\overline{r}_u & = \left( 0 , 1 , \frac{y}{\sqrt{x^2 + y^2}} \right)
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\overline{r}_u \times \overline{r}_v &=
+			\begin{vmatrix}
+				\hat{i} & \hat{j} & \hat{k}                    \\
+				1       & 0       & \frac{x}{\sqrt{x^2 + y^2}} \\
+				0       & 1       & \frac{y}{\sqrt{x^2 + y^2}} \\
+			\end{vmatrix}\\
+		&= \left( \frac{y}{\sqrt{x^2 + y^2}} \right)^2 \hat{i} + \left( \frac{x}{\sqrt{x^2 + y^2}} \right)^2 \hat{j} + \hat{k}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\left| \overline{r}_u \times \overline{r}_v \right| & = \sqrt{\left( \frac{x}{\sqrt{x^2 + y^2}} \right)^2 + \left( \frac{y}{\sqrt{x^2 + y^2}} \right)^2 + 1} \\
+                                                                    & = \sqrt{2}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		A & = \iint\limits_{S} \dif S \\
+                  & = \iint\limits_{D} \sqrt{2} \dif x \dif y
+	\end{align*}
+	Let
+	\begin{align*}
+		x & = r \cos \theta + 1 \\
+		y & = r \sin \theta
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		A & = \iint\limits_{D} \sqrt{2} \dif x \dif y \\
+                  & = \sqrt{2} \pi
+	\end{align*}
+\end{solution}
+
+\begin{question}
+	Calculate the area of the surface of the part of the cone $z = \sqrt{x^2 + y^2}$ which satisfies $x^2 + y^2 \le 2 x$.
+\end{question}
+
+\begin{solution}
+	Let
+	\begin{align*}
+		x            & = r \cos \theta \\
+		y            & = r \sin \theta \\
+		\therefore z & = r
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\overline{s}(r,\theta) & = (r \cos \theta , r \sin \theta , r)
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\overline{s}_r        & = (\cos \theta , \sin \theta , 1) \\
+		\overline{s}_{\theta} & = (-r \sin \theta , r \cos \theta , 0)
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\overline{s}_r \times \overline{s}_{\theta} &=
+			\begin{vmatrix}
+				\hat{i}        & \hat{j}       & \hat{k} \\
+				\cos \theta    & \sin \theta   & 1       \\
+				-r \sin \theta & r \cos \theta & 0       \\
+			\end{vmatrix}\\
+			&= r \cos \theta \hat{i} + r \sin \theta \hat{i} + (-r \sin^2 \theta - r \cos^2 \theta) \hat{k}\\
+			&= r \cos \theta \hat{i} + r \sin \theta \hat{i} - (r) \hat{k}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\left| \overline{s}_r \times \overline{s}_{\theta} \right| & = \sqrt{(r \cos \theta)^2 + (r \sin \theta)^2 + r^2} \\
+                                                                           & = r \sqrt{2}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		A & = \iint\limits_{S} \dif S                                                                                    \\
+                  & = \iint\limits_{D} r \sqrt{2} \dif r \dif \theta                                                             \\
+                  & = \int\limits_{-\frac{\pi}{2}}^{\frac{\pi}{2}} \int\limits_{0}^{2 \cos \theta} \sqrt{2} r \dif r \dif \theta \\
+                  & = \sqrt{2} \int\limits_{-\frac{\pi}{2}}^{\frac{\pi}{2}} 2 \cos^2 \theta \dif \theta                          \\
+                  & = \sqrt{2} \int\limits_{-\frac{\pi}{2}}^{\frac{\pi}{2}} \cos 2 \theta + 1 \dif \theta                        \\
+                  & = \pi \sqrt{2}
+	\end{align*}
+\end{solution}
+
+\begin{question}
+	Calculate $\iint\limits_{S} x^2 \dif S$, where $S : \left\{ (x,y,z) : x^2 + y^2 = 1 , 0 \le z \le 1 \right\}$.
+\end{question}
+
+\begin{solution}
+	The surface is a cylinder with radius $\sqrt{a}$.\\
+	Therefore, in cylindrical coordinates with $r = \sqrt{a}$,
+	\begin{align*}
+		x & = \sqrt{a} \cos \theta \\
+		y & = \sqrt{a} \sin \theta \\
+		z & = z
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\overline{s}(\theta,z) & = \left( \sqrt{a} \cos \theta , \sqrt{a} \sin \theta , z \right)
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\overline{s}_{\theta} & = \left( -\sqrt{a} \sin \theta , \sqrt{a} \sin \theta , 0 \right) \\
+		\overline{s}_z        & = (0 , 0 , 1)
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\overline{s}_{\theta} \times \overline{s}_z &=
+			\begin{vmatrix}
+				\hat{i}               & \hat{j}              & \hat{k} \\
+				-\sqrt{a} \sin \theta & \sqrt{a} \cos \theta & 0       \\
+				0                     & 0                    & 1       \\
+			\end{vmatrix}\\
+		&= \sqrt{a} \cos \theta \hat{i} + \sqrt{a} \sin \theta \hat{j}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\left| \overline{s}_{\theta} \times \overline{s}_z \right| & = \sqrt{\left( \sqrt{a} \cos \theta \right)^2 + \left( \sqrt{a} \sin \theta \right)^2} \\
+                                                                           & = \sqrt{a}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\iint\limits_{S} x^2 \dif S & = \iint\limits_{D} \sqrt{a} \dif x \dif y                                           \\
+                                            & = \int\limits_{0}^{2 \pi} \int\limits_{0}^{1} a \cos^2 \theta \cdot \sqrt{a} \dif z \\
+                                            & = a \sqrt{a} \int\limits_{0}^{2 \pi} \cos^2 \theta \dif \theta                      \\
+                                            & = a \sqrt{a} \int\limits_{0}^{2 \pi} \frac{1 - \cos 2 \theta}{2} \dif \theta        \\
+                                            & = a \sqrt{a} \pi
+	\end{align*}
+\end{solution}
+
+\begin{question}
+	Calculate $\iint\limits_{S} z^2 \dif S$, where $S$ is the unit sphere $x^2 + y^2 + z^2 = 1$.
+\end{question}
+
+\begin{solution}
+	In spherical coordinates with $\rho = 1$,
+	\begin{align*}
+		x & = \cos \theta \sin \varphi \\
+		y & = \sin \theta \sin \varphi \\
+		z & = \cos \varphi
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\overline{r} & = (\cos \theta \sin \varphi , \sin \theta \sin \varphi , \cos \varphi)
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\overline{r}_{\theta}  & = (-\sin \theta \sin \varphi , \cos \theta \sin \varphi , 0) \\
+		\overline{r}_{\varphi} & = (\cos \theta \cos \varphi , \sin \theta \cos \varphi , -\sin \varphi)
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\overline{r}_{\theta} \times \overline{r}_{\varphi} &=
+			\begin{vmatrix}
+				\hat{i}                   & \hat{j}                  & \hat{k}       \\
+				-\sin \theta \sin \varphi & \cos \theta \sin \varphi & 0             \\
+				\cos \theta \cos \varphi  & \sin \theta \cos \varphi & -\sin \varphi \\
+			\end{vmatrix}\\
+			&= -\cos \theta \sin^2 \varphi \hat{i} - \sin \theta \sin^2 \varphi \hat{j} - \left( \sin^2 \theta \cos \varphi \sin \varphi - \cos^2 \theta \sin \varphi \cos \varphi \right) \hat{k}\\
+			&= -\cos \theta \sin^2 \varphi \hat{i} - \sin \theta \sin^2 \varphi \hat{j} - \cos \varphi \sin \varphi \hat{k}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\left| \overline{r}_{\theta} \times \overline{r}_{\varphi} \right| & = \sqrt{\cos^2 \theta \sin^4 \varphi + \sin^2 \theta \sin^4 \varphi + \cos^2 \varphi \sin^2 \varphi} \\
+                                                                                   & = \sqrt{\sin^4 \varphi + \cos^2 \varphi \sin^2 \varphi}                                              \\
+                                                                                   & = \sqrt{\sin^2 \varphi}                                                                              \\
+                                                                                   & = \sin \varphi
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\iint\limits_{S} z^2 \dif S & = \iint\limits_{D} \sin \varphi \dif \theta \dif \varphi                                             \\
+                                            & = \int\limits_{0}^{\pi} \int\limits_{0}^{2 \pi} \cos^2 \varphi \sin \varphi \dif \theta \dif \varphi \\
+                                            & = 2 \pi \int\limits_{0}^{\pi} \cos^2 \varphi \sin \varphi \dif \varphi                               \\
+                                            & = 2 \pi \left( \left. -\frac{\cos^3 \varphi}{3} \right|_{0}^{\pi} \right)                            \\
+                                            & = 2 \pi \left( \frac{1}{3} + \frac{1}{3} \right)                                                     \\
+                                            & = \frac{4 \pi}{3}
+	\end{align*}
+\end{solution}
+
 \end{document}
