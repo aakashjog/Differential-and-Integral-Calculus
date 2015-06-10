@@ -2547,4 +2547,249 @@ Therefore,
 	A closed surface $S$ is said to have positive orientation if $\hat{n}$ is directed outwards.
 \end{definition}
 
+\begin{definition}[Surface Integral of Vector Functions]
+	If 
+	\begin{align*}
+		\overline{F}(x,y,z) = \left( P(x,y,z) , Q(x,y,z) , R(x,y,z) \right)
+	\end{align*}
+	is a continuous vector function on $S$ with orientation $\hat{n}$, then the surface integral of $\overline{F}$ over $\overline{S}$ is
+	\begin{align*}
+		\iint\limits_{S} \overline{F} \cdot \dif \overline{S} & = \iint\limits_{S} \overline{F} \cdot \hat{n} \dif S
+	\end{align*}
+	This integral is also called the flux of $\overline{F}$ through $\overline{S}$ in direction $\hat{n}$.
+\end{definition}
+
+\begin{theorem}
+	Let
+	\begin{align*}
+		\overline{F}(x,y,z) = \left( P(x,y,z) , Q(x,y,z) , R(x,y,z) \right)
+	\end{align*}
+	~\\
+	If $S : z = g(x,y)$, $(x,y) \in D$, then,
+	\begin{align*}
+		\iint\limits_{S} \overline{F} \cdot \dif \overline{S} & = \iint\limits_{S} \overline{S} \cdot \hat{n} \dif S \\
+                                                                      & = \iint\limits_{D} \left( -P g_x - Q g_y + R \right) \dif x \dif y
+	\end{align*}
+	for $S$ with positive orientation, and
+	\begin{align*}
+		\iint\limits_{S} \overline{F} \cdot \dif \overline{S} & = \iint\limits_{S} \overline{S} \cdot \hat{n} \dif S \\
+                                                                      & = -\iint\limits_{D} \left( -P g_x - Q g_y + R \right) \dif x \dif y
+	\end{align*}
+	for $S$ with negative orientation.
+	~\\
+	If $S$ is given parametrically as
+	\begin{align*}
+		\overline{r}(u,v) & = \left( x(u,v) , y(u,v) , z(u,v) \right)
+	\end{align*}
+	for $(u,v) \in D$, then
+	\begin{align*}
+		\iint\limits_{S} \overline{F} \cdot \dif \overline{S} & = \iint\limits_{S} \overline{S} \cdot \hat{n} \dif S \\
+                                                                      & = \iint\limits_{D} \overline{F} \cdot \left( \overline{r}_u \times \overline{r}_v \right) \dif u \dif v
+	\end{align*}
+	~\\
+	If $S$ is closed and given parametrically, it can be solved as above.\\
+	If $S$ is closed and not given parametrically, it can be divided into surfaces of the first kind, and each of the integrals over the smaller surfaces can be solved as above.
+\end{theorem}
+
+\begin{question}
+	Given
+	\begin{align*}
+		\overline{F} & = (x,y,z)
+	\end{align*}
+	Calculate $\iint\limits_{S} \overline{F} \cdot \hat{n} \dif S$, where $S : x^2 + y^2 + z^2 = 1$.
+\end{question}
+
+\begin{solution}
+	The surface $S$ is given by
+	\begin{align*}
+		x^2 + y^2 + z^2 & = 1 \\
+		\therefore z    & = \pm \sqrt{1 - x^2 - y^2}
+	\end{align*}
+	Therefore, let
+	\begin{align*}
+		S_1 & = -\sqrt{1 - x^2 - y^2} \\
+		S_2 & = \sqrt{1 - x^2 - y^2}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\iint\limits_{S} \overline{F} \cdot \hat{n} \dif S & = \iint\limits_{S_1} \overline{F} \cdot \hat{n} \dif S + \iint\limits_{S_2} \overline{F} \cdot \hat{n} \dif S                         \\
+                                                                   & = -\iint\limits_{D} \left( -P (g_1)_x - Q (g_1)_y + R \right) \dif x \dif y                                                           \\
+                                                                   & \quad + \iint\limits_{D} \left( -P (g_1)_x - Q (g_1)_y + R \right) \dif x \dif y                                                      \\
+                                                                   & = 2 \iint\limits_{D} \left( x \frac{x}{\sqrt{1 - x^2 - y^2}} + y \frac{y}{\sqrt{1 - x^2 - y^2}} + \sqrt{1 - x^2 - y^2} \right) \dif A \\
+                                                                   & = 2 \iint\limits_{D} \frac{1}{\sqrt{1 - x^2 - y^2}} \dif x \dif y                                                                     \\
+                                                                   & = 2 \int\limits_{0}^{1} \int\limits_{0}^{2 \pi} \frac{1}{1 - r^2} r \dif \theta \dif r                                                \\
+                                                                   & = 2 \int\limits_{0}^{1} \frac{r}{\sqrt{1 - r^2}} \dif r \int\limits_{0}^{2 \pi} \dif \theta                                           \\
+                                                                   & = 4 \pi \left. \left( -\sqrt{1 - r^2} \right) \right|_{0}^{1}                                                                         \\
+                                                                   & = 4 \pi
+	\end{align*}
+\end{solution}
+
+\begin{question}
+	Given
+	\begin{align*}
+		\overline{F} & = (x,y,z)
+	\end{align*}
+	Calculate $\iint\limits_{S} \overline{F} \cdot \hat{n} \dif S$, where $S : x^2 + y^2 + z^2 = 1$, using parametric representation.
+\end{question}
+
+\begin{solution}
+	$S$ is given parametrically by
+	\begin{align*}
+		\overline{r}(\theta,\varphi) = \left( x(\theta,\varphi) , y(\theta,\varphi) , z(\theta,\varphi) \right)
+	\end{align*}
+	where
+	\begin{align*}
+		x(\theta,\varphi) & = \cos \theta \sin \varphi \\
+		y(\theta,\varphi) & = \sin \theta \sin \varphi \\
+		z(\theta,\varphi) & = \cos \varphi
+	\end{align*}
+	with $D : \{0 \le \theta \le 2 \pi , 0 \le \varphi \le \pi\}$.\\
+	Therefore,
+	\begin{align*}
+		\overline{r}_{\theta} \times \overline{r}_{\varphi} & = \left( -\cos \theta \sin^2 \varphi , -\sin \theta \sin^2 \varphi , -\sin \varphi \cos \varphi \right)
+	\end{align*}
+	If $\theta = \frac{\pi}{2}$, $\varphi = \frac{\pi}{2}$,
+	\begin{align*}
+		\overline{r}_{\theta} \times \overline{r}_{\varphi} & = (0,-1,0)
+	\end{align*}
+	However, the positive normal to $S$ at that point is positively directed.\\
+	Therefore,
+	\begin{align*}
+		\iint\limits_{S} \overline{F} \cdot \hat{n} \dif S & = -\iint\limits_{D} \overline{F} \cdot \left( \overline{r}_{\theta} \times \overline{r}_{\varphi} \right) \dif \theta \dif \varphi                     \\
+                                                                   & = -\iint\limits_{D} \left( -\cos^2 \theta \sin^3 \varphi - \sin^2 \theta \sin^3 \varphi - \cos^2 \varphi \sin \varphi \right) \dif \theta \dif \varphi \\
+                                                                   & = \iint\limits_{D} \left( \sin^3 \varphi + \cos^2 \varphi \sin \varphi \right) \dif \theta \dif \varphi                                                \\
+                                                                   & = \iint\limits_{D} \sin \varphi \dif \theta \dif \varphi                                                                                               \\
+                                                                   & = \int\limits_{0}^{2 \pi} \int\limits_{0}^{\pi} \sin \varphi \dif \varphi \dif \theta                                                                  \\
+                                                                   & = \int\limits_{0}^{2 \pi} \dif \theta \int\limits_{0}^{\pi} \sin \varphi \dif \varphi                                                                  \\
+                                                                   & = 2 \pi \left. \left( -\cos \varphi \right) \right|_{0}^{\pi}                                                                                          \\
+                                                                   & = 4 \pi
+	\end{align*}
+\end{solution}
+
+\section{Green's Theorem}
+
+\begin{definition}[Curl/Rotor]
+	If
+	\begin{align*}
+		\overline{F}(x,y,z) & = \left( P(x,y,z) , Q(x,y,z) , R(x,y,z) \right)
+	\end{align*}
+	then
+	\begin{align*}
+		\curl \overline{R} &= \nabla \times \overline{F}\\
+		                &=
+			\begin{vmatrix}
+				\hat{i}   & \hat{j}   & \hat{k}   \\
+				\dpd{}{x} & \dpd{}{y} & \dpd{}{z} \\
+				P         & Q         & R
+			\end{vmatrix}
+	\end{align*}
+\end{definition}
+
+\section{Divergence}
+
+\begin{definition}[Divergence]
+	If
+	\begin{align*}
+		\overline{F}(x,y,z) & = \left( P(x,y,z) , Q(x,y,z) , R(x,y,z) \right)
+	\end{align*}
+	then
+	\begin{align*}
+		\div \overline{R} & = \nabla \cdot \overline{F} \\
+                                  & = \dpd{P}{x} + \dpd{Q}{y} + \dpd{R}{z}
+	\end{align*}
+\end{definition}
+
+\begin{theorem}
+	If a vector field $\overline{F}(x,y,z)$ is defined on $\mathbb{R}^3$, if there exist continuous first order partial derivatives of $P$, $Q$, $R$, and if $\curl \overline{F} = 0$, then $\overline{F}$ is a conservative vector field.\\
+	In this case, $\exists f(x,y,z)$, such that $\overline{F} = \nabla f$.
+\end{theorem}
+
+\begin{theorem}[Green's Theorem]
+	Let $C$ be a piecewise smooth, simple, and closed curve in $\mathbb{R}^2$ with positive orientation.
+	Let $D$ be a domain bounded by $C$.
+	If there exist continuous first order partial derivatives of $P(x,y)$ and $Q(x,y)$ in an open domain which contains $D$, then
+	\begin{equation*}
+		W = \int\limits_{C} \overline{F} \cdot \hat{T} \dif s = \int\limits_{C} P \dif x + Q \dif y = \iint\limits_{D} (Q_x - P_y) \dif A = \iint\limits_{D} \curl \overline{F} \cdot \hat{k} \dif A
+	\end{equation*}
+	\label{Green's_Theorem}
+\end{theorem}
+
+\section{Stoke's Theorem}
+
+\begin{definition}[Curve with positive orientation]
+	Let $S$ be an oriented surface with normal $\hat{n}$ and let $C$ be a curve bounding $S$.
+	$C$ is called a curve with positive orientation with respect to $S$ if, as we walk on $C$ in this direction and with our head in the direction of $\hat{n}$, the surface $S$ is always on our left.
+\end{definition}
+
+\begin{theorem}[Stoke's Theorem]
+	Let $S$ be a piecewise smooth surface with normal $\hat{n}$ and let $S$ be bounded by a curve $C$ which is piecewise smooth, simple, closed and with positive orientation with respect to $S$.
+	Let $\overline{F}(x,y,z) = \left( P(x,y,z), Q(x,y,z), R(x,y,z) \right)$ be a vector field such that there exist continuous first order partial derivatives of $P$, $Q$, $R$ in an open domain of $\mathbb{R}^3$ which contains $S$.
+	Then 
+	\begin{equation*}
+		\int\limits_{C} \overline{F} \cdot \hat{T} \dif s = \iint\limits_{S} \curl \overline{F} \cdot \hat{n} \dif S
+	\end{equation*}
+	\nameref{Stoke's_Theorem} is a generalization of \nameref{Green's_Theorem}.
+	\label{Stoke's_Theorem}
+\end{theorem}
+
+\begin{question}
+	Verify \nameref{Stoke's_Theorem} when $\overline{F} = \left( -y^2 , x , z^2 \right)$ and $C$ is the intersecton like between the plane $y + z = 2$ and the culinder $x^2 + y^2 = 1$.
+	The direction of $C$ is clockwise, when seen from above.
+\end{question}
+
+\begin{solution}
+	Let $S$ be the circular surface enclosed by $C$.\\
+	As $C$ is clockwise, when seen from above, $\hat{n}$ is negative.\\
+	Let
+	\begin{align*}
+		x & = \cos t \\
+		y & = \sin t
+	\end{align*}
+	Therefore, as $y + z = 2$,
+	\begin{align*}
+		z & = 2 - \sin t
+	\end{align*}
+	where, $t : 2 \pi \to 0$.\\
+	$t$ goes from $2 \pi$ to $0$ and not from $0$ to $2 \pi$, as $C$ is directed clockwise, when seen from above.\\
+	Therefore, the LHS is,
+	\begin{align*}
+		\int\limits_{C} \overline{F} \cdot \hat{T} \dif S & = \int\limits_{2 \pi}^{0} \left( P x'(t) + Q y'(t) + R z'(t) \right) \dif t                                                         \\
+                                                                  & = \int\limits_{2 \pi}^{0} \left( -\sin^2 t \cdot -\sin t + \cos t \cdot \cos t + (2 - \sin t)^2 \cdot -\cos t \right) \dif t        \\
+                                                                  & = \int\limits_{2 \pi}^{0} \left( \left( 1 - \cos^2 t \right) \sin t + \frac{1 + \cos 2 t}{2} - (2 - \sin t)^2 \cos t \right) \dif t \\
+                                                                  & = \left. -\cos t + \frac{\cos^3 t}{3} + \frac{t}{2} + \frac{\sin 2 t}{4} + \frac{(2 - \sin t)^3}{3} \right|_{2 \pi}^{0}             \\
+                                                                  & = -\pi
+	\end{align*}
+	~\\
+	\begin{align*}
+		\curl \overline{F} &= \nabla \times \overline{F}\\
+		                   &=
+			\begin{vmatrix}
+				\hat{i}   & \hat{j}   & \hat{k}   \\
+				\dpd{}{x} & \dpd{}{y} & \dpd{}{z} \\
+				P         & Q         & R
+			\end{vmatrix}\\
+		                   &=
+			\begin{vmatrix}
+				\hat{i}   & \hat{j}   & \hat{k}   \\
+				\dpd{}{x} & \dpd{}{y} & \dpd{}{z} \\
+				-y^2      & x         & z^2
+			\end{vmatrix}\\
+		                   &= (0 - 0) \hat{i} - (0 - 0) \hat{j} + (1 + 2 y) \hat{k}\\
+		                   &= (1 + 2 y) \hat{k}\\
+		                   &= \tilde{P} \hat{i} + \tilde{Q} \hat{j} + \tilde{R} \hat{k}
+	\end{align*}
+	As $C$ is clockwise, when seen from above, $\hat{n}$ is negative.\\
+	Therefore, the RHS is,
+	\begin{align*}
+		\iint\limits_{S} \curl \overline{F} \cdot \hat{n} \dif S & = -\iint\limits_{D} \left( -\tilde{P} g_x - \tilde{Q} q_y + \tilde{R} \right) \dif A                                               \\
+                                                                         & = -\iint\limits_{D} \tilde{R} \dif A                                                                                               \\
+                                                                         & = -\iint\limits_{D} (1 + 2 y) \dif A                                                                                               \\
+                                                                         & = -\int\limits_{0}^{1} \int\limits_{0}^{2 \pi} (1 + 2 r \sin \theta) r \dif \theta \dif r                                          \\
+                                                                         & = -\int\limits_{0}^{1} \int\limits_{0}^{2 \pi} r \dif \theta \dif r - \int\limits_{0}^{2 \pi} 2 r^2 \sin \theta \dif \theta \dif r \\
+                                                                         & = -\int\limits_{0}^{1} r \dif r \int\limits_{0}^{2 \pi} \dif \theta                                                                \\
+                                                                         & = -\pi
+	\end{align*}
+	\qed
+\end{solution}
+
 \end{document}
