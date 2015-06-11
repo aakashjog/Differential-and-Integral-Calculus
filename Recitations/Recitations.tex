@@ -2248,4 +2248,177 @@ where $\rho$ is the distance from $(0,0,0)$ to $(x,y,z)$; $\theta$ is the angle 
 	\end{align*}
 \end{solution}
 
+\recitation
+
+\section{Surface Integrals of Vector Functions}
+
+\begin{question}
+	Find the outward unit normal vector for the surface $z = x^2 + y^2$.
+\end{question}
+
+\begin{solution}
+	If $z = g(x,y)$, $\overline{N} = (g_x,g_y,-1)$.\\
+	As the $z$ coordinate is negative, $\overline{N}$ points outwards.\\
+	Therefore,
+	\begin{align*}
+		\hat{n} & = \pm \frac{(2 x , 2 y , -1)}{\sqrt{4 x^2 + 4 y^2 + 1}}
+	\end{align*}
+\end{solution}
+
+\begin{question}
+	Find the unit normal vectors which point outwards for $S = T_1 \cup T_2 \cup T_3$, where
+	\begin{align*}
+		T_1 & = \left\{ (x,y,z) | x^2 + y^2 = 4 , 1 \le z \le 4 \right\} \\
+		T_2 & = \left\{ (x,y,z) | x^2 + y^2 \le 4 , z = 1 \right\}       \\
+		T_3 & = \left\{ (x,y,z) | x^2 + y^2 \le 4 , z = 4 \right\}
+	\end{align*}
+\end{question}
+
+\begin{solution}
+	In cylindrical coordinates with $r = 2$,
+	\begin{align*}
+		x & = 2 \cos \theta \\
+		y & = 2 \sin \theta \\
+		z & = z
+	\end{align*}
+	Therefore, for $T_1$, $0 \le \theta \le 2 \pi$, $1 \le z \le 4$.\\
+	Therefore,
+	\begin{align*}
+		T_1(\theta,z) & = (2 \cos \theta , 2 \sin \theta , z)
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		(T_1)_{\theta} & = (-2 \sin \theta , 2 \cos \theta , 0) \\
+		(T_2)_z        & = (0 , 0 , 1)
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		(T_1)_{\theta} \times (T_1)_z &=
+			\begin{vmatrix}
+				\hat{i}        & \hat{j}       & \hat{k} \\
+				-2 \sin \theta & 2 \cos \theta & 0       \\
+				0              & 0             & 1       \\
+			\end{vmatrix}\\
+			                      &= (2 \cos \theta , 2 \sin \theta , 0)
+	\end{align*}
+	For $\theta = 0$, $(T_1)_{\theta} \times (T_1)_z = (2,0,0)$.\\
+	Therefore, it is directed outwards, with respect to the cylinder.\\
+	Therefore, the unit normal is
+	\begin{align*}
+		\hat{n_1} & = \frac{(2 \cos \theta , 2 \sin \theta , 0)}{2}
+	\end{align*}
+	$T_2$ and $T_3$ are parts of the planes $z = 1$ and $z = 4$ respectively.\\
+	Therefore, the unit normals directed outwards with respect to the cylinder are
+	\begin{align*}
+		\hat{n_2} & = (0,0,-1) \\
+		\hat{n_3} & = (0,0,1)
+	\end{align*}
+\end{solution}
+
+\begin{question}
+	Calculate $\iint\limits_{S} \overline{F} \cdot \hat{n} \dif S$ where $\overline{F} = \left( -x^2 , -y , z^2 \right)$.
+	$S$ is the cone $z = \sqrt{x^2 + y^2}$ bounded by $z = 1$ and $z = 2$, with orientation outwards with respect to the cone.
+\end{question}
+
+\begin{solution}
+	The surface $S$ can be parametrized as
+	\begin{align*}
+		\overline{r} & = \left( x,y,\sqrt{x^2 + y^2} \right)
+	\end{align*}
+	with $(x,y) \in D$, where $D : \{1 \le x^2 + y^2 \le 4\}$.\\
+	Therefore, $D$ is the region between circles of radii $1$ and $2$, centred at $(0,0,0)$.\\
+	Therefore, the outward normals are given by
+	\begin{align*}
+		\hat{n} & = (g_x , g_y , -1) \\
+                        & = \left( \frac{x}{\sqrt{x^2 + y^2}} , \frac{y}{x^2 + y^2} , -1 \right)
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\iint\limits_{S} \overline{F} \cdot \hat{n} \dif S & = \iint\limits_{D} \left( -x , -y , z^2 \right) \left( \frac{x}{\sqrt{x^2 + y^2}} , \frac{y}{\sqrt{x^2 + y^2}} , -1 \right) \dif S             \\
+                                                                   & = \iint\limits_{D} \left( -x , -y, x^2 + y^2 \right) \left( \frac{x}{\sqrt{x^2 + y^2}} , \frac{y}{\sqrt{x^2 + y^2}} , -1 \right) \dif x \dif y \\
+                                                                   & = \iint\limits_{D} -\frac{x^2}{\sqrt{x^2 + y^2}} - \frac{y^2}{\sqrt{x^2 + y^2}} - \left( x^2 + y^2 \right) \dif x \dif y                       \\
+                                                                   & = \int\limits_{0}^{2 \pi} \int\limits_{1}^{2} \left( -\frac{r^2}{r} - r^2 \right) r \dif r \dif \theta                                         \\
+                                                                   & = 2 \pi \int\limits_{1}^{2} -r^2 - r^3 \dif r                                                                                                  \\
+                                                                   & = -\frac{73 \pi}{6}
+	\end{align*}
+	~\\
+	Alternatively, by $S$ can be parametrized as
+	\begin{align*}
+		\overline{\Gamma} & = (r \cos \theta , r \sin \theta , r)
+	\end{align*}
+	with $(r,\theta) \in D$, where $D : \{1 \le r \le 2 , 0 \le \theta \le 2 \pi \}$.\\
+	Therefore, $D$ is the region between circles of radii $1$ and $2$, centred at $(0,0,0)$.\\
+	Therefore,
+	\begin{align*}
+		\overline{\Gamma}_r \times \overline{\Gamma}_{\theta} & = (-r \cos \theta , -r \sin \theta , r \cos^2 \theta + r \sin^2 \theta) \\
+                                                                        & = (-r \cos \theta , -r \sin \theta , r)
+	\end{align*}
+	As this vector is directed inwards with respect to the cone,
+	\begin{align*}
+		\hat{n} & = -\overline{\Gamma}_r \times \overline{\Gamma}_{\theta} \\
+                        & = (r \cos \theta , r \sin \theta , -r)
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\iint\limits_{S} \overline{F} \cdot \hat{n} \dif S & = \int\limits_{0}^{2 \pi} \int\limits_{1}^{2} (-r \cos \theta , -r \sin \theta , r^2) \cdot (r \cos \theta , r \sin \theta , -r) \dif r \dif \theta \\
+                                                                   & = 2 \pi \int\limits_{1}^{2} -r^2 - r^2 \dif r                                                                                                       \\
+                                                                   & = -\frac{73 \pi}{6}
+	\end{align*}
+\end{solution}
+
+\section{Stoke's Theorem}
+
+\begin{question}
+	Let $C$ be the circle $x^2 + y^2 = 4$, and let $\overline{F} = (2 z,3 x,5 y)$.
+	Calculate $\int\limits_{C} \overline{F} \dif r$, where the direction of $C$ is positive.
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		\curl \overline{F} &=
+			\begin{vmatrix}
+				\hat{i}   & \hat{j}   & \hat{k}   \\
+				\dpd{}{x} & \dpd{}{y} & \dpd{}{z} \\
+				2 z       & 3 x       & 5 y       \\
+			\end{vmatrix}\\
+		                   &= (5,2,3)
+	\end{align*}
+	Let $S$ be the paraboloid $z = 4 - x^2 - y^2$, $z \ge 0$.\\
+	Parametrizing $\overline{F}$,
+	\begin{align*}
+		\overline{\Gamma}                                          & = \left( x , y , 4 - x^2 - y^2 \right) \\
+		\therefore \overline{\Gamma}_x \times \overline{\Gamma}_y & = (-2 x , -2 y , -1)
+	\end{align*}
+	As this vector is directed inwards,
+	\begin{align*}
+		\hat{n} & = -\overline{\Gamma}_x \times \overline{\Gamma}_y \\
+                        & = (2 x , 2 y , 1)
+	\end{align*}
+	Therefore, by Stoke's Theorem,
+	\begin{align*}
+		\int\limits_{C} \overline{F} \dif r & = \int\limits_{S} \curl \overline{F} \cdot \hat{n} \dif S                                                              \\
+                                                    & = \iint\limits_{D} (5,2,3) \cdot (2 x , 2 y , 1) \dif A                                                                \\
+                                                    & = \iint\limits_{D} \left( 10 x + 4 y + 3 \right) \dif x \dif y                                                         \\
+                                                    & = \int\limits_{0}^{2 \pi} \int\limits_{0}^{2} \left( 10 r \cos \theta + 4 r \sin \theta + 3 \right) \dif r \dif \theta \\
+                                                    & = 12 \pi
+	\end{align*}
+	~\\
+	Alternatively, let $S$ be the circular region of radius $2$.
+	Parametrizing $\overline{F}$,
+	\begin{align*}
+		\overline{\Gamma}                                          & = (x,y,0) \\
+		\therefore \overline{\Gamma}_x \times \overline{\Gamma}_y & = (0,0,1)
+	\end{align*}
+	As this vector is directed outwards,
+	\begin{align*}
+		\hat{n} & = (0,0,1)
+	\end{align*}
+	Therefore, by Stoke's Theorem,
+	\begin{align*}
+		\int\limits_{C} \overline{F} \dif r & = \int\limits_{S} \curl \overline{F} \cdot \hat{n} \dif S \\
+                                                    & = \iint\limits_{D} (5,2,3) \cdot (0,0,1) \dif A \\
+                                                    & = 12 \pi
+	\end{align*}
+\end{solution}
+
 \end{document}
