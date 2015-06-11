@@ -2314,7 +2314,7 @@ Therefore,
 	If $C : \overline{r}(t) = \left( x(t) , y(t) , z(t) \right)$, $t : a \to b$, then
 	\begin{align*}
 		W & =\int\limits_{C} \overline{F} \cdot \hat{T} \dif s                                                                                                                \\
-                  & = \int\limits_{a}^{b} \left( \overline{F}\left( \overline{r}(t) \right) \cdot {\overline{r}}'(t) \dif t                                                           \\
+                  & = \int\limits_{a}^{b} \left( \overline{F}\left( \overline{r}(t) \right) \right) \cdot {\overline{r}}'(t) \dif t                                                           \\
                   & = \int\limits_{C} \overline{F} \cdot \dif \overline{r}                                                                                                            \\
                   & = \int\limits_{a}^{b} \left( P\left( \overline{r}(t) \right) x'(t) + Q\left( \overline{r}(t) \right) y'(t) + R\left( \overline{r}(t) \right) z'(t) \right) \dif t \\
                   & = \int\limits_{C} P \dif x + Q \dif y + R \dif z
@@ -2348,18 +2348,6 @@ Therefore,
 \begin{definition}[Curve with positive orientation]
 	A simple closed curve $C$ is called a curve with a positive orientation, or with anti-clockwise orientation if the domain $D$ bounded by $C$ always remains on the left when we circulate over $C$ by $\overline{r}(t), t : a \to b$.
 \end{definition}
-
-\begin{theorem}[Green's Theorem]
-	Let $C$ be a piecewise smooth, simple, and closed curve in $\mathbb{R}^2$ with positive orientation.
-	Let $D$ be a domain bounded by $C$.
-	If there exist continuous first order partial derivatives of $P(x,y)$ and $Q(x,y)$ in an open domain which contains $D$, then
-	\begin{align*}
-		W & = \int\limits_{C} \overline{F} \cdot \hat{T} \dif s \\
-                  & = \int\limits_{C} P \dif x + Q \dif y               \\
-                  & = \iint\limits_{D} (Q_x - P_y) \dif A
-	\end{align*}
-	\label{Green's_Theorem}
-\end{theorem}
 
 \section{Surface Integrals of Scalar Functions}
 
@@ -2470,7 +2458,7 @@ Therefore,
 \begin{theorem}
 	If $S$ is smooth and given by $z = g(x,y)$, $(x,y) \in D$, then
 	\begin{align*}
-		\iint\limit_{S} f(x,y,z) \dif S &= \iint\limits_{D} f\left( x , y , g(x,y) \right) \sqrt{1 + (g_x)^2 + (g_y)^2} \dif x \dif y
+		\iint\limits_{S} f(x,y,z) \dif S &= \iint\limits_{D} f\left( x , y , g(x,y) \right) \sqrt{1 + (g_x)^2 + (g_y)^2} \dif x \dif y
 	\end{align*}
 \end{theorem}
 \begin{theorem}
@@ -2567,12 +2555,12 @@ Therefore,
 	~\\
 	If $S : z = g(x,y)$, $(x,y) \in D$, then,
 	\begin{align*}
-		\iint\limits_{S} \overline{F} \cdot \dif \overline{S} & = \iint\limits_{S} \overline{S} \cdot \hat{n} \dif S \\
+		\iint\limits_{S} \overline{F} \cdot \dif \overline{S} & = \iint\limits_{S} \overline{F} \cdot \hat{n} \dif S \\
                                                                       & = \iint\limits_{D} \left( -P g_x - Q g_y + R \right) \dif x \dif y
 	\end{align*}
 	for $S$ with positive orientation, and
 	\begin{align*}
-		\iint\limits_{S} \overline{F} \cdot \dif \overline{S} & = \iint\limits_{S} \overline{S} \cdot \hat{n} \dif S \\
+		\iint\limits_{S} \overline{F} \cdot \dif \overline{S} & = \iint\limits_{S} \overline{F} \cdot \hat{n} \dif S \\
                                                                       & = -\iint\limits_{D} \left( -P g_x - Q g_y + R \right) \dif x \dif y
 	\end{align*}
 	for $S$ with negative orientation.
@@ -2583,7 +2571,7 @@ Therefore,
 	\end{align*}
 	for $(u,v) \in D$, then
 	\begin{align*}
-		\iint\limits_{S} \overline{F} \cdot \dif \overline{S} & = \iint\limits_{S} \overline{S} \cdot \hat{n} \dif S \\
+		\iint\limits_{S} \overline{F} \cdot \dif \overline{S} & = \iint\limits_{S} \overline{F} \cdot \hat{n} \dif S \\
                                                                       & = \iint\limits_{D} \overline{F} \cdot \left( \overline{r}_u \times \overline{r}_v \right) \dif u \dif v
 	\end{align*}
 	~\\
