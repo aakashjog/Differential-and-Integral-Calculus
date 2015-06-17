@@ -2696,9 +2696,13 @@ Therefore,
 	Let $C$ be a piecewise smooth, simple, and closed curve in $\mathbb{R}^2$ with positive orientation.
 	Let $D$ be a domain bounded by $C$.
 	If there exist continuous first order partial derivatives of $P(x,y)$ and $Q(x,y)$ in an open domain which contains $D$, then
-	\begin{equation*}
-		W = \int\limits_{C} \overline{F} \cdot \hat{T} \dif s = \int\limits_{C} P \dif x + Q \dif y = \iint\limits_{D} (Q_x - P_y) \dif A = \iint\limits_{D} \curl \overline{F} \cdot \hat{k} \dif A
-	\end{equation*}
+	\begin{align*}
+		W & = \int\limits_{C} \overline{F} \cdot \hat{T} \dif s        \\
+                  & = \int\limits_{C} P \dif x + Q \dif y                      \\
+                  & = \iint\limits_{D} (Q_x - P_y) \dif A                      \\
+                  & = \iint\limits_{D} \curl \overline{F} \cdot \hat{k} \dif A \\
+                  & = \iint\limits_{D} \divergence \overline{F} \dif A
+	\end{align*}
 	\label{Green's_Theorem}
 \end{theorem}
 
@@ -2778,6 +2782,47 @@ Therefore,
                                                                          & = -\pi
 	\end{align*}
 	\qed
+\end{solution}
+
+\section{Gauss' Theorem}
+
+\begin{theorem}
+	Let $E$ be a body bounded by a surface $S$, with a positive orientation of $S$.
+	Let
+	\begin{align*}
+		\overline{F} & = (P,Q,R)
+	\end{align*}
+	be a vector field such that there exist continuous first order partial derivatives of $P$, $Q$, and $Q$, in some open domain which contains $E$.
+	Then,
+	\begin{align*}
+		\iint\limits_{S} \overline{F} \cdot \hat{n} \dif S & = \iiint\limits_{E} \divergence \overline{F} \dif V
+	\end{align*}
+	\label{Gauss's_Theorem}
+\end{theorem}
+
+\begin{question}
+	Find $\iint\limits_{S} \overline{F} \cdot \hat{n} \dif S$ where
+	\begin{align*}
+		\overline{F} & = \left( x y , y^2 + e^{x z^2} , \sin x y \right)
+	\end{align*}
+	and $S$ is a lateral surface of a body $E$ which is bounded by the parabolic cylinder $z = 1 - x^2$ and the planes $z = $, $y = 0$, and $y + z = 2$.
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		\iint\limits_{S} \overline{F} \cdot \hat{n} \dif S & = \iiint\limits_{E} \divergence \overline{F} \dif V                                          \\
+                                                                   & = \iiint\limits_{E} (y + 2 y + 0) \dif V                                                     \\
+                                                                   & = 3 \iiint\limits_{E_{\mathrm{II}}} y \dif V                                                 \\
+                                                                   & = 3 \iint\limits_{D} \left( \int\limits_{0}^{2 - z} y \dif y \right) \dif A                  \\
+                                                                   & = 3 \iint\limits_{D} \left. \frac{y^2}{2} \right|_{y = 0}^{y = 2 - z} \dif A                 \\
+                                                                   & = \frac{3}{2} \iint\limits_{D} (2 - z)^2 \dif A                                              \\
+                                                                   & = \frac{3}{2} \int\limits_{-1}^{1} \int\limits_{0}^{1 - x^2} (2 - z)^2 \dif z \dif x         \\
+                                                                   & = \frac{3}{2} \int\limits_{-1}^{1} \left. -\frac{(2 - z)^3}{3} \right|_{z = 0}^{z = 1 - x^2} \\
+                                                                   & = \frac{3}{2} \int\limits_{-1}^{1} \left( \frac{8}{3} - \frac{(1 - x^2)^3}{3} \right) \dif x \\
+                                                                   & = \frac{1}{2} \int\limits_{-1}^{1} \left( 8 - (1 + x^2)^3 \right) \dif x                     \\
+                                                                   & = \int\limits_{0}^{1} \left( 8 - (1 + x^2)^3 \right) \dif x                                  \\
+                                                                   & = \frac{184}{35}
+	\end{align*}
 \end{solution}
 
 \end{document}
