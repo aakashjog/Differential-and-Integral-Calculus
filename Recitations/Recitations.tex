@@ -37,6 +37,8 @@
 
 \newcommand{\curl}{\mathrm{curl\,}}
 
+\newcommand{\divergence}{\mathrm{div\,}}
+
 \makeatletter
 \@addtoreset{section}{part} %resets section numbers in new part
 \makeatother
@@ -2418,6 +2420,163 @@ where $\rho$ is the distance from $(0,0,0)$ to $(x,y,z)$; $\theta$ is the angle 
 		\int\limits_{C} \overline{F} \dif r & = \int\limits_{S} \curl \overline{F} \cdot \hat{n} \dif S \\
                                                     & = \iint\limits_{D} (5,2,3) \cdot (0,0,1) \dif A \\
                                                     & = 12 \pi
+	\end{align*}
+\end{solution}
+
+\recitation
+
+\begin{question}
+	Calculate $\int\limits_{C} \overline{F} \dif r$ where $F = (x y , x^2 , z^2)$ and $C$ is the intersection of the hyperboloid $z = x^2 + y^2$ with the plane $z = y$, with anti-clockwise direction as seen from above.
+\end{question}
+
+\begin{solution}
+	For Stoke's Theorem, any surface bounded by $C$ can be used.\\
+	Let $S$ be the planar surface bounded by $C$.\\
+	Therefore,
+	\begin{align*}
+		\overline{\nabla} \times \overline{F} &=
+			\begin{vmatrix}
+				\hat{i} & \hat{j} & \hat{k}\\
+				\dpd{}{x} & \dpd{}{y} & \dpd{}{z}\\
+				x y & x^2 & z^2\\
+			\end{vmatrix}\\
+		                                      &= (0,0,x)
+	\end{align*}
+	$S$ can be parametrized as
+	\begin{align*}
+		x &= x\\
+		y &= y\\
+		z &= y
+	\end{align*}
+	Therefore, the projection of $S$ on the $x$-$y$ plane is $D$, given by
+	\begin{align*}
+		z &= x^2 + y^2\\
+		\therefore y &= x^2 + y^2\\
+		\therefore \frac{1}{4} &= x^2 + \left( y - \frac{1}{2} \right)^2
+	\end{align*}
+	Therefore, $D$ is a circle with radius $\frac{1}{2}$ and centre $\left( 0 , \frac{1}{2} \right)$.\\
+	As $z$ is a function of $x$ and $y$,
+	\begin{align*}
+		\overline{N} &= (f_x , f_y , -1)\\
+		&= (0,1,-1)
+	\end{align*}
+	However, as $C$ is directed anti-clockwise, as seen from above, the normal must be positive.\\
+	Therefore,
+	\begin{align*}
+		\hat{n} &= -\overline{N}
+	\end{align*}
+	$\hat{n}$ is not a unit normal, but can be used for Stoke's Theorem.\\
+	Therefore, by Stoke's Theorem,
+	\begin{align*}
+		\int\limits_{C} \overline{F} \dif r &= \int\limits_{S} \curl \overline{F} \cdot \hat{n} \dif S\\
+		&= \iint\limits_{D} (0,0,x) \cdot (0,-1,1) \dif x \dif y\\
+		&= \iint\limits_{D} x \dif x \dif y
+	\end{align*}
+	Let
+	\begin{align*}
+		x &= r \cos \theta\\
+		y &= \frac{1}{2} + r \sin \theta
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		J &= r
+	\end{align*}
+	where $r \in \left[ 0 , \frac{1}{2} \right]$ and $\theta \in [0,2 \pi]$.\\
+	Therefore,
+	\begin{align*}
+		\int\limits_{C} \overline{F} \dif r &= \iint\limits_{D} x \dif x \dif y\\
+		&= \iint\limits_{D} r \cos \theta \cdot r \dif r \dif \theta\\
+		&= \int\limits_{0}^{2 \pi} \int\limits_{0}^{\frac{1}{2}} r^2 \cos \theta \dif r \dif \theta\\
+		&= \int\limits_{0}^{2 \pi} \left. \frac{r^3 \cos \theta}{3} \right|_{0}^{\frac{1}{2}} \dif \theta\\
+		&= \int\limits_{0}^{2 \pi} \frac{\cos \theta}{24} \dif \theta\\
+		&= \frac{1}{24} \int\limits_{0}^{2 \pi} \cos \theta \dif \theta\\
+		&= 0
+	\end{align*}
+\end{solution}
+
+\section{Gauss' Theorem}
+
+\begin{question}
+	Calculate $\iint\limits_{S} \overline{F} \dif S$ where $S : \{x^2 + y^2 + z^2 = 1\}$ and $\overline {F} = (x,y,z)$ and the orientation over $S$ is outwards.
+\end{question}
+
+\begin{solution}
+	\begin{align*}
+		\divergence \overline{F} &= \dpd{P}{x} + \dpd{Q}{y} + \dpd{R}{z}\\
+		&= 1 + 1 + 1\\
+		&= 3
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\iint\limits_{S} \cdot \hat{n} \overline{F} \dif S &= \iiint\limits_{x^2 + y^2 + z^2 \le 1} 3 \dif x \dif y \dif z\\
+		&= 3 \iiint\limits_{x^2 + y^2 + z^2 \le 1} \dif x \dif y \dif z\\
+		&= 3 \cdot \frac{4 \pi}{3}\\
+		&= 4 \pi
+	\end{align*}
+\end{solution}
+
+\begin{question}
+	Calculate $\iint\limits_{S} \overline{F} \dif S$ where
+	\begin{align*}
+		\overline{F} &= \left( x^3 - \cos y , y^3 + \sqrt{x^3 + z^2} , z + 5 x y \right)\\
+		S &= \left\{ (x,y,z) : z = 4 - x^2 - y^2 , z \ge 0 \right\}
+	\end{align*}
+	and the orientation on $S$ is such that the $z$ coordinate of the unit vector at every point is negative.
+\end{question}
+
+\begin{solution}
+	$S$ is the part of a hyperboloid, with $z > 0$.
+	Therefore, it is not closed.\\
+	Hence, for Gauss' Theorem to be applicable, the surface must be closed by adding another surface.\\
+	Let $D$ be the area enclosed by the circle $x^2 + y^2 = 4$ in the $x$-$y$ plane.\\
+	Therefore, the closed surface is $S \cup D$.\\
+	Therefore,
+	\begin{align*}
+		\divergence \overline{F} &= 3 x^2 + 3 y^2 + 1
+	\end{align*}
+	Let $E$ be the volume enclosed by $S \cup D$.\\
+	Therefore,
+	\begin{align*}
+		E &= \left\{ (x,y,z) : 0 \le z \le 4 - x^2 - y^2 , x^2 + y^2 \le 4 \right\}
+	\end{align*}
+	Therefore, by Gauss' Theorem, as the given orientation is opposite to that by convention,
+	\begin{align*}
+		\iint\limits_{S \cup D} \overline{F} \cdot \hat{n} \dif S &= -\iiint\limits_{E} \divergence \overline{F} \dif x \dif y \dif z\\
+		\iint\limits_{S \cup D} \overline{F} \cdot \hat{n} \dif S &= -\iiint\limits_{E} 3 x^2 + 3 y^2 + 1 \dif x \dif y \dif z\\
+		&= -\iint\limits_{D} \int\limits_{0}^{4 - x^2 + y^2} 3 x^2 + 3 y^2 + 1 \dif z \dif x \dif y\\
+		&= -\iint\limits_{D} \left( 3 x^2 + 3 y^2 + 1 \right) \left( 4 - x^2 - y^2 \right) \dif x \dif y
+	\end{align*}
+	Let
+	\begin{align*}
+		x &= r \cos \theta\\
+		y &= r \sin \theta
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		J &= r
+	\end{align*}
+	where $r \in [0,2]$ and $\theta \in [0,2 \pi]$.
+	\begin{align*}
+		\iint\limits_{S \cup D} \overline{F} \cdot \hat{n} \dif S &= -\iint\limits_{D}  \left( 3 x^2 + 3 y^2 + 1 \right) \left( 4 - x^2 - y^2 \right) \dif x \dif y\\
+		&= -\int\limits_{0}^{2 \pi} \int\limits_{0}^{2} \left( 3 r^2 + 1 \right) \left( 4 - r^2 \right) r \dif r \dif \theta\\
+		&= -2 \pi \int\limits_{0}^{2} 12 r^3 - 3 r^5 + 4 r - r^3 \dif r\\
+		&= -40 \pi
+	\end{align*}
+	Therefore, subtracting $\iint\limits_{D} \overline{F} \cdot \hat{n} \dif S$, where the orientation over $D$ is $(0,0,-1)$, from $\iint\limits_{S \cup D} \overline{F} \cdot \hat{n} \dif S$,
+	\begin{align*}
+		\iint\limits_{S} \overline{F} \cdot \hat{n} \dif S &= \iint\limits_{S \cup D} \overline{F} \cdot \hat{n} \dif S - \iint\limits_{D} \overline{F} \cdot \hat{n} \dif S
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\iint\limits_{D} \overline{F} \cdot \hat{n} \dif S &= \iint\limits_{D} -z - 5 x y \dif x \dif y\\
+		&= -5 \iint\limits_{D} x y \dif x \dif y\\
+		&= 0
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\iint\limits_{S} \overline{F} \cdot \hat{n} \dif S &= \iint\limits_{S \cup D} \overline{F} \cdot \hat{n} \dif S - \iint\limits_{D} \overline{F} \cdot \hat{n} \dif S\\
+		&= 40 \pi - 0\\
+		&= 40 \pi
 	\end{align*}
 \end{solution}
 
